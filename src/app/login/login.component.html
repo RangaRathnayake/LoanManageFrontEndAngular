@@ -1,0 +1,30 @@
+<div class="container">
+    <!-- Content here -->
+
+    <div class="row" style="margin-top:20%">
+        <div class="col-md-4 offset-md-4">
+
+            <div class="card card-profile">
+                <!-- <div class="card-avatar">
+                    <a href="javascript:void(0)">
+                        <img class="img" src="./assets/img/logo.png" />
+                    </a>
+                </div> -->
+                <div class="card-body">
+                    <br>
+                    <mat-form-field class="col-md-12">
+                        <input matInput type="text" id="uname" [(ngModel)]="uname" placeholder="User Name" />
+                    </mat-form-field>
+                    <br>
+                    <mat-form-field class="col-md-12">
+                        <input matInput type="password" id="pword" [(ngModel)]="pword" placeholder="Password" />
+                    </mat-form-field>
+                    <br>
+
+                    <button class="btn btn-primary btn-round btn-block" (click)="login()">Login</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
