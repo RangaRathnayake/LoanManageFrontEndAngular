@@ -63,7 +63,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
   declarations: [
     AppComponent,
     AdminLayoutComponent,
-    LoginComponent, 
+    LoginComponent
   ],
   providers: [],
   bootstrap: [AppComponent]
