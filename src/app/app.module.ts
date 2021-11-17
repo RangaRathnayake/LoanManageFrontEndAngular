@@ -3,14 +3,9 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
-
-
 import { AppRoutingModule } from './app.routing';
 import { ComponentsModule } from './components/components.module';
-
 import { AppComponent } from './app.component';
-
-
 import {
   AgmCoreModule
 } from '@agm/core';
@@ -43,7 +38,6 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     ComponentsModule,
     RouterModule,
     AppRoutingModule,
-
     MatFormFieldModule,
     MatButtonModule,
     MatRippleModule,

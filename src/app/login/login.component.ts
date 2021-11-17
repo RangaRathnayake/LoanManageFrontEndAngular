@@ -27,6 +27,7 @@ export class LoginComponent implements OnInit {
         console.log(data);
         this.alart.showNotification('Success', 'success');
         localStorage.setItem('user', JSON.stringify(data));
+        window.location.href = '/';
       })
     } else {
 
