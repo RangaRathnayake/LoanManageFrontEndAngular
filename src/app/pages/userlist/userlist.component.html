@@ -30,10 +30,12 @@
                                         </mat-form-field>
                                     </div>
                                 </div>
+
+
                                 <div class="row">
                                     <div class="col-md-10">
                                         <mat-form-field class="example-full-width">
-                                            <input matInput placeholder="Password" type="password" [(ngModel)]="pass">
+                                            <input matInput placeholder="Mobile" [(ngModel)]="mob">
                                         </mat-form-field>
                                     </div>
                                 </div>
@@ -41,16 +43,42 @@
                                 <div class="row">
                                     <div class="col-md-10">
                                         <mat-form-field class="example-full-width">
-                                            <input matInput placeholder="Re -Enter Password" type="password"
-                                                [(ngModel)]="repass">
+                                            <input matInput placeholder="E-mail" [(ngModel)]="email" type="email">
                                         </mat-form-field>
                                     </div>
                                 </div>
 
+                                <div *ngIf="ifvisivle">
+                                    <div class="row" >
+                                        <div class="col-md-10">
+                                            <mat-form-field class="example-full-width">
+                                                <input matInput placeholder="Password" type="password" [(ngModel)]="pass" >
+                                            </mat-form-field>
+                                        </div>
+                                    </div>
+    
+                                    <div class="row" >
+                                        <div class="col-md-10">
+                                            <mat-form-field class="example-full-width">
+                                                <input matInput placeholder="Re -Enter Password" type="password"
+                                                    [(ngModel)]="repass" >
+                                            </mat-form-field>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                
+
                                 <div class="row">
-                                    <div class="col-md-10">
-                                        <button mat-raised-button class="btn btn-danger pull-right"
-                                            (click)="save()">save</button>
+                                    <div class="col-md-4">
+                                        <button mat-raised-button class="btn btn-success pull-right" (click)="save()">save</button>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <button mat-raised-button class="btn btn-warning pull-right" (click)="clear()">clear</button>
+                                    </div>
+                                    <div class="col-md-4" *ngIf="enabaledeactine">
+                                        <button mat-raised-button class="btn btn-danger pull-right" (click)="deactine()" >Deactive</button>
                                     </div>
                                 </div>
 
@@ -90,7 +118,7 @@
                                     <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
                                 </mat-table>
 
-                                <mat-paginator #paginatorpen [pageSizeOptions]="[3,10,50,100]" showFirstLastButtons>
+                                <mat-paginator #paginatorpen [pageSizeOptions]="[10,100,200]" showFirstLastButtons>
                                 </mat-paginator>
 
                             </div>
