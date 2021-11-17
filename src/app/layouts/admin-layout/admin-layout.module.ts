@@ -13,11 +13,14 @@ import { NotificationsComponent } from '../../notifications/notifications.compon
 import { UpgradeComponent } from '../../upgrade/upgrade.component';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatRippleModule } from '@angular/material/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatSelectModule } from '@angular/material/select';
 import { UsersComponent } from 'app/pages/users/users.component';
+import { UserlistComponent } from 'app/pages/userlist/userlist.component';
 
 
 
@@ -28,6 +31,8 @@ import { UsersComponent } from 'app/pages/users/users.component';
     FormsModule,
     ReactiveFormsModule,
     MatButtonModule,
+    MatTableModule,
+    MatPaginatorModule,
     MatRippleModule,
     MatFormFieldModule,
     MatInputModule,
@@ -43,7 +48,8 @@ import { UsersComponent } from 'app/pages/users/users.component';
     MapsComponent,
     NotificationsComponent,
     UpgradeComponent,
-    UsersComponent
+    UsersComponent,
+    UserlistComponent
   ]
 })
 

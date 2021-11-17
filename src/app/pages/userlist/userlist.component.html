@@ -1,1 +1,104 @@
-<p>userlist works!</p>
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <!-- <div class="col-md-12"> -->
+            <div class="card">
+                <div class="card-header card-header-danger">
+                    <h4 class="card-title">Create Users</h4>
+                    <p class="card-category"></p>
+                </div>
+
+                <div class="card-body">
+                    <div class="row">
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <div class="col-md-10">
+                                        <mat-form-field>
+                                            <mat-label>Select User type</mat-label>
+                                            <mat-select [(ngModel)]="category" (ngModelChange)="loadsubcat()">
+                                                <mat-option *ngFor="let prod of categorylist" [value]="prod.id">
+                                                    {{prod.name}}
+                                                </mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-10">
+                                        <mat-form-field class="example-full-width">
+                                            <input matInput placeholder="User name " [(ngModel)]="username">
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-10">
+                                        <mat-form-field class="example-full-width">
+                                            <input matInput placeholder="Password" type="password" [(ngModel)]="pass">
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-10">
+                                        <mat-form-field class="example-full-width">
+                                            <input matInput placeholder="Re -Enter Password" type="password"
+                                                [(ngModel)]="repass">
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-10">
+                                        <button mat-raised-button class="btn btn-danger pull-right"
+                                            (click)="save()">save</button>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="col-md-6">
+
+                                <mat-table sortpen [dataSource]="dataSource">
+                                    <!-- Name Column -->
+                                    <ng-container matColumnDef="name">
+                                        <mat-header-cell mat-sort-header *matHeaderCellDef>Name</mat-header-cell>
+                                        <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
+                                    </ng-container>
+                                    <!-- Name Column -->
+                                    <ng-container matColumnDef="utype.name">
+                                        <mat-header-cell mat-sort-header *matHeaderCellDef> Product
+                                        </mat-header-cell>
+                                        <mat-cell *matCellDef="let element"> {{element.utype.name}} </mat-cell>
+                                    </ng-container>
+
+                                    <!-- <ng-container matColumnDef="amount">
+                                        <mat-header-cell mat-sort-header *matHeaderCellDef> Pay amount
+                                        </mat-header-cell>
+                                        <mat-cell *matCellDef="let element"> {{element.amount}} </mat-cell>
+                                    </ng-container> -->
+
+
+
+                                    <ng-container matColumnDef="id">
+                                        <mat-header-cell mat-sort-header *matHeaderCellDef> select
+                                        </mat-header-cell>
+                                        <mat-cell *matCellDef="let element"><button mat-button
+                                                (click)="getuserdata(element.id)">More</button>
+                                        </mat-cell>
+                                    </ng-container>
+
+                                    <mat-header-row *matHeaderRowDef=" displayedColumns"></mat-header-row>
+                                    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+                                </mat-table>
+
+                                <mat-paginator #paginatorpen [pageSizeOptions]="[3,10,50,100]" showFirstLastButtons>
+                                </mat-paginator>
+
+                            </div>
+                    </div>
+                </div>
+            </div>
+            <!-- </div> -->
+
+        </div>
+    </div>
+</div>
