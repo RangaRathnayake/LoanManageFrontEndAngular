@@ -25,6 +25,8 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatCardModule } from '@angular/material/card';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import {MatRadioModule} from '@angular/material/radio';
+//import { NewapplicationComponent } from './pages/newapplication/newapplication.component';
 //import { CalloanComponent } from './pages/calloan/calloan.component';
 
 
@@ -46,6 +48,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     MatInputModule,
     MatSelectModule,
     MatTooltipModule,
+    MatRadioModule,
     MatTableModule,
     MatCheckboxModule,
     MatDialogModule,
@@ -59,6 +62,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     AppComponent,
     AdminLayoutComponent,
     LoginComponent,
+    //NewapplicationComponent,
     //CalloanComponent
   ],
   providers: [],

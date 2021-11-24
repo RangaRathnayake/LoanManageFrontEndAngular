@@ -21,6 +21,8 @@ import { MatSelectModule } from '@angular/material/select';
 import { UsersComponent } from 'app/pages/users/users.component';
 import { UserlistComponent } from 'app/pages/userlist/userlist.component';
 import { CalloanComponent } from 'app/pages/calloan/calloan.component';
+import { NewapplicationComponent } from 'app/pages/newapplication/newapplication.component';
+import {MatRadioModule} from '@angular/material/radio';
 
 
 
@@ -38,6 +40,8 @@ import { CalloanComponent } from 'app/pages/calloan/calloan.component';
     MatInputModule,
     MatSelectModule,
     MatTooltipModule,
+    MatRadioModule
+    
   ],
   declarations: [
     DashboardComponent,
@@ -49,7 +53,8 @@ import { CalloanComponent } from 'app/pages/calloan/calloan.component';
     UpgradeComponent,
     UsersComponent,
     UserlistComponent,
-    CalloanComponent
+    CalloanComponent,
+    NewapplicationComponent
   ]
 })
 

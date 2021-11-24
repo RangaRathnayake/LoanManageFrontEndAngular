@@ -1,0 +1,109 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="card">
+                <div class="card-header card-header-danger">
+                    <h4 class="card-title">New Application</h4>
+                    <p class="card-category"></p>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6 offset-md-3">
+                            <div class="row">
+                                <mat-radio-group aria-label="Select an option">
+                                   
+                                        <mat-radio-button value="1">Loans </mat-radio-button>
+                                   
+                                    
+                                        <mat-radio-button value="2">Property</mat-radio-button>
+                                    
+                                </mat-radio-group>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <mat-form-field class="example-full-width">
+                                <input matInput placeholder="Loan Amount" >
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-6">
+                            <mat-form-field class="example-full-width">
+                                <input matInput placeholder="Customer Full Name " >
+                            </mat-form-field>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <!-- <mat-form-field class="example-full-width">
+                                <input matInput placeholder="Monthly Interest Rate" >
+                            </mat-form-field> -->
+
+                            <mat-form-field>
+                                <mat-label>Select Rate</mat-label>
+                                <mat-select [(ngModel)]="rate">
+                                    <mat-option *ngFor="let prod of ratelist" [value]="prod.id">
+                                        {{prod.rate}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-6">
+                            <mat-form-field class="example-full-width">
+                                <input matInput placeholder="Name With Initials" >
+                            </mat-form-field>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <mat-form-field class="example-full-width">
+                                <input matInput placeholder="Months" >
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-6">
+                            <mat-form-field class="example-full-width">
+                                <input matInput placeholder="NIC" >
+                            </mat-form-field>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <mat-form-field class="example-full-width">
+                                <input matInput placeholder="Date" >
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-6">
+                            <mat-form-field class="example-full-width">
+                                <input matInput placeholder="Address" >
+                            </mat-form-field>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <mat-form-field class="example-full-width">
+                                <input matInput placeholder="Documant Chage" >
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-6">
+                            <mat-form-field class="example-full-width">
+                                <input matInput placeholder="Mobile No" >
+                            </mat-form-field>
+                        </div>
+                    </div>
+
+
+
+                    <button mat-raised-button class="btn btn-success pull-right"
+                                        (click)="apply()">save</button>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

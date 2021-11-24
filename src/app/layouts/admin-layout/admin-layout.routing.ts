@@ -11,6 +11,7 @@ import { UpgradeComponent } from '../../upgrade/upgrade.component';
 import { UsersComponent } from 'app/pages/users/users.component';
 import { UserlistComponent } from 'app/pages/userlist/userlist.component';
 import { CalloanComponent } from 'app/pages/calloan/calloan.component';
+import { NewapplicationComponent } from 'app/pages/newapplication/newapplication.component';
 
 export const AdminLayoutRoutes: Routes = [
     { path: 'dashboard', component: DashboardComponent },
@@ -23,5 +24,6 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'upgrade', component: UpgradeComponent },
     { path: 'users', component: UsersComponent },
     { path: 'userlist',component:UserlistComponent},
-    { path: 'calloan',component:CalloanComponent}
+    { path: 'calloan',component:CalloanComponent},
+    { path: 'newapplicatin',component:NewapplicationComponent}
 ];
