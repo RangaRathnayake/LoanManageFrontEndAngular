@@ -25,6 +25,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatCardModule } from '@angular/material/card';
 import { MatPaginatorModule } from '@angular/material/paginator';
+//import { CalloanComponent } from './pages/calloan/calloan.component';
 
 
 
@@ -57,7 +58,8 @@ import { MatPaginatorModule } from '@angular/material/paginator';
   declarations: [
     AppComponent,
     AdminLayoutComponent,
-    LoginComponent
+    LoginComponent,
+    //CalloanComponent
   ],
   providers: [],
   bootstrap: [AppComponent]

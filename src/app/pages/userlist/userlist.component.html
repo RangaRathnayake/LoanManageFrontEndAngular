@@ -1,7 +1,6 @@
 <div class="main-content">
     <div class="container-fluid">
         <div class="row">
-            <!-- <div class="col-md-12"> -->
             <div class="card">
                 <div class="card-header card-header-danger">
                     <h4 class="card-title">Create Users</h4>
@@ -10,32 +9,49 @@
 
                 <div class="card-body">
                     <div class="row">
-                            <div class="col-md-6">
-                                <div class="row">
-                                    <div class="col-md-10">
-                                        <mat-form-field>
-                                            <mat-label>Select User type</mat-label>
-                                            <mat-select [(ngModel)]="category" (ngModelChange)="loadsubcat()">
-                                                <mat-option *ngFor="let prod of categorylist" [value]="prod.id">
-                                                    {{prod.name}}
-                                                </mat-option>
-                                            </mat-select>
-                                        </mat-form-field>
-                                    </div>
+                        <div class="col-md-6">
+                            <div class="row">
+                                <div class="col-md-10">
+                                    <mat-form-field>
+                                        <mat-label>Select User type</mat-label>
+                                        <mat-select [(ngModel)]="category" (ngModelChange)="loadsubcat()">
+                                            <mat-option *ngFor="let prod of categorylist" [value]="prod.id">
+                                                {{prod.name}}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
                                 </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-10">
+                                    <mat-form-field class="example-full-width">
+                                        <input matInput placeholder="User name " [(ngModel)]="username">
+                                    </mat-form-field>
+                                </div>
+                            </div>
+
+
+                            <div class="row">
+                                <div class="col-md-10">
+                                    <mat-form-field class="example-full-width">
+                                        <input matInput placeholder="Mobile" [(ngModel)]="mob">
+                                    </mat-form-field>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-10">
+                                    <mat-form-field class="example-full-width">
+                                        <input matInput placeholder="E-mail" [(ngModel)]="email" type="email">
+                                    </mat-form-field>
+                                </div>
+                            </div>
+
+                            <div *ngIf="ifvisivle">
                                 <div class="row">
                                     <div class="col-md-10">
                                         <mat-form-field class="example-full-width">
-                                            <input matInput placeholder="User name " [(ngModel)]="username">
-                                        </mat-form-field>
-                                    </div>
-                                </div>
-
-
-                                <div class="row">
-                                    <div class="col-md-10">
-                                        <mat-form-field class="example-full-width">
-                                            <input matInput placeholder="Mobile" [(ngModel)]="mob">
+                                            <input matInput placeholder="Password" type="password" [(ngModel)]="pass">
                                         </mat-form-field>
                                     </div>
                                 </div>
@@ -43,62 +59,48 @@
                                 <div class="row">
                                     <div class="col-md-10">
                                         <mat-form-field class="example-full-width">
-                                            <input matInput placeholder="E-mail" [(ngModel)]="email" type="email">
+                                            <input matInput placeholder="Re -Enter Password" type="password"
+                                                [(ngModel)]="repass">
                                         </mat-form-field>
-                                    </div>
-                                </div>
-
-                                <div *ngIf="ifvisivle">
-                                    <div class="row" >
-                                        <div class="col-md-10">
-                                            <mat-form-field class="example-full-width">
-                                                <input matInput placeholder="Password" type="password" [(ngModel)]="pass" >
-                                            </mat-form-field>
-                                        </div>
-                                    </div>
-    
-                                    <div class="row" >
-                                        <div class="col-md-10">
-                                            <mat-form-field class="example-full-width">
-                                                <input matInput placeholder="Re -Enter Password" type="password"
-                                                    [(ngModel)]="repass" >
-                                            </mat-form-field>
-                                        </div>
-                                    </div>
-
-                                </div>
-
-                                
-
-                                <div class="row">
-                                    <div class="col-md-4">
-                                        <button mat-raised-button class="btn btn-success pull-right" (click)="save()">save</button>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <button mat-raised-button class="btn btn-warning pull-right" (click)="clear()">clear</button>
-                                    </div>
-                                    <div class="col-md-4" *ngIf="enabaledeactine">
-                                        <button mat-raised-button class="btn btn-danger pull-right" (click)="deactine()" >Deactive</button>
                                     </div>
                                 </div>
 
                             </div>
-                            <div class="col-md-6">
 
-                                <mat-table sortpen [dataSource]="dataSource">
-                                    <!-- Name Column -->
-                                    <ng-container matColumnDef="name">
-                                        <mat-header-cell mat-sort-header *matHeaderCellDef>Name</mat-header-cell>
-                                        <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
-                                    </ng-container>
-                                    <!-- Name Column -->
-                                    <ng-container matColumnDef="utype.name">
-                                        <mat-header-cell mat-sort-header *matHeaderCellDef> Product
-                                        </mat-header-cell>
-                                        <mat-cell *matCellDef="let element"> {{element.utype.name}} </mat-cell>
-                                    </ng-container>
 
-                                    <!-- <ng-container matColumnDef="amount">
+
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <button mat-raised-button class="btn btn-success pull-right"
+                                        (click)="save()">save</button>
+                                </div>
+                                <div class="col-md-4">
+                                    <button mat-raised-button class="btn btn-warning pull-right"
+                                        (click)="clear()">clear</button>
+                                </div>
+                                <div class="col-md-4" *ngIf="enabaledeactine">
+                                    <button mat-raised-button class="btn btn-danger pull-right"
+                                        (click)="deactine()">Deactive</button>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-6">
+
+                            <mat-table sortpen [dataSource]="dataSource">
+                                <!-- Name Column -->
+                                <ng-container matColumnDef="name">
+                                    <mat-header-cell mat-sort-header *matHeaderCellDef>Name</mat-header-cell>
+                                    <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
+                                </ng-container>
+                                <!-- Name Column -->
+                                <ng-container matColumnDef="utype.name">
+                                    <mat-header-cell mat-sort-header *matHeaderCellDef> Product
+                                    </mat-header-cell>
+                                    <mat-cell *matCellDef="let element"> {{element.utype.name}} </mat-cell>
+                                </ng-container>
+
+                                <!-- <ng-container matColumnDef="amount">
                                         <mat-header-cell mat-sort-header *matHeaderCellDef> Pay amount
                                         </mat-header-cell>
                                         <mat-cell *matCellDef="let element"> {{element.amount}} </mat-cell>
@@ -106,22 +108,22 @@
 
 
 
-                                    <ng-container matColumnDef="id">
-                                        <mat-header-cell mat-sort-header *matHeaderCellDef> select
-                                        </mat-header-cell>
-                                        <mat-cell *matCellDef="let element"><button mat-button
-                                                (click)="getuserdata(element.id)">More</button>
-                                        </mat-cell>
-                                    </ng-container>
+                                <ng-container matColumnDef="id">
+                                    <mat-header-cell mat-sort-header *matHeaderCellDef> select
+                                    </mat-header-cell>
+                                    <mat-cell *matCellDef="let element"><button mat-button
+                                            (click)="getuserdata(element.id)">More</button>
+                                    </mat-cell>
+                                </ng-container>
 
-                                    <mat-header-row *matHeaderRowDef=" displayedColumns"></mat-header-row>
-                                    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-                                </mat-table>
+                                <mat-header-row *matHeaderRowDef=" displayedColumns"></mat-header-row>
+                                <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+                            </mat-table>
 
-                                <mat-paginator #paginatorpen [pageSizeOptions]="[10,100,200]" showFirstLastButtons>
-                                </mat-paginator>
+                            <mat-paginator #paginatorpen [pageSizeOptions]="[10,100,200]" showFirstLastButtons>
+                            </mat-paginator>
 
-                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

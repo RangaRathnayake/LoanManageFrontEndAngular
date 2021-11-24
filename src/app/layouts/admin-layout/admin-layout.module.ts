@@ -20,6 +20,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatSelectModule } from '@angular/material/select';
 import { UsersComponent } from 'app/pages/users/users.component';
 import { UserlistComponent } from 'app/pages/userlist/userlist.component';
+import { CalloanComponent } from 'app/pages/calloan/calloan.component';
 
 
 
@@ -47,7 +48,8 @@ import { UserlistComponent } from 'app/pages/userlist/userlist.component';
     NotificationsComponent,
     UpgradeComponent,
     UsersComponent,
-    UserlistComponent
+    UserlistComponent,
+    CalloanComponent
   ]
 })
 

@@ -1,0 +1,97 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="card">
+                <div class="card-header card-header-danger">
+                    <h4 class="card-title">Create Users</h4>
+                    <p class="card-category"></p>
+                </div>
+
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label>Loan Amount </label>
+                                </div>
+                                <div class="col-md-6">
+                                    <mat-form-field class="example-full-width">
+                                        <input matInput placeholder="Loan Amount" [(ngModel)]="loanamount">
+                                    </mat-form-field>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label>Monthly Interest Rate</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <mat-form-field>
+                                        <mat-label>Select Rate</mat-label>
+                                        <mat-select [(ngModel)]="rate">
+                                            <mat-option *ngFor="let prod of ratelist" [value]="prod.id">
+                                                {{prod.rate}}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+
+
+
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label>Months</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <mat-form-field class="example-full-width">
+                                        <input matInput placeholder="Months" [(ngModel)]="month">
+                                    </mat-form-field>
+                                </div>
+                            </div>
+
+                            <!-- <div class="row">
+                               
+                            </div> -->
+
+                            <button mat-raised-button class="btn btn-danger pull-right"
+                                (click)="cal()">Calculate</button>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 offset-md-3">
+                            <div class="row"><label style="vertical-align: middle;"> Monthly Payment</label></div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-md-6"><label>Capital</label></div>
+
+                                <div class="col-md-6"><label>{{Capital}}</label></div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6"><label>Interest</label></div>
+
+                                <div class="col-md-6"><label>{{Interest}}</label></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6"><label>Total</label></div>
+
+                                <div class="col-md-6"><label>{{Total}}</label></div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6"><label>Full Total </label></div>
+
+                                <div class="col-md-6"><label>{{FullTotal}}</label></div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
