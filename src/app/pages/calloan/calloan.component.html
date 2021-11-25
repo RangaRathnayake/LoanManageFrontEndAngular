@@ -29,7 +29,7 @@
                                     <mat-form-field>
                                         <mat-label>Select Rate</mat-label>
                                         <mat-select [(ngModel)]="rate">
-                                            <mat-option *ngFor="let prod of ratelist" [value]="prod.id">
+                                            <mat-option *ngFor="let prod of ratelist" [value]="prod.rate">
                                                 {{prod.rate}}
                                             </mat-option>
                                         </mat-select>
