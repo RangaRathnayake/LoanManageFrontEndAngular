@@ -39,7 +39,7 @@ export class CalloanComponent implements OnInit {
     if(this.loanamount && this.rate  && this.month){
       this.Capital=(this.loanamount /this.month).toFixed(2);
       this.Interest = (this.Capital*(this.rate/100)).toFixed(2);
-      this.Total=Number(this.Capital) + Number(this.Interest) ;
+      this.Total=(Number(this.Capital) + Number(this.Interest)) .toFixed(2);
       this.FullTotal= (Number(this.Total)*this.month).toFixed(2);
       this.ischeck=true;
 
