@@ -10,6 +10,7 @@ import { AlartService } from 'app/service/alart.service';
 export class CalloanComponent implements OnInit {
   loanamount;
   rate;
+  monthrate;
   ratelist;
   month;
 
@@ -41,6 +42,7 @@ export class CalloanComponent implements OnInit {
       this.Interest = (this.Capital*(this.rate/100)).toFixed(2);
       this.Total=(Number(this.Capital) + Number(this.Interest)) .toFixed(2);
       this.FullTotal= (Number(this.Total)*this.month).toFixed(2);
+      this.monthrate=Number(this.rate/this.month).toFixed(2);
       this.ischeck=true;
 
       console.log("xxxxxxxxxxx");
