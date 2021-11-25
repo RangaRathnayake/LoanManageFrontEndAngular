@@ -40,7 +40,7 @@ export class CalloanComponent implements OnInit {
       this.Capital=(this.loanamount /this.month).toFixed(2);
       this.Interest = (this.Capital*(this.rate/100)).toFixed(2);
       this.Total=Number(this.Capital) + Number(this.Interest) ;
-      this.FullTotal= Number(this.Total)*12;
+      this.FullTotal= Number(this.Total)*this.month;
       this.ischeck=true;
     }else{
       console.log("fklglkfdgkgg");
