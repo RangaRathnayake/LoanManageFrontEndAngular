@@ -26,9 +26,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatCardModule } from '@angular/material/card';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import {MatRadioModule} from '@angular/material/radio';
-//import { ProploanComponent } from './pages/proploan/proploan.component';
-//import { NewapplicationComponent } from './pages/newapplication/newapplication.component';
-//import { CalloanComponent } from './pages/calloan/calloan.component';
+
 
 
 
@@ -63,9 +61,7 @@ import {MatRadioModule} from '@angular/material/radio';
     AppComponent,
     AdminLayoutComponent,
     LoginComponent,
-    //ProploanComponent,
-    //NewapplicationComponent,
-    //CalloanComponent
+
   ],
   providers: [],
   bootstrap: [AppComponent]
