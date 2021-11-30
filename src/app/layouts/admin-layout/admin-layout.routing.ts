@@ -12,6 +12,7 @@ import { UsersComponent } from 'app/pages/users/users.component';
 import { UserlistComponent } from 'app/pages/userlist/userlist.component';
 import { CalloanComponent } from 'app/pages/calloan/calloan.component';
 import { NewapplicationComponent } from 'app/pages/newapplication/newapplication.component';
+import { ProploanComponent } from 'app/pages/proploan/proploan.component';
 
 export const AdminLayoutRoutes: Routes = [
     { path: 'dashboard', component: DashboardComponent },
@@ -25,5 +26,6 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'users', component: UsersComponent },
     { path: 'userlist',component:UserlistComponent},
     { path: 'calloan',component:CalloanComponent},
-    { path: 'newapplicatin',component:NewapplicationComponent}
+    { path: 'newapplicatin',component:NewapplicationComponent},
+    { path: 'proploan',component:ProploanComponent}
 ];

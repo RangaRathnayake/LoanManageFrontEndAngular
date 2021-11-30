@@ -22,6 +22,7 @@ import { UsersComponent } from 'app/pages/users/users.component';
 import { UserlistComponent } from 'app/pages/userlist/userlist.component';
 import { CalloanComponent } from 'app/pages/calloan/calloan.component';
 import { NewapplicationComponent } from 'app/pages/newapplication/newapplication.component';
+import { ProploanComponent } from 'app/pages/proploan/proploan.component';
 import {MatRadioModule} from '@angular/material/radio';
 
 
@@ -54,7 +55,8 @@ import {MatRadioModule} from '@angular/material/radio';
     UsersComponent,
     UserlistComponent,
     CalloanComponent,
-    NewapplicationComponent
+    NewapplicationComponent,
+    ProploanComponent
   ]
 })
 

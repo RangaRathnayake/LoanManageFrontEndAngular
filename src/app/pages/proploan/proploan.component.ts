@@ -5,11 +5,11 @@ import { Pipe, PipeTransform } from '@angular/core';
 import { DatePipe } from '@angular/common';
 
 @Component({
-  selector: 'app-newapplication',
-  templateUrl: './newapplication.component.html',
-  styleUrls: ['./newapplication.component.scss']
+  selector: 'app-proploan',
+  templateUrl: './proploan.component.html',
+  styleUrls: ['./proploan.component.scss']
 })
-export class NewapplicationComponent implements OnInit {
+export class ProploanComponent implements OnInit {
 
   loanamount;
   cusfullname;
@@ -29,6 +29,7 @@ export class NewapplicationComponent implements OnInit {
   interestPerMonth;
   totalPerMonth;
   monthlyPayDate;
+  refno;
 
   constructor(private apiCall: ApicallService, private alart: AlartService) {
     this.gettate();
@@ -134,6 +135,8 @@ export class NewapplicationComponent implements OnInit {
     })
 
   }
+
+
 
 
 }
