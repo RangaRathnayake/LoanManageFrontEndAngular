@@ -1,1 +1,23 @@
-<p>expencese works!</p>
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="card">
+            <div class="card-header card-header-danger">
+                <h4 class="card-title">Expences</h4>
+                <p class="card-category"></p>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6 ">
+                        <mat-form-field>
+                            <mat-label>Select Expence Type</mat-label>
+                            <mat-select [(ngModel)]="selectedExType">
+                                <mat-option *ngFor="let t of exTypes" [value]="t.id">
+                                    {{t.type}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AlartService } from 'app/service/alart.service';
+import { ApicallService } from 'app/service/apicall.service';
 
 @Component({
   selector: 'app-expencese',
@@ -7,9 +9,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ExpenceseComponent implements OnInit {
 
-  constructor() { }
+  exTypes;
+  selectedExType;
+  constructor(private apiCall: ApicallService, private alart: AlartService) { }
 
   ngOnInit(): void {
+    this.getExpenceType();
+  }
+
+  getExpenceType() {
+    this.apiCall.get('expencese/type', data => {
+      this.exTypes = data;
+      console.log(this.exTypes);
+    });
   }
 
 }
