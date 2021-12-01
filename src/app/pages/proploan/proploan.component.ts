@@ -23,6 +23,7 @@ export class ProploanComponent implements OnInit {
   mobile;
   rate;
   ratelist;
+  totloan;
 
   getuser;
   capitalPerMonth;
@@ -30,6 +31,11 @@ export class ProploanComponent implements OnInit {
   totalPerMonth;
   monthlyPayDate;
   refno;
+
+  checked = false;
+  indeterminate = false;
+  labelPosition: 'before' | 'after' = 'after';
+  disabled = false;
 
   constructor(private apiCall: ApicallService, private alart: AlartService) {
     this.gettate();
@@ -51,6 +57,14 @@ export class ProploanComponent implements OnInit {
       this.capitalPerMonth = (Number(this.loanamount) / Number(this.month)).toFixed(2);
       this.interestPerMonth = (Number(this.rate) / Number(this.month)).toFixed(2);
       this.totalPerMonth = (Number(this.capitalPerMonth) + (Number(this.capitalPerMonth) * Number(this.month))).toFixed(2);
+
+
+      if(this.checked){
+        this.totloan=Number(this.loanamount) + Number(this.doccharge);
+      }else{
+        this.totloan=Number(this.loanamount);
+      }
+
       console.log(this.capitalPerMonth);
       console.log(this.interestPerMonth);
       console.log(this.totalPerMonth);
@@ -62,7 +76,14 @@ export class ProploanComponent implements OnInit {
       console.log(value);
 
       this.apiCall.get('main/max/p', result => {
-        var max =result.max;
+        if(result.max == null ){
+          console.log("okkkkkkk");
+          var max =0;
+        }else{
+          console.log("noooo");
+           max =result.max;
+        }
+        console.log(max);
         this.apiCall.post('customer', {
           customer: {
             fullName: this.cusfullname,
@@ -86,7 +107,7 @@ export class ProploanComponent implements OnInit {
               oderNumber: this.refno,
               loanAmount: this.loanamount,
               dockCharge: this.doccharge,
-              totalLoanAmount: this.loanamount,
+              totalLoanAmount:(Number(this.totloan)).toFixed(2) ,
               monthsCount: this.month,
               interestRate: this.rate,
               interestRateId: 1,
@@ -109,7 +130,7 @@ export class ProploanComponent implements OnInit {
             }
           }, data => {
             this.alart.showNotification('success', 'save');
-            this.cler();
+           // this.cler();
           })
   
         })

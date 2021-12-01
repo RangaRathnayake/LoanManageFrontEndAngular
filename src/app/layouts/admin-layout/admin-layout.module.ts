@@ -24,6 +24,7 @@ import { CalloanComponent } from 'app/pages/calloan/calloan.component';
 import { NewapplicationComponent } from 'app/pages/newapplication/newapplication.component';
 import { ProploanComponent } from 'app/pages/proploan/proploan.component';
 import { MatRadioModule } from '@angular/material/radio';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 import { ExpenceseComponent } from '../../pages/expencese/expencese.component';
 
 
@@ -41,7 +42,8 @@ import { ExpenceseComponent } from '../../pages/expencese/expencese.component';
     MatInputModule,
     MatSelectModule,
     MatTooltipModule,
-    MatRadioModule
+    MatRadioModule,
+    MatCheckboxModule
 
   ],
   declarations: [

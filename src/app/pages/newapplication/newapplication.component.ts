@@ -23,12 +23,20 @@ export class NewapplicationComponent implements OnInit {
   mobile;
   rate;
   ratelist;
+  totloan;
+  nextnum:number;
 
   getuser;
   capitalPerMonth;
   interestPerMonth;
   totalPerMonth;
   monthlyPayDate;
+
+
+  checked = false;
+  indeterminate = false;
+  labelPosition: 'before' | 'after' = 'after';
+  disabled = false;
 
   constructor(private apiCall: ApicallService, private alart: AlartService) {
     this.gettate();
@@ -49,6 +57,14 @@ export class NewapplicationComponent implements OnInit {
       this.capitalPerMonth = (Number(this.loanamount) / Number(this.month)).toFixed(2);
       this.interestPerMonth = (Number(this.rate) / Number(this.month)).toFixed(2);
       this.totalPerMonth = (Number(this.capitalPerMonth) + (Number(this.capitalPerMonth) * Number(this.month))).toFixed(2);
+
+      if(this.checked){
+        this.totloan=Number(this.loanamount) + Number(this.doccharge);
+      }else{
+        this.totloan=Number(this.loanamount);
+      }
+
+
       console.log(this.capitalPerMonth);
       console.log(this.interestPerMonth);
       console.log(this.totalPerMonth);
@@ -58,7 +74,17 @@ export class NewapplicationComponent implements OnInit {
       console.log(value);
 
       this.apiCall.get('main/max/l', result => {
-        var max =result.max;
+       
+        if(result.max == null ){
+          console.log("okkkkkkk");
+          var max =0;
+         
+        }else{
+          console.log("noooo");
+           max =result.max;
+        }
+        console.log(max);
+        this.nextnum=Number(max)+1;
         this.apiCall.post('customer', {
           customer: {
             fullName: this.cusfullname,
@@ -79,10 +105,10 @@ export class NewapplicationComponent implements OnInit {
           this.apiCall.post('main', {
             main: {
               loanType: "l",
-              oderNumber: "L"+Number(max)+1,
+              oderNumber: "L"+this.nextnum,
               loanAmount: this.loanamount,
               dockCharge: this.doccharge,
-              totalLoanAmount: this.loanamount,
+              totalLoanAmount: (Number(this.totloan)).toFixed(2) ,
               monthsCount: this.month,
               interestRate: this.rate,
               interestRateId: 1,
@@ -105,7 +131,7 @@ export class NewapplicationComponent implements OnInit {
             }
           }, data => {
             this.alart.showNotification('success', 'save');
-            this.cler();
+           // this.cler();
           })
   
         })
@@ -139,17 +165,17 @@ export class NewapplicationComponent implements OnInit {
   }
 
   cler(){
-    this.loanamount="";
-    this.cusfullname="";
-    this.monthrate="";
-    this.namewithinitial="";
-    this.month="";
-    this.nic="";
-    this.address="";
-    this.doccharge="";
-    this.mobile="";
-    this.rate="";
-    this.ratelist="";
+    this.loanamount='';
+    this.cusfullname='';
+    this.monthrate='';
+    this.namewithinitial='';
+    this.month='';
+    this.nic='';
+    this.address='';
+    this.doccharge='';
+    this.mobile='';
+    this.rate='';
+    this.ratelist='';
 
   }
 
