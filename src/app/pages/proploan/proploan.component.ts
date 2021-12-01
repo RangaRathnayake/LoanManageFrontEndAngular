@@ -38,6 +38,7 @@ export class ProploanComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.getloanref();
   }
 
   apply() {
@@ -45,7 +46,7 @@ export class ProploanComponent implements OnInit {
     console.log(this.date);
 
     if (this.loanamount && this.cusfullname && this.namewithinitial && this.month
-      && this.nic && this.date && this.address && this.doccharge && this.mobile && this.rate && this.ratelist) {
+      && this.nic && this.date && this.address && this.doccharge && this.mobile && this.rate && this.ratelist && this.refno) {
 
       this.capitalPerMonth = (Number(this.loanamount) / Number(this.month)).toFixed(2);
       this.interestPerMonth = (Number(this.rate) / Number(this.month)).toFixed(2);
@@ -59,56 +60,61 @@ export class ProploanComponent implements OnInit {
       var datePipe = new DatePipe("en-US");
       let value = datePipe.transform(dt, 'dd');
       console.log(value);
-      this.apiCall.post('customer', {
-        customer: {
-          fullName: this.cusfullname,
-          name: this.namewithinitial,
-          nic: this.nic,
-          address: this.address,
-          mobile: this.mobile,
-          phone: this.mobile,
-          project: 1,
-          block: "1",
-          otherString: "string",
-          otherInt: 1
-        }
-      }, data => {
 
-        console.log(data);
-
-        this.apiCall.post('main', {
-          main: {
-            loanType: "l",
-            oderNumber: "L1",
-            loanAmount: this.loanamount,
-            dockCharge: this.doccharge,
-            totalLoanAmount: this.loanamount,
-            monthsCount: this.month,
-            interestRate: this.rate,
-            interestRateId: 1,
-            startDate: this.date,
-            userId: this.getuser.id,
-            capitalPerMonth: this.capitalPerMonth,
-            interestPerMonth: this.interestPerMonth,
-            totalPerMonth: this.totalPerMonth,
-            monthlyPayDate: value,
-            NonRefundableAdvance: "0.00",
-            downPayment: "0.00",
-            projectId: null,
-            projectName: null,
-            blockNumber: null,
-            propertyName: null,
-            propertyCode: null,
-            status: 0,
-            customer: data.id
+      this.apiCall.get('main/max/p', result => {
+        var max =result.max;
+        this.apiCall.post('customer', {
+          customer: {
+            fullName: this.cusfullname,
+            name: this.namewithinitial,
+            nic: this.nic,
+            address: this.address,
+            mobile: this.mobile,
+            phone: this.mobile,
+            project: 1,
+            block: "1",
+            otherString: "string",
+            otherInt: 1
           }
         }, data => {
-          this.alart.showNotification('success', 'save');
+  
+          console.log(data);
+  
+          this.apiCall.post('main', {
+            main: {
+              loanType: "p",
+              oderNumber: this.refno,
+              loanAmount: this.loanamount,
+              dockCharge: this.doccharge,
+              totalLoanAmount: this.loanamount,
+              monthsCount: this.month,
+              interestRate: this.rate,
+              interestRateId: 1,
+              startDate: this.date,
+              userId: this.getuser.id,
+              capitalPerMonth: this.capitalPerMonth,
+              interestPerMonth: this.interestPerMonth,
+              totalPerMonth: this.totalPerMonth,
+              monthlyPayDate: value,
+              NonRefundableAdvance: "0.00",
+              downPayment: "0.00",
+              projectId: null,
+              projectName: null,
+              blockNumber: null,
+              propertyName: null,
+              propertyCode: null,
+              status: 0,
+              customer: data.id,
+              oderNumberInt:Number(max)+1
+            }
+          }, data => {
+            this.alart.showNotification('success', 'save');
+            this.cler();
+          })
+  
         })
 
       })
-
-
     } else {
 
     }
@@ -130,11 +136,27 @@ export class ProploanComponent implements OnInit {
 
 
   getloanref() {
-    this.apiCall.get('interest', result => {
-
+    this.apiCall.get('main/max/l', result => {
+      console.log(result)
     })
+  }
+
+
+  cler(){
+    this.loanamount="";
+    this.cusfullname="";
+    this.monthrate="";
+    this.namewithinitial="";
+    this.month="";
+    this.nic="";
+    this.address="";
+    this.doccharge="";
+    this.mobile="";
+    this.rate="";
+    this.ratelist="";
 
   }
+
 
 
 
