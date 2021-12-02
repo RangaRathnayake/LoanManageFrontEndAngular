@@ -1,1 +1,94 @@
-<p>applist works!</p>
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="card">
+                <div class="card-header card-header-danger">
+                    <h4 class="card-title">Serch Application</h4>
+                    <p class="card-category"></p>
+                </div>
+                <div class="card-body">
+
+                    <div class="row">
+                        <div class="col-md-6 offset-md-3">
+                            <div class="row">
+                                <div class="col-md-10">
+                                    <!-- <mat-form-field class="example-full-width">
+                                        <input matInput placeholder="Serch here" [(ngModel)]="textserch">
+                                    </mat-form-field> -->
+                                    <mat-form-field appearance="standard">
+                                        <mat-label>Filter</mat-label>
+                                        <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium" #input>
+                                      </mat-form-field>
+                                </div>
+                                <!-- <div class="col-md-2">
+                                    <button mat-raised-button class="btn btn-danger pull-right"
+                                    (click)="serch()">Serch</button>
+                                </div> -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr>
+
+                    <div class="row">
+
+                        <div class="col-md-10 offset-md-1">
+                            <!-- <mat-form-field appearance="standard">
+                                <mat-label>Filter</mat-label>
+                                <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium" #input>
+                              </mat-form-field> -->
+                              
+                              <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+                              
+                                <!-- Position Column -->
+                                <ng-container matColumnDef="oderNumber">
+                                  <th mat-header-cell *matHeaderCellDef> oderNumbers </th>
+                                  <td mat-cell *matCellDef="let element"> {{element.oderNumber}} </td>
+                                </ng-container>
+                              
+                                <!-- Name Column -->
+                                <ng-container matColumnDef="Name">
+                                  <th mat-header-cell *matHeaderCellDef> Name </th>
+                                  <td mat-cell *matCellDef="let element"> {{element.customer.fullName}} </td>
+                                </ng-container>
+                              
+                                <!-- Weight Column -->
+                                <ng-container matColumnDef="nic">
+                                  <th mat-header-cell *matHeaderCellDef> NIC </th>
+                                  <td mat-cell *matCellDef="let element"> {{element.customer.nic}} </td>
+                                </ng-container>
+                              
+                                <!-- Symbol Column -->
+                                <ng-container matColumnDef="mobile">
+                                  <th mat-header-cell *matHeaderCellDef> Mobile </th>
+                                  <td mat-cell *matCellDef="let element"> {{element.customer.mobile}} </td>
+                                </ng-container>
+
+                                <ng-container matColumnDef="id">
+                                    <th mat-header-cell *matHeaderCellDef> id </th>
+                                    <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+                                  </ng-container>
+
+                                <!-- <ng-container matColumnDef="id">
+                                    <th mat-header-cell *matHeaderCellDef> More </th>
+                                    <td mat-cell *matCellDef="let element">   <button mat-raised-button class="btn btn-danger pull-right"
+                                        (click)="serch()">Serch</button> </td>
+                                  </ng-container> -->
+                              
+                                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                              
+                                <!-- Row shown when there is no matching data. -->
+                                <tr class="mat-row" *matNoDataRow>
+                                  <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+                                </tr>
+                              </table>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

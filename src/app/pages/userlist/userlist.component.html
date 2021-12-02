@@ -88,25 +88,17 @@
                         <div class="col-md-6">
 
                             <mat-table sortpen [dataSource]="dataSource">
-                                <!-- Name Column -->
+
                                 <ng-container matColumnDef="name">
                                     <mat-header-cell mat-sort-header *matHeaderCellDef>Name</mat-header-cell>
                                     <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
                                 </ng-container>
-                                <!-- Name Column -->
+
                                 <ng-container matColumnDef="utype.name">
                                     <mat-header-cell mat-sort-header *matHeaderCellDef> Product
                                     </mat-header-cell>
                                     <mat-cell *matCellDef="let element"> {{element.utype.name}} </mat-cell>
                                 </ng-container>
-
-                                <!-- <ng-container matColumnDef="amount">
-                                        <mat-header-cell mat-sort-header *matHeaderCellDef> Pay amount
-                                        </mat-header-cell>
-                                        <mat-cell *matCellDef="let element"> {{element.amount}} </mat-cell>
-                                    </ng-container> -->
-
-
 
                                 <ng-container matColumnDef="id">
                                     <mat-header-cell mat-sort-header *matHeaderCellDef> select
