@@ -14,6 +14,7 @@ import { CalloanComponent } from 'app/pages/calloan/calloan.component';
 import { NewapplicationComponent } from 'app/pages/newapplication/newapplication.component';
 import { ProploanComponent } from 'app/pages/proploan/proploan.component';
 import { ExpenceseComponent } from 'app/pages/expencese/expencese.component';
+import { ApplistComponent } from 'app/pages/applist/applist.component';
 
 export const AdminLayoutRoutes: Routes = [
     { path: 'dashboard', component: DashboardComponent },
@@ -29,5 +30,6 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'calloan',component:CalloanComponent},
     { path: 'newapplicatin',component:NewapplicationComponent},
     { path: 'proploan',component:ProploanComponent},
-    { path: 'expencese',component:ExpenceseComponent}
+    { path: 'expencese',component:ExpenceseComponent},
+    { path: 'applist',component:ApplistComponent}
 ];
