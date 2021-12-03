@@ -44,7 +44,7 @@
                             <mat-form-field>
                                 <mat-label>Select Rate</mat-label>
                                 <mat-select [(ngModel)]="rate"  (selectionChange)="onChange()">
-                                    <mat-option *ngFor="let prod of ratelist" [value]="prod.rate" >
+                                    <mat-option *ngFor="let prod of ratelist" [value]="prod" >
                                         {{prod.rate}}
                                     </mat-option>
                                 </mat-select>

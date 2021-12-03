@@ -51,8 +51,14 @@ export class ProploanComponent implements OnInit {
 
     console.log(this.date);
 
+
+
     if (this.loanamount && this.cusfullname && this.namewithinitial && this.month
       && this.nic && this.date && this.address && this.doccharge && this.mobile && this.rate && this.ratelist && this.refno) {
+
+
+        var rateid=this.rate.id
+        var rate=this.rate.rate;
 
         this.totloan=this.loanamount;
         if(this.checked){
@@ -62,7 +68,7 @@ export class ProploanComponent implements OnInit {
         }
 
       this.capitalPerMonth = (Number(this.loanamount) / Number(this.month)).toFixed(2);
-      this.interestPerMonth = (Number(this.rate) / Number(12) *Number(this.capitalPerMonth)).toFixed(2);
+      this.interestPerMonth = (Number(rate) / Number(12) *Number(this.capitalPerMonth)).toFixed(2);
       this.totalPerMonth = (Number(this.capitalPerMonth) + Number(this.interestPerMonth)).toFixed(2);
 
 
@@ -111,8 +117,8 @@ export class ProploanComponent implements OnInit {
               dockCharge: this.doccharge,
               totalLoanAmount:(Number(this.loanamount)).toFixed(2),
               monthsCount: this.month,
-              interestRate: this.rate,
-              interestRateId: 1,
+              interestRate: rate,
+              interestRateId: rateid,
               startDate: this.date,
               userId: this.getuser.id,
               capitalPerMonth: this.capitalPerMonth,

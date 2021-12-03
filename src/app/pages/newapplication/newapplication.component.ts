@@ -49,10 +49,21 @@ export class NewapplicationComponent implements OnInit {
 
   apply() {
 
-    console.log(this.date);
+    console.log("xxxxxx");
+    console.log(this.rate);
+    console.log("xxxxxx");
+
+ 
+ 
+
+    
+ 
 
     if (this.loanamount && this.cusfullname && this.namewithinitial && this.month
       && this.nic && this.date && this.address && this.doccharge && this.mobile && this.rate && this.ratelist) {
+
+        var rateid=this.rate.id
+        var rate=this.rate.rate;
 
         this.totloan=this.loanamount;
         if(this.checked){
@@ -62,7 +73,7 @@ export class NewapplicationComponent implements OnInit {
         }
 
       this.capitalPerMonth = (Number(this.loanamount) / Number(this.month)).toFixed(2);
-      this.interestPerMonth = (Number(this.rate) / Number(12) *Number(this.capitalPerMonth)).toFixed(2);
+      this.interestPerMonth = (Number(rate) / Number(12) *Number(this.capitalPerMonth)).toFixed(2);
       this.totalPerMonth = (Number(this.capitalPerMonth) + Number(this.interestPerMonth)).toFixed(2);
 
      
@@ -113,8 +124,8 @@ export class NewapplicationComponent implements OnInit {
               dockCharge: this.doccharge,
               totalLoanAmount: (Number(this.loanamount)).toFixed(2) ,
               monthsCount: this.month,
-              interestRate: this.rate,
-              interestRateId: 1,
+              interestRate: rate,
+              interestRateId: rateid,
               startDate: this.date,
               userId: this.getuser.id,
               capitalPerMonth: this.capitalPerMonth,
@@ -134,7 +145,6 @@ export class NewapplicationComponent implements OnInit {
             }
           }, data => {
             this.alart.showNotification('success', 'save');
-           // this.cler();
           })
   
         })
