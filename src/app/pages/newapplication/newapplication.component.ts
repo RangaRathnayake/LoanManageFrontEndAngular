@@ -54,15 +54,18 @@ export class NewapplicationComponent implements OnInit {
     if (this.loanamount && this.cusfullname && this.namewithinitial && this.month
       && this.nic && this.date && this.address && this.doccharge && this.mobile && this.rate && this.ratelist) {
 
-      this.capitalPerMonth = (Number(this.loanamount) / Number(this.month)).toFixed(2);
-      this.interestPerMonth = (Number(this.rate) / Number(this.month)).toFixed(2);
-      this.totalPerMonth = (Number(this.capitalPerMonth) + (Number(this.capitalPerMonth) * Number(this.month))).toFixed(2);
+        this.totloan=this.loanamount;
+        if(this.checked){
+          this.loanamount=Number(this.loanamount) + Number(this.doccharge);
+        }else{
+          this.loanamount=Number(this.loanamount);
+        }
 
-      if(this.checked){
-        this.totloan=Number(this.loanamount) + Number(this.doccharge);
-      }else{
-        this.totloan=Number(this.loanamount);
-      }
+      this.capitalPerMonth = (Number(this.loanamount) / Number(this.month)).toFixed(2);
+      this.interestPerMonth = (Number(this.rate) / Number(12) *Number(this.capitalPerMonth)).toFixed(2);
+      this.totalPerMonth = (Number(this.capitalPerMonth) + Number(this.interestPerMonth)).toFixed(2);
+
+     
 
 
       console.log(this.capitalPerMonth);
@@ -93,10 +96,10 @@ export class NewapplicationComponent implements OnInit {
             address: this.address,
             mobile: this.mobile,
             phone: this.mobile,
-            project: 1,
-            block: "1",
-            otherString: "string",
-            otherInt: 1
+            project: 0,
+            block: "",
+            otherString: "",
+            otherInt: 0
           }
         }, data => {
   
@@ -106,9 +109,9 @@ export class NewapplicationComponent implements OnInit {
             main: {
               loanType: "l",
               oderNumber: "L"+this.nextnum,
-              loanAmount: this.loanamount,
+              loanAmount: this.totloan,
               dockCharge: this.doccharge,
-              totalLoanAmount: (Number(this.totloan)).toFixed(2) ,
+              totalLoanAmount: (Number(this.loanamount)).toFixed(2) ,
               monthsCount: this.month,
               interestRate: this.rate,
               interestRateId: 1,
