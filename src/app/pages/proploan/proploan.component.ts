@@ -68,7 +68,7 @@ export class ProploanComponent implements OnInit {
         }
 
       this.capitalPerMonth = (Number(this.loanamount) / Number(this.month)).toFixed(2);
-      this.interestPerMonth = (Number(rate) / Number(12) *Number(this.capitalPerMonth)).toFixed(2);
+      this.interestPerMonth = (Number(rate) / Number(1200) *Number(this.capitalPerMonth)).toFixed(2);
       this.totalPerMonth = (Number(this.capitalPerMonth) + Number(this.interestPerMonth)).toFixed(2);
 
 
@@ -117,7 +117,7 @@ export class ProploanComponent implements OnInit {
               dockCharge: this.doccharge,
               totalLoanAmount:(Number(this.loanamount)).toFixed(2),
               monthsCount: this.month,
-              interestRate: rate,
+              interestRate:Number(rate)/12 ,
               interestRateId: rateid,
               startDate: this.date,
               userId: this.getuser.id,
