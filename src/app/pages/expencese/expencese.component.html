@@ -6,18 +6,34 @@
                 <p class="card-category"></p>
             </div>
             <div class="card-body">
-                <div class="row">
-                    <div class="col-md-6 ">
-                        <mat-form-field>
-                            <mat-label>Select Expence Type</mat-label>
-                            <mat-select [(ngModel)]="selectedExType">
-                                <mat-option *ngFor="let t of exTypes" [value]="t.id">
-                                    {{t.type}}
-                                </mat-option>
-                            </mat-select>
-                        </mat-form-field>
-                    </div>
-                </div>
+
+                <mat-form-field>
+                    <mat-label>Select Expence Type</mat-label>
+                    <mat-select [(ngModel)]="selectedExType">
+                        <mat-option *ngFor="let t of exTypes" [value]="t.id">
+                            {{t.type}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+                <mat-form-field class="example-full-width">
+                    <input matInput placeholder="Description" [(ngModel)]="description">
+                </mat-form-field>
+
+                <mat-form-field class="example-full-width">
+                    <input matInput placeholder="Date" type="date" [(ngModel)]="date">
+                </mat-form-field>
+
+                <mat-form-field class="example-full-width">
+                    <input matInput placeholder="To Whom" [(ngModel)]="to">
+                </mat-form-field>
+
+                <mat-form-field class="example-full-width">
+                    <input matInput type="number" placeholder="Amount" [(ngModel)]="amount">
+                </mat-form-field>
+
+                <button mat-raised-button class="btn btn-success pull-right" (click)="apply()">save</button>
+
             </div>
         </div>
     </div>

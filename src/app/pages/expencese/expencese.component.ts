@@ -11,6 +11,12 @@ export class ExpenceseComponent implements OnInit {
 
   exTypes;
   selectedExType;
+
+  description;
+  date;
+  to;
+  amount;
+
   constructor(private apiCall: ApicallService, private alart: AlartService) { }
 
   ngOnInit(): void {
@@ -22,6 +28,31 @@ export class ExpenceseComponent implements OnInit {
       this.exTypes = data;
       console.log(this.exTypes);
     });
+  }
+
+  apply() {
+    console.log(this.selectedExType);
+    console.log(this.description)
+    console.log(this.date)
+    console.log(this.to)
+    console.log(this.amount)
+
+    if (this.selectedExType && this.selectedExType > 0 && this.date && this.amount > 0) {
+      const expences = {
+        description: this.description,
+        day: this.date,
+        to: this.to,
+        amount: this.amount,
+        status: 1,
+        exptype: this.selectedExType
+      }
+      this.apiCall.post('expencese', { expences: expences }, data => {
+        console.log(data);
+      });
+    } else {
+      this.alart.showNotification('warning', 'Please recheck your input');
+    }
+
   }
 
 }
