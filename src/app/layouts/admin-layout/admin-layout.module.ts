@@ -27,7 +27,7 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatCheckboxModule} from '@angular/material/checkbox';
 import { ExpenceseComponent } from '../../pages/expencese/expencese.component';
 import { ApplistComponent } from 'app/pages/applist/applist.component';
-
+import { SystemComponent } from '../../pages/system/system.component';
 
 @NgModule({
   imports: [
@@ -61,7 +61,8 @@ import { ApplistComponent } from 'app/pages/applist/applist.component';
     NewapplicationComponent,
     ProploanComponent,
     ExpenceseComponent,
-    ApplistComponent
+    ApplistComponent,
+    SystemComponent
   ]
 })
 
