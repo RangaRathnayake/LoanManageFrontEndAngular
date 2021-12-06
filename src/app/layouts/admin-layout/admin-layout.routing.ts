@@ -15,6 +15,7 @@ import { NewapplicationComponent } from 'app/pages/newapplication/newapplication
 import { ProploanComponent } from 'app/pages/proploan/proploan.component';
 import { ExpenceseComponent } from 'app/pages/expencese/expencese.component';
 import { ApplistComponent } from 'app/pages/applist/applist.component';
+import { MoreinfoComponent } from 'app/pages/moreinfo/moreinfo.component';
 import { SystemComponent } from 'app/pages/system/system.component';
 
 export const AdminLayoutRoutes: Routes = [
@@ -33,5 +34,6 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'proploan',component:ProploanComponent},
     { path: 'expencese',component:ExpenceseComponent},
     { path: 'applist',component:ApplistComponent},
+    { path: 'applist/:id',component:MoreinfoComponent},
     { path: 'system',component:SystemComponent}
 ];

@@ -23,6 +23,7 @@ import { UserlistComponent } from 'app/pages/userlist/userlist.component';
 import { CalloanComponent } from 'app/pages/calloan/calloan.component';
 import { NewapplicationComponent } from 'app/pages/newapplication/newapplication.component';
 import { ProploanComponent } from 'app/pages/proploan/proploan.component';
+import { MoreinfoComponent } from 'app/pages/moreinfo/moreinfo.component';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatCheckboxModule} from '@angular/material/checkbox';
 import { ExpenceseComponent } from '../../pages/expencese/expencese.component';
@@ -60,6 +61,7 @@ import { SystemComponent } from '../../pages/system/system.component';
     CalloanComponent,
     NewapplicationComponent,
     ProploanComponent,
+    MoreinfoComponent,
     ExpenceseComponent,
     ApplistComponent,
     SystemComponent

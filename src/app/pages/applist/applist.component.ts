@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {MatTableDataSource} from '@angular/material/table';
 import { ApicallService } from 'app/service/apicall.service';
+import { ActivatedRoute , } from '@angular/router';
+import { Router } from '@angular/router';
+
 
 
 
@@ -44,7 +47,7 @@ export class ApplistComponent implements OnInit {
   textserch;
 
 
-  constructor(private apiCall: ApicallService) { 
+  constructor(private apiCall: ApicallService , private aroute:ActivatedRoute , private router:Router) { 
      this.getallcus();
   }
 
@@ -64,6 +67,10 @@ export class ApplistComponent implements OnInit {
       
     })
 
+  }
+
+  more(id){
+    this.router.navigate(['applist',id]);
   }
 
 }
