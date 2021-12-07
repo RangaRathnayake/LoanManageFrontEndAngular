@@ -17,6 +17,7 @@ import { ExpenceseComponent } from 'app/pages/expencese/expencese.component';
 import { ApplistComponent } from 'app/pages/applist/applist.component';
 import { MoreinfoComponent } from 'app/pages/moreinfo/moreinfo.component';
 import { SystemComponent } from 'app/pages/system/system.component';
+import { FulldetailsComponent } from 'app/pages/fulldetails/fulldetails.component';
 
 export const AdminLayoutRoutes: Routes = [
     { path: 'dashboard', component: DashboardComponent },
@@ -35,5 +36,6 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'expencese',component:ExpenceseComponent},
     { path: 'applist',component:ApplistComponent},
     { path: 'applist/:id',component:MoreinfoComponent},
-    { path: 'system',component:SystemComponent}
+    { path: 'system',component:SystemComponent},
+    { path: 'fulldetails',component:FulldetailsComponent}
 ];

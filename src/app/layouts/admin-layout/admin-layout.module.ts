@@ -29,6 +29,7 @@ import { MatCheckboxModule} from '@angular/material/checkbox';
 import { ExpenceseComponent } from '../../pages/expencese/expencese.component';
 import { ApplistComponent } from 'app/pages/applist/applist.component';
 import { SystemComponent } from '../../pages/system/system.component';
+import { FulldetailsComponent } from 'app/pages/fulldetails/fulldetails.component';
 
 @NgModule({
   imports: [
@@ -62,6 +63,7 @@ import { SystemComponent } from '../../pages/system/system.component';
     NewapplicationComponent,
     ProploanComponent,
     MoreinfoComponent,
+    FulldetailsComponent,
     ExpenceseComponent,
     ApplistComponent,
     SystemComponent
