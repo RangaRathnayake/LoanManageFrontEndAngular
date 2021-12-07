@@ -54,10 +54,7 @@ export class NewapplicationComponent implements OnInit {
     console.log("xxxxxx");
 
  
- 
-
-    
- 
+ // මේ ටිකට වෙන වෙනම if දාලා  වැලිඩේට් කරන්න වෙනවා හොද error message පෙන්වන්න.. මොබයිල් නම්බර් එක වැලිටේට් කරන්න ලෙන්ත් එක 10 කට ඩේට් එක හරි ෆෝමැට් එකෙන්  තියනවාද කියලා චෙක් කරන්න. එරර් මැසේජ් දාන්න.
 
     if (this.loanamount && this.cusfullname && this.namewithinitial && this.month
       && this.nic && this.date && this.address && this.doccharge && this.mobile && this.rate && this.ratelist) {
@@ -151,7 +148,7 @@ export class NewapplicationComponent implements OnInit {
       })
 
     } else {
-
+      this.alart.showNotification('warning', 'Error message eka penwanna');
     }
 
   }
