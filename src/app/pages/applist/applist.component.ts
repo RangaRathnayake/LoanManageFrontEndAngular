@@ -1,26 +1,12 @@
-import { Component, OnInit } from '@angular/core';
-import {MatTableDataSource} from '@angular/material/table';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatTableDataSource } from '@angular/material/table';
 import { ApicallService } from 'app/service/apicall.service';
-import { ActivatedRoute , } from '@angular/router';
+import { ActivatedRoute, } from '@angular/router';
 import { Router } from '@angular/router';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
 
 
-
-
-// const ELEMENT_DATA: PeriodicElement[] = [
-//   {position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H'},
-//   {position: 2, name: 'Helium', weight: 4.0026, symbol: 'He'},
-//   {position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li'},
-//   {position: 4, name: 'Beryllium', weight: 9.0122, symbol: 'Be'},
-//   {position: 5, name: 'Boron', weight: 10.811, symbol: 'B'},
-//   {position: 6, name: 'Carbon', weight: 12.0107, symbol: 'C'},
-//   {position: 7, name: 'Nitrogen', weight: 14.0067, symbol: 'N'},
-//   {position: 8, name: 'Oxygen', weight: 15.9994, symbol: 'O'},
-//   {position: 9, name: 'Fluorine', weight: 18.9984, symbol: 'F'},
-//   {position: 10, name: 'Neon', weight: 20.1797, symbol: 'Ne'},
-// ];
-
-//const ELEMENT_DATA: PeriodicElement[]=[];
 
 @Component({
   selector: 'app-applist',
@@ -28,49 +14,65 @@ import { Router } from '@angular/router';
   styleUrls: ['./applist.component.scss']
 })
 
- //ELEMENT_DATA: any=[];
+//ELEMENT_DATA: any=[];
 
 export class ApplistComponent implements OnInit {
 
-  ELEMENT_DATA: any[]=[]
+  ELEMENT_DATA: any[] = []
+  inputval;
 
-  //displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
-  displayedColumns: string[] = ['oderNumber','Name','nic','mobile','id'];
-  // dataSource = new MatTableDataSource(this.ELEMENT_DATA);
+  displayedColumns: string[] = ['oderNumber', 'Name', 'nic', 'mobile', 'id'];
   dataSource = <any>[];
 
-  applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
+  applayFilter(text) {
+    this.dataSource.filter = text.trim().toLocaleLowerCase();
   }
 
-  textserch;
 
+  @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
+  @ViewChild(MatSort, { static: false }) sort: MatSort;
 
-  constructor(private apiCall: ApicallService , private aroute:ActivatedRoute , private router:Router) { 
-     this.getallcus();
+  constructor(private apiCall: ApicallService, private aroute: ActivatedRoute, private router: Router) {
+    this.getallcus();
   }
 
   ngOnInit(): void {
     this.getallcus();
   }
 
-  serch(){
+  serch() {
     // console.log(id);
   }
 
-  getallcus(){
+  getallcus() {
     this.apiCall.get('main/withCus', result => {
-      this.ELEMENT_DATA=result;
+
+      result.forEach(element => {
+        var obj = {
+          oderNumber: element.oderNumber,
+          Name: element.customer.name,
+          nic: element.customer.nic,
+          mobile: element.customer.mobile,
+          id: element.id
+        }
+        console.log(obj);
+        this.ELEMENT_DATA.push(obj);
+      });
+
+   
+      console.log(this.ELEMENT_DATA);
       this.dataSource = new MatTableDataSource(this.ELEMENT_DATA);
-      console.log(result);
-      
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
+   
+
+
     })
 
   }
 
-  more(id){
-    this.router.navigate(['applist',id]);
+  more(id) {
+    this.router.navigate(['applist', id]);
   }
 
 }

@@ -14,6 +14,9 @@ export class SystemComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  apply(){}
+  apply(){
+
+    
+  }
 
 }
