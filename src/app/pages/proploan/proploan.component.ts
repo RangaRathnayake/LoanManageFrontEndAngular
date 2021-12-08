@@ -4,6 +4,10 @@ import { AlartService } from 'app/service/alart.service';
 import { Pipe, PipeTransform } from '@angular/core';
 import { DatePipe } from '@angular/common';
 
+import {FormControl} from '@angular/forms';
+import {Observable} from 'rxjs';
+import {map, startWith} from 'rxjs/operators';
+
 @Component({
   selector: 'app-proploan',
   templateUrl: './proploan.component.html',
@@ -36,6 +40,21 @@ export class ProploanComponent implements OnInit {
   indeterminate = false;
   labelPosition: 'before' | 'after' = 'after';
   disabled = false;
+
+  paytypelist = [
+    {
+      id: 1,
+      type: 'non refundable advance'
+    },
+    {
+      id: 2,
+      type: 'advance payment'
+    }
+  ]
+
+  paytype;
+  cusfullname2;
+  advancepay;
 
   constructor(private apiCall: ApicallService, private alart: AlartService) {
     this.gettate();
@@ -92,7 +111,6 @@ export class ProploanComponent implements OnInit {
             console.log("noooo");
             max = result.max;
           }
-          console.log(max);
 
             this.apiCall.post('main', {
               main: {
@@ -240,7 +258,9 @@ export class ProploanComponent implements OnInit {
             otherInt: 0
           }
         }, data => {
-
+          console.log(data);
+          this.cusfullname2=data.name;
+          localStorage.setItem("cusid",data.id);
         })
       }
     }else{
@@ -248,6 +268,54 @@ export class ProploanComponent implements OnInit {
     }
 
    
+  }
+
+  payadvace(){
+    if(this.cusfullname2 && this.paytype && this.advancepay){
+      if(Number(this.advancepay)){
+
+        var nonradvance =0;
+        var downpay= 0;
+
+        if(this.paytype.id == 1){
+         nonradvance = this.advancepay;
+        }else{
+          downpay = this.advancepay;
+        }
+
+        this.apiCall.get('main/max/p', result => { 
+          if (result.max == null) {
+            console.log("okkkkkkk");
+            var max = 0;
+          } else {
+            console.log("noooo");
+            max = result.max;
+          }
+
+          this.apiCall.post('main', {
+            main: {
+              loanType: "p",
+              userId: this.getuser.id,
+              NonRefundableAdvance: (Number(nonradvance)).toFixed(2) ,
+              downPayment: (Number(downpay)).toFixed(2) ,
+              status: 0,
+              customer: localStorage.getItem("cusid"), // this is hardcord
+              oderNumberInt: Number(max) + 1
+            }
+          }, data => {
+            this.alart.showNotification('success', 'save');
+            // this.cler();
+          })
+
+
+        })
+
+      }else{
+        this.alart.showNotification('warning', 'invalid pay amount');
+      }
+    }else{
+      this.alart.showNotification('warning', 'check all feilds');
+    }
   }
 
 

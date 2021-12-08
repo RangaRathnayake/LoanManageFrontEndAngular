@@ -54,6 +54,33 @@
                     <p class="card-category"></p>
                 </div>
                 <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <mat-form-field class="example-full-width">
+                                <input matInput placeholder="select customer" [(ngModel)]="cusfullname2" readonly>
+                            </mat-form-field>
+                        </div>
+
+                        <div class="col-md-4">
+                            <mat-form-field class="example-full-width">
+                                <mat-label>Select payment type</mat-label>
+                                <mat-select [(ngModel)]="paytype" >
+                                    <mat-option *ngFor="let ptype of paytypelist" [value]="ptype">
+                                        {{ptype.type}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+
+                        <div class="col-md-4">
+                            <mat-form-field class="example-full-width">
+                                <input matInput placeholder="Pay amount" [(ngModel)]="advancepay" >
+                            </mat-form-field>
+                        </div>
+                    </div>
+
+                    <button mat-raised-button class="btn btn-success pull-right" (click)="payadvace()">save</button>
+
                 </div>   
             </div>
         </div>
