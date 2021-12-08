@@ -1,16 +1,64 @@
 <div class="main-content">
     <div class="container-fluid">
+        <div class="row">
+            <div class="card">
+                <div class="card-header card-header-danger">
+                    <h4 class="card-title">New Customer</h4>
+                    <p class="card-category"></p>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <mat-form-field class="example-full-width">
+                                <input matInput placeholder="Customer Full Name " [(ngModel)]="cusfullname">
+                            </mat-form-field>
+                        </div>
+
+                        <div class="col-md-6">
+                            <mat-form-field class="example-full-width">
+                                <input matInput placeholder="Name With Initials" [(ngModel)]="namewithinitial">
+                            </mat-form-field>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <mat-form-field class="example-full-width">
+                                <input matInput placeholder="NIC" [(ngModel)]="nic">
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-6">
+                            <mat-form-field class="example-full-width">
+                                <input matInput placeholder="Address" [(ngModel)]="address">
+                            </mat-form-field>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <mat-form-field class="example-full-width">
+                                <input matInput placeholder="Mobile No" [(ngModel)]="mobile">
+                            </mat-form-field>
+                        </div>
+                    </div>
+
+                    <button mat-raised-button class="btn btn-success pull-right" (click)="savecus()">save</button>
+                </div>
+            </div>
+        </div>
 
         <div class="row">
             <div class="card">
                 <div class="card-header card-header-danger">
-                    <h4 class="card-title">New Application</h4>
+                    <h4 class="card-title">Advance payment</h4>
                     <p class="card-category"></p>
                 </div>
                 <div class="card-body">
-                </div>
+                </div>   
             </div>
         </div>
+
+
 
         <div class="row">
             <div class="card">
@@ -26,11 +74,7 @@
                                 <input matInput placeholder="Ref no" [(ngModel)]="refno">
                             </mat-form-field>
                         </div>
-                        <!-- <div class="col-md-6">
-                            <mat-form-field class="example-full-width">
-                                <input matInput placeholder="Customer Full Name " [(ngModel)]="cusfullname">
-                            </mat-form-field>
-                        </div> -->
+
                     </div>
 
                     <div class="row">
@@ -48,9 +92,6 @@
 
                     <div class="row">
                         <div class="col-md-6">
-                            <!-- <mat-form-field class="example-full-width">
-                                <input matInput placeholder="Monthly Interest Rate" >
-                            </mat-form-field> -->
 
                             <mat-form-field>
                                 <mat-label>Select Rate</mat-label>

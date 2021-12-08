@@ -93,22 +93,6 @@ export class ProploanComponent implements OnInit {
             max = result.max;
           }
           console.log(max);
-          this.apiCall.post('customer', {
-            customer: {
-              fullName: this.cusfullname,
-              name: this.namewithinitial,
-              nic: this.nic,
-              address: this.address,
-              mobile: this.mobile,
-              phone: this.mobile,
-              project: 0,
-              block: "",
-              otherString: "sting",
-              otherInt: 0
-            }
-          }, data => {
-
-            console.log(data);
 
             this.apiCall.post('main', {
               main: {
@@ -134,7 +118,7 @@ export class ProploanComponent implements OnInit {
                 propertyName: null,
                 propertyCode: null,
                 status: 0,
-                customer: data.id,
+                customer: 1, // this is hardcord
                 oderNumberInt: Number(max) + 1
               }
             }, data => {
@@ -142,12 +126,12 @@ export class ProploanComponent implements OnInit {
               // this.cler();
             })
 
-          })
+          // })
 
         })
       }
     } else {
-
+      this.alart.showNotification('warning', 'check all feilds');
     }
 
   }
@@ -239,6 +223,32 @@ export class ProploanComponent implements OnInit {
     return isdocvharge;
   }
 
+  savecus(){
+    if(this.nic && this.mobile && this.cusfullname && this.namewithinitial && this.address){
+      if (  this.validnic()  && this.vaidmobile() ) {
+        this.apiCall.post('customer', {
+          customer: {
+            fullName: this.cusfullname,
+            name: this.namewithinitial,
+            nic: this.nic,
+            address: this.address,
+            mobile: this.mobile,
+            phone: this.mobile,
+            project: 0,
+            block: "",
+            otherString: "",
+            otherInt: 0
+          }
+        }, data => {
+
+        })
+      }
+    }else{
+      this.alart.showNotification('warning', 'check all feilds');
+    }
+
+   
+  }
 
 
 

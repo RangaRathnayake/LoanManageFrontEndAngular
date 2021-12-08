@@ -169,7 +169,7 @@ export class NewapplicationComponent implements OnInit {
         
 
     } else {
-      this.alart.showNotification('warning', 'Error message eka penwanna');
+      this.alart.showNotification('warning', 'check all feilds');
     }
 
   }
