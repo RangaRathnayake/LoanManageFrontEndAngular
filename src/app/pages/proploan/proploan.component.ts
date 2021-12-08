@@ -68,15 +68,12 @@ export class ProploanComponent implements OnInit {
 
   apply() {
 
-    console.log(this.date);
+
+    if (this.loanamount   && this.month
+      && this.date  && this.doccharge  && this.rate && this.ratelist && this.refno) {
 
 
-
-    if (this.loanamount && this.cusfullname && this.namewithinitial && this.month
-      && this.nic && this.date && this.address && this.doccharge && this.mobile && this.rate && this.ratelist && this.refno) {
-
-
-      if (this.validloanamount() && this.validmonth() && this.validnic() && this.vaiddoccharge() && this.vaidmobile()) {
+      if (this.validloanamount() && this.validmonth()  && this.vaiddoccharge() ) {
         var rateid = this.rate.id
         var rate = this.rate.rate;
 
@@ -114,6 +111,7 @@ export class ProploanComponent implements OnInit {
 
             this.apiCall.post('main', {
               main: {
+                id:Number(localStorage.getItem("mainid")),
                 loanType: "p",
                 oderNumber: this.refno,
                 loanAmount: this.totloan,
@@ -128,16 +126,12 @@ export class ProploanComponent implements OnInit {
                 interestPerMonth: this.interestPerMonth,
                 totalPerMonth: this.totalPerMonth,
                 monthlyPayDate: value,
-                NonRefundableAdvance: "0.00",
-                downPayment: "0.00",
+                status: 0,
                 projectId: null,
                 projectName: null,
                 blockNumber: null,
                 propertyName: null,
                 propertyCode: null,
-                status: 0,
-                customer: 1, // this is hardcord
-                oderNumberInt: Number(max) + 1
               }
             }, data => {
               this.alart.showNotification('success', 'save');
@@ -304,7 +298,7 @@ export class ProploanComponent implements OnInit {
             }
           }, data => {
             this.alart.showNotification('success', 'save');
-            // this.cler();
+            localStorage.setItem("mainid",data.id);
           })
 
 
