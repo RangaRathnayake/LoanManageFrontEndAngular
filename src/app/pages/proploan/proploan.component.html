@@ -1,5 +1,6 @@
 <div class="main-content">
     <div class="container-fluid">
+
         <div class="row">
             <div class="card">
                 <div class="card-header card-header-danger">
@@ -7,20 +8,17 @@
                     <p class="card-category"></p>
                 </div>
                 <div class="card-body">
-                    <!-- <div class="row">
-                        <div class="col-md-6 offset-md-3">
-                            <div class="row">
-                                <mat-radio-group aria-label="Select an option">
-                                   
-                                        <mat-radio-button value="1">Loans </mat-radio-button>
-                                   
-                                    
-                                        <mat-radio-button value="2">Property</mat-radio-button>
-                                    
-                                </mat-radio-group>
-                            </div>
-                        </div>
-                    </div> -->
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="card">
+                <div class="card-header card-header-danger">
+                    <h4 class="card-title">New Application</h4>
+                    <p class="card-category"></p>
+                </div>
+                <div class="card-body">
 
                     <div class="row">
                         <div class="col-md-6">
@@ -56,8 +54,8 @@
 
                             <mat-form-field>
                                 <mat-label>Select Rate</mat-label>
-                                <mat-select [(ngModel)]="rate"  (selectionChange)="onChange()">
-                                    <mat-option *ngFor="let prod of ratelist" [value]="prod" >
+                                <mat-select [(ngModel)]="rate" (selectionChange)="onChange()">
+                                    <mat-option *ngFor="let prod of ratelist" [value]="prod">
                                         {{prod.rate}}
                                     </mat-option>
                                 </mat-select>
@@ -104,15 +102,12 @@
                         </div>
                         <div class="col-md-2">
                             <section class="example-section">
-                                <mat-checkbox
-                                    class="example-margin"
-                                    [(ngModel)]="checked"
-                                    [(indeterminate)]="indeterminate"
-                                    [labelPosition]="labelPosition"
+                                <mat-checkbox class="example-margin" [(ngModel)]="checked"
+                                    [(indeterminate)]="indeterminate" [labelPosition]="labelPosition"
                                     [disabled]="disabled">
-                                 Add to loan
+                                    Add to loan
                                 </mat-checkbox>
-                              </section>
+                            </section>
                         </div>
                         <div class="col-md-6">
                             <mat-form-field class="example-full-width">
@@ -120,14 +115,15 @@
                             </mat-form-field>
                         </div>
                     </div>
-                    <h1>මේකට ඕනේ අනිත් ‍ෆීල්ඩ් දාන්න. ‍ ප්‍රොජෙක්ට් ලොට් නම්බර් එක එහෙම. මේක තව ඇඩ්වන්ස් නන් රිෆන්ඩබල් ඇඩ්වාන්ස් මේවත් දාන්න. ඕනේ ඒක නිසා මේ ෆෝම් එක සෑහෙන්න වෙනස් කරන්න වෙනවා. 
-                        මුලින්ම කස්ටමර් ව සේව් කරලා ඉවර කරන්න ඉට පස්සේ. පේමන්ට් ටයිප් එක සිලෙක්ට් කරලා දන්න පුළුවන් වෙන්න ඕනේ. පස්සේ තමයි ලොන් එක දාන්න වෙන්න‍ේ
-                        
+                    <h1>මේකට ඕනේ අනිත් ‍ෆීල්ඩ් දාන්න. ‍ ප්‍රොජෙක්ට් ලොට් නම්බර් එක එහෙම. මේක තව ඇඩ්වන්ස් නන් රිෆන්ඩබල්
+                        ඇඩ්වාන්ස් මේවත් දාන්න. ඕනේ ඒක නිසා මේ ෆෝම් එක සෑහෙන්න වෙනස් කරන්න වෙනවා.
+                        මුලින්ම කස්ටමර් ව සේව් කරලා ඉවර කරන්න ඉට පස්සේ. පේමන්ට් ටයිප් එක සිලෙක්ට් කරලා දන්න පුළුවන්
+                        වෙන්න ඕනේ. පස්සේ තමයි ලොන් එක දාන්න වෙන්න‍ේ
+
                     </h1>
 
 
-                    <button mat-raised-button class="btn btn-success pull-right"
-                                        (click)="apply()">save</button>
+                    <button mat-raised-button class="btn btn-success pull-right" (click)="apply()">save</button>
 
 
                 </div>
