@@ -1,81 +1,85 @@
 <div class="main-content">
     <div class="container-fluid">
-        <div class="row">
-            <div class="card">
-                <div class="card-header card-header-success">
-                    <h4 class="card-title">Get Payment</h4>
-                    <p class="card-category"></p>
+
+        <div class="card">
+            <div class="card-header card-header-success">
+                <h4 class="card-title">Get Payment : {{loannumber}}</h4>
+                <p class="card-category"></p>
+            </div>
+            <div class="card-body">
+
+                <div class="col-md-8" style="float: none; margin: 0 auto;">
+                    <h3>Number : {{loannumber}} <br> Name : {{cusname}}</h3>
+                    <p>Total Loan Amount : {{totalLoanAmount}}</p>
+                    <p>Total Paid : {{paid}}</p>
+                    <p>Current Loan Amount : {{current}}</p>
+                    <p>Annual interest rate : {{anualRate}}</p>
                 </div>
-                <div class="card-body">
 
-                    <div class="row">
-                        <div class="col-md-6 offset-md-3">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <mat-label class="lab">Number - {{loannumber}}</mat-label>
-                                </div>
-                                <div class="col-md-6">
-                                    <mat-label class="lab">Customer Name - {{cusname}}</mat-label>
-                                </div>
-                            </div>
-                        </div>
-                        
-                    </div>
-
-                    <div class="row">
-                        <div class="col-md-6 offset-md-3">
-                            <mat-form-field appearance="standard">
-                                <mat-label>Pay Amount</mat-label>
-                                <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium" #input>
-                            </mat-form-field>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-md-6 offset-md-3">
-
-                            <div class="row">
-                                <div class="col-md-6"><label>Capital</label></div>
-
-                                <div class="col-md-6"><label style="text-align: right;">hghh</label></div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-md-6"><label>Annual interest rate</label></div>
-
-                                <div class="col-md-6"><label style="text-align: right;">ghgh</label></div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-md-6"><label>Monthly interest rate</label></div>
-
-                                <div class="col-md-6"><label style="text-align: right;">ghg</label></div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-md-6"><label>Interest</label></div>
-
-                                <div class="col-md-6"><label style="text-align: right;">gffg</label></div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6"><label>Total</label></div>
-
-                                <div class="col-md-6"><label style="text-align: right;">gfgf</label></div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-md-6"><label>Full Total </label></div>
-
-                                <div class="col-md-6"><label style="text-align: right;">gfgf</label></div>
-                            </div>
-
-                        </div>
-                    </div>
-
-
-
+                <div class="col-md-8" style="float: none; margin: 0 auto;">
+                    <mat-form-field appearance="standard" style="text-align: right;">
+                        <mat-label>Pay Amount Rs. </mat-label>
+                        <input type="number" matInput (keyup)="cal($event.target.value)" placeholder="Amount" #input>
+                    </mat-form-field>
                 </div>
+
+
+                <div class="row">
+                    <div class="col-md-8" style="float: none; margin: 0 auto;">
+                        <table style="width: 100%; font-size: medium; ">
+                            <thead>
+                                <th>Pay Type</th>
+                                <th style="text-align: right;">Current</th>
+                                <th style="text-align: right;">PAY</th>
+                            </thead>
+                            <tbody>
+                                <tr style="color: blue;">
+                                    <td>Warant</td>
+                                    <td style="text-align: right;">{{warrant | currency:' '}}</td>
+                                    <td style="text-align: right;">{{payW | currency:' '}}</td>
+                                </tr>
+                                <tr style="color: blue;">
+                                    <td>Arrears</td>
+                                    <td style="text-align: right;">{{arrears | currency:' '}}</td>
+                                    <td style="text-align: right;">{{payA | currency:' '}}</td>
+                                </tr>
+                                <tr style="color: blue;">
+                                    <td>Capital</td>
+                                    <td style="text-align: right;">{{capitalPerMonth | currency:' '}}</td>
+                                    <td style="text-align: right;">{{payC | currency:' '}}</td>
+                                </tr>
+                                <tr style="color: blue;">
+                                    <td>Interest</td>
+                                    <td style="text-align: right;">{{interestPerMonth | currency:' '}}</td>
+                                    <td style="text-align: right;">{{payI | currency:' '}}</td>
+                                </tr>
+
+                                <tr style="color: green;">
+                                    <td>Over Pay</td>
+                                    <td style="text-align: right;">{{priviarsOver | currency:' '}}</td>
+                                    <td style="text-align: right;">{{over | currency:' '}}</td>
+                                </tr>
+                            </tbody>
+                            <tfoot style="font-weight: bold;">
+                                <td>Total</td>
+                                <td style="text-align: right;">{{totalHaveToPay | currency:' '}}</td>
+                                <td style="text-align: right;">{{payT | currency:' '}}</td>
+                            </tfoot>
+                        </table>
+                        <br>
+                        <div>
+                            <button *ngIf="!clickOnPay" mat-raised-button class="btn btn-success pull-right"
+                                (click)="pay()">Get
+                                Payment</button>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
             </div>
         </div>
+
     </div>
 </div>
