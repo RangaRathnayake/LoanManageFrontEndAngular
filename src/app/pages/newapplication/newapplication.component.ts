@@ -4,6 +4,7 @@ import { AlartService } from 'app/service/alart.service';
 import { Pipe, PipeTransform } from '@angular/core';
 import { DatePipe } from '@angular/common';
 
+
 @Component({
   selector: 'app-newapplication',
   templateUrl: './newapplication.component.html',
@@ -49,9 +50,7 @@ export class NewapplicationComponent implements OnInit {
 
   apply() {
 
-    console.log("xxxxxx");
-    console.log(this.rate);
-    console.log("xxxxxx");
+
 
  
  // මේ ටිකට වෙන වෙනම if දාලා  වැලිඩේට් කරන්න වෙනවා හොද error message පෙන්වන්න.. මොබයිල් නම්බර් එක වැලිටේට් කරන්න ලෙන්ත් එක 10 කට ඩේට් එක හරි ෆෝමැට් එකෙන්  තියනවාද කියලා චෙක් කරන්න. එරර් මැසේජ් දාන්න.
@@ -59,7 +58,23 @@ export class NewapplicationComponent implements OnInit {
     if (this.loanamount && this.cusfullname && this.namewithinitial && this.month
       && this.nic && this.date && this.address && this.doccharge && this.mobile && this.rate && this.ratelist) {
 
-        var rateid=this.rate.id
+        // if(this.validloanamount()){
+        //   if(this.validmonth()){
+        //     if(this.validnic()){
+        //       if(this.vaiddoccharge()){
+        //         if(this.vaidmobile()){
+
+        //         }
+        //       }
+        //     }
+        //   }
+
+        // }
+
+        if(this.validloanamount() && this.validmonth() && this.validnic() && this.vaiddoccharge() && this.vaidmobile() ){
+
+
+          var rateid=this.rate.id
         var rate=this.rate.rate;
 
         this.totloan=this.loanamount;
@@ -147,6 +162,12 @@ export class NewapplicationComponent implements OnInit {
         })
       })
 
+
+
+        }
+
+        
+
     } else {
       this.alart.showNotification('warning', 'Error message eka penwanna');
     }
@@ -187,6 +208,58 @@ export class NewapplicationComponent implements OnInit {
     this.rate='';
     this.ratelist='';
 
+  }
+
+
+  vaidmobile(): boolean {
+    var ismobile = false;
+    if (this.mobile.length == 10 && Number(this.mobile)) {
+      ismobile = true;
+    }else{
+      this.alart.showNotification('warning', 'Enter valid mobile number');
+    }
+    console.log(ismobile);
+    return ismobile;
+  }
+
+  validloanamount():boolean{
+    var isloanamount=false;
+    if(Number(this.loanamount)){
+      isloanamount=true;
+    }else{
+      this.alart.showNotification('warning', 'Enter valid loan amount');
+    }
+    return isloanamount;
+  }
+
+  validmonth():boolean{
+    var ismonth=false;
+    if(Number(this.month)){
+      ismonth=true;
+    }else{
+      this.alart.showNotification('warning', 'Enter valid month');
+    }
+    return ismonth;
+  }
+
+  validnic():boolean{
+    var isnic=false;
+    if (this.nic.length >= 10 && this.nic.length <= 12) {
+      isnic=true;
+    }else{
+      this.alart.showNotification('warning', 'Enter valid nic');
+    }
+    return isnic;
+  }
+
+  vaiddoccharge():boolean{
+    var isdocvharge=false;
+    if(Number(this.doccharge)){
+      isdocvharge =true;
+    }else{
+      this.alart.showNotification('warning', 'Enter valid document charge');
+    }
+    return isdocvharge;
   }
 
 
