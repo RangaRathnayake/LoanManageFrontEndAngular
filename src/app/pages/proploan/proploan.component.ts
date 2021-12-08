@@ -57,93 +57,95 @@ export class ProploanComponent implements OnInit {
       && this.nic && this.date && this.address && this.doccharge && this.mobile && this.rate && this.ratelist && this.refno) {
 
 
-        var rateid=this.rate.id
-        var rate=this.rate.rate;
+      if (this.validloanamount() && this.validmonth() && this.validnic() && this.vaiddoccharge() && this.vaidmobile()) {
+        var rateid = this.rate.id
+        var rate = this.rate.rate;
 
-        this.totloan=this.loanamount;
-        if(this.checked){
-          this.loanamount=Number(this.loanamount) + Number(this.doccharge);
-        }else{
-          this.loanamount=Number(this.loanamount);
+        this.totloan = this.loanamount;
+        if (this.checked) {
+          this.loanamount = Number(this.loanamount) + Number(this.doccharge);
+        } else {
+          this.loanamount = Number(this.loanamount);
         }
 
-      this.capitalPerMonth = (Number(this.loanamount) / Number(this.month)).toFixed(2);
-      this.interestPerMonth = (Number(rate) / Number(1200) *Number(this.capitalPerMonth)).toFixed(2);
-      this.totalPerMonth = (Number(this.capitalPerMonth) + Number(this.interestPerMonth)).toFixed(2);
+        this.capitalPerMonth = (Number(this.loanamount) / Number(this.month)).toFixed(2);
+        this.interestPerMonth = (Number(rate) / Number(1200) * Number(this.capitalPerMonth)).toFixed(2);
+        this.totalPerMonth = (Number(this.capitalPerMonth) + Number(this.interestPerMonth)).toFixed(2);
 
 
-    
-      console.log(this.capitalPerMonth);
-      console.log(this.interestPerMonth);
-      console.log(this.totalPerMonth);
-      //  this.date.setDate( this.date.getDate() + 3 );
-      //  console.log(this.date);
-      let dt = new Date(this.date);
-      var datePipe = new DatePipe("en-US");
-      let value = datePipe.transform(dt, 'dd');
-      console.log(value);
 
-      this.apiCall.get('main/max/p', result => {
-        if(result.max == null ){
-          console.log("okkkkkkk");
-          var max =0;
-        }else{
-          console.log("noooo");
-           max =result.max;
-        }
-        console.log(max);
-        this.apiCall.post('customer', {
-          customer: {
-            fullName: this.cusfullname,
-            name: this.namewithinitial,
-            nic: this.nic,
-            address: this.address,
-            mobile: this.mobile,
-            phone: this.mobile,
-            project: 0,
-            block: "",
-            otherString: "sting",
-            otherInt: 0
+        console.log(this.capitalPerMonth);
+        console.log(this.interestPerMonth);
+        console.log(this.totalPerMonth);
+        //  this.date.setDate( this.date.getDate() + 3 );
+        //  console.log(this.date);
+        let dt = new Date(this.date);
+        var datePipe = new DatePipe("en-US");
+        let value = datePipe.transform(dt, 'dd');
+        console.log(value);
+
+        this.apiCall.get('main/max/p', result => {
+          if (result.max == null) {
+            console.log("okkkkkkk");
+            var max = 0;
+          } else {
+            console.log("noooo");
+            max = result.max;
           }
-        }, data => {
-  
-          console.log(data);
-  
-          this.apiCall.post('main', {
-            main: {
-              loanType: "p",
-              oderNumber: this.refno,
-              loanAmount: this.totloan,
-              dockCharge: this.doccharge,
-              totalLoanAmount:(Number(this.loanamount)).toFixed(2),
-              monthsCount: this.month,
-              interestRate:Number(rate)/12 ,
-              interestRateId: rateid,
-              startDate: this.date,
-              userId: this.getuser.id,
-              capitalPerMonth: this.capitalPerMonth,
-              interestPerMonth: this.interestPerMonth,
-              totalPerMonth: this.totalPerMonth,
-              monthlyPayDate: value,
-              NonRefundableAdvance: "0.00",
-              downPayment: "0.00",
-              projectId: null,
-              projectName: null,
-              blockNumber: null,
-              propertyName: null,
-              propertyCode: null,
-              status: 0,
-              customer: data.id,
-              oderNumberInt:Number(max)+1
+          console.log(max);
+          this.apiCall.post('customer', {
+            customer: {
+              fullName: this.cusfullname,
+              name: this.namewithinitial,
+              nic: this.nic,
+              address: this.address,
+              mobile: this.mobile,
+              phone: this.mobile,
+              project: 0,
+              block: "",
+              otherString: "sting",
+              otherInt: 0
             }
           }, data => {
-            this.alart.showNotification('success', 'save');
-           // this.cler();
-          })
-  
-        })
 
-      })
+            console.log(data);
+
+            this.apiCall.post('main', {
+              main: {
+                loanType: "p",
+                oderNumber: this.refno,
+                loanAmount: this.totloan,
+                dockCharge: this.doccharge,
+                totalLoanAmount: (Number(this.loanamount)).toFixed(2),
+                monthsCount: this.month,
+                interestRate: Number(rate) / 12,
+                interestRateId: rateid,
+                startDate: this.date,
+                userId: this.getuser.id,
+                capitalPerMonth: this.capitalPerMonth,
+                interestPerMonth: this.interestPerMonth,
+                totalPerMonth: this.totalPerMonth,
+                monthlyPayDate: value,
+                NonRefundableAdvance: "0.00",
+                downPayment: "0.00",
+                projectId: null,
+                projectName: null,
+                blockNumber: null,
+                propertyName: null,
+                propertyCode: null,
+                status: 0,
+                customer: data.id,
+                oderNumberInt: Number(max) + 1
+              }
+            }, data => {
+              this.alart.showNotification('success', 'save');
+              // this.cler();
+            })
+
+          })
+
+        })
+      }
     } else {
 
     }
@@ -171,19 +173,70 @@ export class ProploanComponent implements OnInit {
   }
 
 
-  cler(){
-    this.loanamount="";
-    this.cusfullname="";
-    this.monthrate="";
-    this.namewithinitial="";
-    this.month="";
-    this.nic="";
-    this.address="";
-    this.doccharge="";
-    this.mobile="";
-    this.rate="";
-    this.ratelist="";
+  cler() {
+    this.loanamount = "";
+    this.cusfullname = "";
+    this.monthrate = "";
+    this.namewithinitial = "";
+    this.month = "";
+    this.nic = "";
+    this.address = "";
+    this.doccharge = "";
+    this.mobile = "";
+    this.rate = "";
+    this.ratelist = "";
 
+  }
+
+  vaidmobile(): boolean {
+    var ismobile = false;
+    if (this.mobile.length == 10 && Number(this.mobile)) {
+      ismobile = true;
+    } else {
+      this.alart.showNotification('warning', 'Enter valid mobile number');
+    }
+    console.log(ismobile);
+    return ismobile;
+  }
+
+  validloanamount(): boolean {
+    var isloanamount = false;
+    if (Number(this.loanamount)) {
+      isloanamount = true;
+    } else {
+      this.alart.showNotification('warning', 'Enter valid loan amount');
+    }
+    return isloanamount;
+  }
+
+  validmonth(): boolean {
+    var ismonth = false;
+    if (Number(this.month)) {
+      ismonth = true;
+    } else {
+      this.alart.showNotification('warning', 'Enter valid month');
+    }
+    return ismonth;
+  }
+
+  validnic(): boolean {
+    var isnic = false;
+    if (this.nic.length >= 10 && this.nic.length <= 12) {
+      isnic = true;
+    } else {
+      this.alart.showNotification('warning', 'Enter valid nic');
+    }
+    return isnic;
+  }
+
+  vaiddoccharge(): boolean {
+    var isdocvharge = false;
+    if (Number(this.doccharge)) {
+      isdocvharge = true;
+    } else {
+      this.alart.showNotification('warning', 'Enter valid document charge');
+    }
+    return isdocvharge;
   }
 
 
