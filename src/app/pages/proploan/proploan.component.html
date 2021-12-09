@@ -47,7 +47,7 @@
             </div>
         </div>
 
-        <div class="row">
+        <div class="row" *ngIf="ispayment">
             <div class="card">
                 <div class="card-header card-header-danger">
                     <h4 class="card-title">Advance payment</h4>
@@ -64,7 +64,7 @@
                         <div class="col-md-4">
                             <mat-form-field class="example-full-width">
                                 <mat-label>Select payment type</mat-label>
-                                <mat-select [(ngModel)]="paytype" >
+                                <mat-select [(ngModel)]="paytype">
                                     <mat-option *ngFor="let ptype of paytypelist" [value]="ptype">
                                         {{ptype.type}}
                                     </mat-option>
