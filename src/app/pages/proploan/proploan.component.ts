@@ -56,6 +56,9 @@ export class ProploanComponent implements OnInit {
   cusfullname2;
   advancepay;
 
+  projectlist;
+  project;
+
   constructor(private apiCall: ApicallService, private alart: AlartService) {
     this.gettate();
     this.getuser = this.apiCall.logedUser();
@@ -64,6 +67,7 @@ export class ProploanComponent implements OnInit {
 
   ngOnInit(): void {
     this.getloanref();
+    this.getallproject();
   }
 
   apply() {
@@ -310,6 +314,14 @@ export class ProploanComponent implements OnInit {
     }else{
       this.alart.showNotification('warning', 'check all feilds');
     }
+  }
+
+  getallproject(){
+    this.apiCall.get('project', result => {
+      this.projectlist = result;
+      console.log(result);
+
+    })
   }
 
 

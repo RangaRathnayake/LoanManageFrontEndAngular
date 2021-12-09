@@ -110,14 +110,7 @@
                                 <input matInput placeholder="Loan Amount" [(ngModel)]="loanamount">
                             </mat-form-field>
                         </div>
-                        <!-- <div class="col-md-6">
-                            <mat-form-field class="example-full-width">
-                                <input matInput placeholder="Customer Full Name " [(ngModel)]="cusfullname">
-                            </mat-form-field>
-                        </div> -->
-                    </div>
 
-                    <div class="row">
                         <div class="col-md-6">
 
                             <mat-form-field>
@@ -129,12 +122,9 @@
                                 </mat-select>
                             </mat-form-field>
                         </div>
-                        <!-- <div class="col-md-6">
-                            <mat-form-field class="example-full-width">
-                                <input matInput placeholder="Name With Initials" [(ngModel)]="namewithinitial">
-                            </mat-form-field>
-                        </div> -->
                     </div>
+
+                    
 
                     <div class="row">
                         <div class="col-md-6">
@@ -142,25 +132,15 @@
                                 <input matInput placeholder="Months" [(ngModel)]="month">
                             </mat-form-field>
                         </div>
-                        <!-- <div class="col-md-6">
-                            <mat-form-field class="example-full-width">
-                                <input matInput placeholder="NIC" [(ngModel)]="nic">
-                            </mat-form-field>
-                        </div> -->
-                    </div>
 
-                    <div class="row">
                         <div class="col-md-6">
                             <mat-form-field class="example-full-width">
                                 <input matInput placeholder="Date" type="date" [(ngModel)]="date">
                             </mat-form-field>
                         </div>
-                        <!-- <div class="col-md-6">
-                            <mat-form-field class="example-full-width">
-                                <input matInput placeholder="Address" [(ngModel)]="address">
-                            </mat-form-field>
-                        </div> -->
                     </div>
+
+                    
 
                     <div class="row">
                         <div class="col-md-4">
@@ -177,11 +157,26 @@
                                 </mat-checkbox>
                             </section>
                         </div>
-                        <!-- <div class="col-md-6">
-                            <mat-form-field class="example-full-width">
-                                <input matInput placeholder="Mobile No" [(ngModel)]="mobile">
+                        <div class="col-md-6">
+
+                            <mat-form-field>
+                                <mat-label>Select project</mat-label>
+                                <mat-select [(ngModel)]="project" (selectionChange)="onChange()">
+                                    <mat-option *ngFor="let proj of projectlist" [value]="proj">
+                                        {{proj.name}}
+                                    </mat-option>
+                                </mat-select>
                             </mat-form-field>
-                        </div> -->
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <mat-form-field class="example-full-width">
+                                <input matInput placeholder="Lot number" [(ngModel)]="lotnum">
+                            </mat-form-field>
+                        </div>
                     </div>
 
 
