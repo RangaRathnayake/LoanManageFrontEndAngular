@@ -56,21 +56,35 @@ export class ProploanComponent implements OnInit {
   cusfullname2;
   advancepay;
 
+  projectlist;
+  project;
+
+  lotnum;
+
+  //visivly
+
+  iscus:boolean=false;
+  ispayment:boolean=false;
+  isnewapp:boolean=false;
+
   constructor(private apiCall: ApicallService, private alart: AlartService) {
     this.gettate();
     this.getuser = this.apiCall.logedUser();
     console.log(this.getuser);
+    this.iscus=true;
   }
 
   ngOnInit(): void {
     this.getloanref();
+    this.getallproject();
   }
 
   apply() {
 
 
     if (this.loanamount   && this.month
-      && this.date  && this.doccharge  && this.rate && this.ratelist && this.refno) {
+  
+  && this.date  && this.doccharge  && this.rate && this.ratelist && this.refno && this.lotnum && this.project) {
 
 
       if (this.validloanamount() && this.validmonth()  && this.vaiddoccharge() ) {
@@ -127,18 +141,16 @@ export class ProploanComponent implements OnInit {
                 totalPerMonth: this.totalPerMonth,
                 monthlyPayDate: value,
                 status: 0,
-                projectId: null,
-                projectName: null,
-                blockNumber: null,
+                projectId:Number(this.project.id),
+                projectName: this.project.name,
+                blockNumber: this.lotnum,
                 propertyName: null,
                 propertyCode: null,
               }
             }, data => {
               this.alart.showNotification('success', 'save');
-              // this.cler();
             })
 
-          // })
 
         })
       }
@@ -255,6 +267,8 @@ export class ProploanComponent implements OnInit {
           console.log(data);
           this.cusfullname2=data.name;
           localStorage.setItem("cusid",data.id);
+          this.iscus=false;
+          this.ispayment=true;
         })
       }
     }else{
@@ -299,6 +313,8 @@ export class ProploanComponent implements OnInit {
           }, data => {
             this.alart.showNotification('success', 'save');
             localStorage.setItem("mainid",data.id);
+            this.ispayment=false;
+            this.isnewapp=true;
           })
 
 
@@ -310,6 +326,14 @@ export class ProploanComponent implements OnInit {
     }else{
       this.alart.showNotification('warning', 'check all feilds');
     }
+  }
+
+  getallproject(){
+    this.apiCall.get('project', result => {
+      this.projectlist = result;
+      console.log(result);
+
+    })
   }
 
 
