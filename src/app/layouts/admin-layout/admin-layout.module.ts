@@ -46,8 +46,8 @@ import { FulldetailsComponent } from 'app/pages/fulldetails/fulldetails.componen
     MatSelectModule,
     MatTooltipModule,
     MatRadioModule,
-    MatCheckboxModule
-
+    MatCheckboxModule,
+    
   ],
   declarations: [
     DashboardComponent,

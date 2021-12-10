@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AlartService } from 'app/service/alart.service';
 import { ApicallService } from 'app/service/apicall.service';
 
+
 @Component({
   selector: 'app-moreinfo',
   templateUrl: './moreinfo.component.html',
@@ -19,12 +20,14 @@ export class MoreinfoComponent implements OnInit {
   rateId;
   mainId;
   transactionData;
+  mainData;
+  user;
 
   totalHaveToPay: number = 0;
   capitalPerMonth: number = 0;
   interestPerMonth: number = 0;
-  arrears: number = 10.00;
-  warrant: number = 10.00;
+  arrears: number = 0;
+  warrant: number = 0;
   priviarsOver: number = 0;
 
   inputval;
@@ -40,6 +43,9 @@ export class MoreinfoComponent implements OnInit {
   constructor(private router: Router, private arout: ActivatedRoute, private apiCall: ApicallService, private alart: AlartService) { }
 
   ngOnInit(): void {
+
+    this.user = this.apiCall.logedUser()
+
     this.arout.params.subscribe(params => {
       const id = params['id'];
       this.mainId = id;
@@ -55,6 +61,7 @@ export class MoreinfoComponent implements OnInit {
   getmoreinfo(id) {
     this.apiCall.get('main/' + id, result => {
       console.log(result);
+      this.mainData = result;
       this.loannumber = result.oderNumber;
       this.cusname = result.customer.name;
       this.rateId = result.interestRateId;
@@ -138,7 +145,7 @@ export class MoreinfoComponent implements OnInit {
     console.log(this.over);
   }
 
-  pay() {    
+  pay() {
     if (this.payT > 0) {
       this.clickOnPay = true;
       console.log("warant " + this.payW)
@@ -147,6 +154,35 @@ export class MoreinfoComponent implements OnInit {
       console.log("interest " + this.payI)
       console.log("Over " + this.over)
       console.log("total " + this.payT);
+
+      let obj = {
+        transaction: {
+          day: new Date(),
+          capital: this.payC,
+          interest: this.payI,
+          warant: this.payW,
+          dockCharge: 0,
+          monthCount: 1,
+          nonRefund: 0,
+          advance: 0,
+          otherPay: 0,
+          over: this.over,
+          total: this.payT,
+          payType: "installment",
+          cheque: 0,
+          loanType: "l",
+          interestRate: this.anualRate / 12,
+          status: 1,
+          customer: this.mainData.customer.id,
+          main: this.mainData.id,
+          user: this.user.id,
+        }
+      }
+
+      this.apiCall.post('transaction', obj, data => {
+        console.log(data);
+      })
+
     } else {
       this.alart.showNotification("danger", "Please Enter Pay Amount Correctly")
     }
