@@ -30,6 +30,7 @@ import { ExpenceseComponent } from '../../pages/expencese/expencese.component';
 import { ApplistComponent } from 'app/pages/applist/applist.component';
 import { SystemComponent } from '../../pages/system/system.component';
 import { FulldetailsComponent } from 'app/pages/fulldetails/fulldetails.component';
+import { SystemsettingsComponent } from 'app/pages/systemsettings/systemsettings.component';
 
 @NgModule({
   imports: [
@@ -64,6 +65,7 @@ import { FulldetailsComponent } from 'app/pages/fulldetails/fulldetails.componen
     ProploanComponent,
     MoreinfoComponent,
     FulldetailsComponent,
+    SystemsettingsComponent,
     ExpenceseComponent,
     ApplistComponent,
     SystemComponent

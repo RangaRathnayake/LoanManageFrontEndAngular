@@ -18,6 +18,7 @@ import { ApplistComponent } from 'app/pages/applist/applist.component';
 import { MoreinfoComponent } from 'app/pages/moreinfo/moreinfo.component';
 import { SystemComponent } from 'app/pages/system/system.component';
 import { FulldetailsComponent } from 'app/pages/fulldetails/fulldetails.component';
+import { SystemsettingsComponent } from 'app/pages/systemsettings/systemsettings.component';
 
 export const AdminLayoutRoutes: Routes = [
     { path: 'dashboard', component: DashboardComponent },
@@ -37,5 +38,6 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'applist',component:ApplistComponent},
     { path: 'moreinfo/:id',component:MoreinfoComponent},
     { path: 'system',component:SystemComponent},
-    { path: 'fulldetails/:id',component:FulldetailsComponent}
+    { path: 'fulldetails/:id',component:FulldetailsComponent},
+    { path: 'syssetting',component:SystemsettingsComponent}
 ];
