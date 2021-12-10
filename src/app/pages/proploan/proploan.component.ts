@@ -3,6 +3,8 @@ import { ApicallService } from 'app/service/apicall.service';
 import { AlartService } from 'app/service/alart.service';
 import { Pipe, PipeTransform } from '@angular/core';
 import { DatePipe } from '@angular/common';
+import { ActivatedRoute, } from '@angular/router';
+import { Router } from '@angular/router';
 
 import {FormControl} from '@angular/forms';
 import {Observable} from 'rxjs';
@@ -67,7 +69,7 @@ export class ProploanComponent implements OnInit {
   ispayment:boolean=false;
   isnewapp:boolean=false;
 
-  constructor(private apiCall: ApicallService, private alart: AlartService) {
+  constructor(private apiCall: ApicallService, private alart: AlartService , private router: Router) {
     this.gettate();
     this.getuser = this.apiCall.logedUser();
     console.log(this.getuser);
@@ -149,6 +151,9 @@ export class ProploanComponent implements OnInit {
               }
             }, data => {
               this.alart.showNotification('success', 'save');
+              if(data){
+                this.router.navigate(['fulldetails', data.id]);
+              }
             })
 
 
