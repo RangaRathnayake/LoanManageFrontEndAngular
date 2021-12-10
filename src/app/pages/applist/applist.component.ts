@@ -69,7 +69,7 @@ export class ApplistComponent implements OnInit {
   }
 
   more(id) {
-    this.router.navigate(['applist', id]);
+    this.router.navigate(['fulldetails', id]);
   }
 
 }

@@ -35,7 +35,7 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'proploan',component:ProploanComponent},
     { path: 'expencese',component:ExpenceseComponent},
     { path: 'applist',component:ApplistComponent},
-    { path: 'applist/:id',component:MoreinfoComponent},
+    { path: 'moreinfo/:id',component:MoreinfoComponent},
     { path: 'system',component:SystemComponent},
-    { path: 'fulldetails',component:FulldetailsComponent}
+    { path: 'fulldetails/:id',component:FulldetailsComponent}
 ];

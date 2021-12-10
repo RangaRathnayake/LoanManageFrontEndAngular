@@ -1,1 +1,23 @@
-<p>fulldetails works!</p>
+<div class="main-content">
+    <div class="container-fluid">
+
+        <div class="card">
+            <div class="card-header card-header-success">
+                <h4 class="card-title">Get Payment : {{loannumber}}</h4>
+                <p class="card-category"></p>
+            </div>
+            <div class="card-body">
+
+                <div class="col-md-8" style="float: none; margin: 0 auto;">
+                    <h3>Number : {{loannumber}} <br> Name : {{cusname}}</h3>
+                    <p>Total Loan Amount : {{totalLoanAmount}}</p>
+                    <p>Total Paid : {{paid}}</p>
+                    <p>Current Loan Amount : {{current}}</p>
+                    <p>Annual interest rate : {{anualRate}}</p>
+                </div>
+            </div>
+            <button mat-raised-button class="btn btn-success pull-right" (click)="more()">Get Instalment
+                Payment</button>
+        </div>
+    </div>
+</div>
