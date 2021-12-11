@@ -1,1 +1,21 @@
-<p>process works!</p>
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="card">
+            <div class="card-header card-header-danger">
+                <h4 class="card-title">Process depend on these values</h4>
+                <p class="card-category"></p>
+            </div>
+            <div class="card-body">
+                <h4>Warrant excuse day count :<strong> {{warrant_day}} </strong><br>
+                    Warrant rate per day :<strong> {{warrant_rate}} %</strong> <br>
+                    Last Processed day :
+                </h4>
+
+                <button *ngIf="!isStart" mat-raised-button class="btn btn-success pull-right"
+                    (click)="startProcess()">Start Today
+                    Process</button>
+            </div>
+        </div>
+
+    </div>
+</div>
