@@ -26,8 +26,8 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatCardModule } from '@angular/material/card';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatRadioModule } from '@angular/material/radio';
-//import { SystemsettingsComponent } from './pages/systemsettings/systemsettings.component';
-//import { FulldetailsComponent } from './pages/fulldetails/fulldetails.component';
+
+
 
 
 
@@ -62,8 +62,6 @@ import { MatRadioModule } from '@angular/material/radio';
     AppComponent,
     AdminLayoutComponent,
     LoginComponent,
-    //SystemsettingsComponent,
-    //FulldetailsComponent,
   ],
   providers: [],
   bootstrap: [AppComponent]

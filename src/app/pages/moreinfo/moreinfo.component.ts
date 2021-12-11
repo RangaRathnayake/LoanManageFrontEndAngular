@@ -22,6 +22,7 @@ export class MoreinfoComponent implements OnInit {
   transactionData;
   mainData;
   user;
+  monthCount = 0;
 
   totalHaveToPay: number = 0;
   capitalPerMonth: number = 0;

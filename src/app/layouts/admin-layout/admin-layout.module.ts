@@ -25,12 +25,12 @@ import { NewapplicationComponent } from 'app/pages/newapplication/newapplication
 import { ProploanComponent } from 'app/pages/proploan/proploan.component';
 import { MoreinfoComponent } from 'app/pages/moreinfo/moreinfo.component';
 import { MatRadioModule } from '@angular/material/radio';
-import { MatCheckboxModule} from '@angular/material/checkbox';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 import { ExpenceseComponent } from '../../pages/expencese/expencese.component';
 import { ApplistComponent } from 'app/pages/applist/applist.component';
 import { SystemComponent } from '../../pages/system/system.component';
 import { FulldetailsComponent } from 'app/pages/fulldetails/fulldetails.component';
-import { SystemsettingsComponent } from 'app/pages/systemsettings/systemsettings.component';
+import { ProcessComponent } from '../../pages/process/process.component';
 
 @NgModule({
   imports: [
@@ -48,7 +48,7 @@ import { SystemsettingsComponent } from 'app/pages/systemsettings/systemsettings
     MatTooltipModule,
     MatRadioModule,
     MatCheckboxModule,
-    
+
   ],
   declarations: [
     DashboardComponent,
@@ -65,10 +65,10 @@ import { SystemsettingsComponent } from 'app/pages/systemsettings/systemsettings
     ProploanComponent,
     MoreinfoComponent,
     FulldetailsComponent,
-    SystemsettingsComponent,
     ExpenceseComponent,
     ApplistComponent,
-    SystemComponent
+    SystemComponent,
+    ProcessComponent
   ]
 })
 

@@ -18,7 +18,7 @@ import { ApplistComponent } from 'app/pages/applist/applist.component';
 import { MoreinfoComponent } from 'app/pages/moreinfo/moreinfo.component';
 import { SystemComponent } from 'app/pages/system/system.component';
 import { FulldetailsComponent } from 'app/pages/fulldetails/fulldetails.component';
-import { SystemsettingsComponent } from 'app/pages/systemsettings/systemsettings.component';
+import { ProcessComponent } from '../../pages/process/process.component';
 
 export const AdminLayoutRoutes: Routes = [
     { path: 'dashboard', component: DashboardComponent },
@@ -30,14 +30,16 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'notifications', component: NotificationsComponent },
     { path: 'upgrade', component: UpgradeComponent },
     { path: 'users', component: UsersComponent },
-    { path: 'userlist',component:UserlistComponent},
-    { path: 'calloan',component:CalloanComponent},
-    { path: 'newapplicatin',component:NewapplicationComponent},
-    { path: 'proploan',component:ProploanComponent},
-    { path: 'expencese',component:ExpenceseComponent},
-    { path: 'applist',component:ApplistComponent},
-    { path: 'moreinfo/:id',component:MoreinfoComponent},
-    { path: 'system',component:SystemComponent},
-    { path: 'fulldetails/:id',component:FulldetailsComponent},
-    { path: 'syssetting',component:SystemsettingsComponent}
+    { path: 'userlist', component: UserlistComponent },
+    { path: 'calloan', component: CalloanComponent },
+    { path: 'newapplicatin', component: NewapplicationComponent },
+    { path: 'proploan', component: ProploanComponent },
+    { path: 'expencese', component: ExpenceseComponent },
+    { path: 'applist', component: ApplistComponent },
+    { path: 'moreinfo/:id', component: MoreinfoComponent },
+    { path: 'system', component: SystemComponent },
+    { path: 'fulldetails/:id', component: FulldetailsComponent },
+    { path: 'process', component: ProcessComponent },
+
+
 ];
