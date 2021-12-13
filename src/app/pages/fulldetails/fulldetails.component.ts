@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AlartService } from 'app/service/alart.service';
 import { ApicallService } from 'app/service/apicall.service';
 
+
 @Component({
   selector: 'app-fulldetails',
   templateUrl: './fulldetails.component.html',
@@ -119,6 +120,10 @@ export class FulldetailsComponent implements OnInit {
       })
       this.alart.showNotification("success", "Loan Approved");
     });
+  }
+
+  edit(){
+    this.router.navigate(['Update',  this.mainId]);
   }
 
 }

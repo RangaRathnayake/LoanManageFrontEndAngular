@@ -21,6 +21,9 @@
                     <p>Annual interest rate : {{anualRate}}</p>
                 </div>
 
+                <button  mat-raised-button class="btn btn-success pull-right"
+                    (click)="edit()">Edit</button>
+
                 <button *ngIf="user.utype.id<3 && !clickOnApprove" mat-raised-button class="btn btn-warning pull-right"
                     (click)="approve()">Approve This Loan</button>
                 <button *ngIf="mainData && mainData.status==1" mat-raised-button class="btn btn-success pull-right"
