@@ -35,6 +35,7 @@ export class MoreinfoComponent implements OnInit {
   firstArrearsData;
   isCompleteThisMonth = 0;
 
+  allFinish = false;
 
 
 
@@ -201,6 +202,9 @@ export class MoreinfoComponent implements OnInit {
           this.arrearsData[x].capitalPaid = Number(this.arrearsData[x].capitalPaid) + Number(this.arrearsData[x].capitalArrears);
           this.arrearsData[x].capitalArrears = 0;
           this.arrearsData[x].status = 1
+          if (this.arrearsData.length == x - 1) {
+            this.allFinish = true;
+          }
           this.arrearsData[x].completeDate = this.today;
         } else {
           this.payA += this.over;
@@ -231,6 +235,9 @@ export class MoreinfoComponent implements OnInit {
           this.over = this.over - Number(this.arrearsData[x].capital);
           this.arrearsData[x].capital = 0;
           this.arrearsData[x].status = 1;
+          if (this.arrearsData.length == x - 1) {
+            this.allFinish = true;
+          }
           this.arrearsData[x].completeDate = this.today;
         } else {
           this.payC += this.over;
@@ -331,7 +338,6 @@ export class MoreinfoComponent implements OnInit {
 
 
       console.log(this.arrearsData);
-
       this.apiCall.post('transaction', obj, data => {
         console.log(data);
         this.apiCall.post('arrears/update', { arrearss: this.arrearsData }, dd => {
