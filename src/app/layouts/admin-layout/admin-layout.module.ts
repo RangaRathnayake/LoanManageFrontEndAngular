@@ -33,7 +33,7 @@ import { SystemComponent } from '../../pages/system/system.component';
 import { FulldetailsComponent } from 'app/pages/fulldetails/fulldetails.component';
 import { ProcessComponent } from '../../pages/process/process.component';
 import { UpdateComponent } from 'app/pages/update/update.component';
-
+import { ReportComponent } from '../../pages/report/report.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -71,7 +71,8 @@ import { UpdateComponent } from 'app/pages/update/update.component';
     ApplistComponent,
     SystemComponent,
     ProcessComponent,
-    UpdateComponent
+    UpdateComponent,
+    ReportComponent
   ]
 })
 
