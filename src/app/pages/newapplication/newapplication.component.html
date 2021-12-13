@@ -7,7 +7,7 @@
                     <p class="card-category"></p>
                 </div>
                 <div class="card-body">
-                  
+
 
                     <div class="row">
                         <div class="col-md-6">
@@ -47,7 +47,7 @@
                     <div class="row">
                         <div class="col-md-6">
                             <mat-form-field class="example-full-width">
-                                <input matInput placeholder="Months" [(ngModel)]="month">
+                                <input matInput placeholder="Months" [(ngModel)]="month" type="number">
                             </mat-form-field>
                         </div>
                         <div class="col-md-6">
@@ -73,7 +73,7 @@
                     <div class="row">
                         <div class="col-md-4">
                             <mat-form-field class="example-full-width">
-                                <input matInput placeholder="Documant Chage" [(ngModel)]="doccharge">
+                                <input matInput placeholder="Documant Chage" [(ngModel)]="doccharge" type="number">
                             </mat-form-field>
                         </div>
                         <div class="col-md-2">
@@ -99,46 +99,50 @@
 
                     <div class="row" *ngIf="ischeck">
                         <div class="col-md-6 offset-md-3">
-                            <!-- <div class="row"><label style="text-align: center;"> Monthly Payment</label></div> -->
-                            <hr>
-                            <div class="row">
-                                <div class="col-md-6"><label>Capital</label></div>
+                            <div class="bold">
+                                <hr>
+                                <div class="row">
+                                    <div class="col-md-6"><label>Capital</label></div>
 
-                                <div class="col-md-6"><label style="text-align: right;">{{dicapital}}</label></div>
+                                    <div class="col-md-6"><label style="text-align: right;">{{dicapital}}</label></div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-6"><label>Annual interest rate</label></div>
+
+                                    <div class="col-md-6"><label style="text-align: right;">{{dianualrate}}%</label>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-6"><label>Monthly interest rate</label></div>
+
+                                    <div class="col-md-6"><label style="text-align: right;">{{dimonthrate}}%</label>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-6"><label>Interest</label></div>
+
+                                    <div class="col-md-6"><label style="text-align: right;">{{diinstare}}</label></div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6"><label>Total</label></div>
+
+                                    <div class="col-md-6"><label style="text-align: right;">{{ditotal}}</label></div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-6"><label>Full Total </label></div>
+
+                                    <div class="col-md-6"><label style="text-align: right;">{{difulltotal}}</label>
+                                    </div>
+                                </div>
                             </div>
-
-                            <div class="row">
-                                <div class="col-md-6"><label>Annual interest rate</label></div>
-
-                                <div class="col-md-6"><label  style="text-align: right;">{{dianualrate}}%</label></div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-md-6"><label>Monthly interest rate</label></div>
-
-                                <div class="col-md-6"><label  style="text-align: right;">{{dimonthrate}}%</label></div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-md-6"><label>Interest</label></div>
-
-                                <div class="col-md-6"><label  style="text-align: right;">{{diinstare}}</label></div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6"><label >Total</label></div>
-
-                                <div class="col-md-6"><label style="text-align: right;">{{ditotal}}</label></div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-md-6"><label>Full Total </label></div>
-
-                                <div class="col-md-6" ><label style="text-align: right;">{{difulltotal}}</label></div>
-                            </div>
-
                         </div>
                     </div>
-                    <button mat-raised-button class="btn btn-success pull-right" (click)="apply()"  *ngIf="ischecksave">save</button>
+                    <button mat-raised-button class="btn btn-success pull-right" (click)="apply()"
+                        *ngIf="ischecksave">save</button>
 
 
                 </div>

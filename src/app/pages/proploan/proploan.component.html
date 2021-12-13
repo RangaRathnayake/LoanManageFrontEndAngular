@@ -1,9 +1,9 @@
 <div class="main-content">
     <div class="container-fluid">
-        <div class="row" *ngIf="iscus">
+        <div class="row" >
             <div class="card">
                 <div class="card-header card-header-danger">
-                    <h4 class="card-title">New Customer</h4>
+                    <h4 class="card-title"> Customer</h4>
                     <p class="card-category"></p>
                 </div>
                 <div class="card-body">
@@ -36,9 +36,8 @@
 
                     <div class="row">
                         <div class="col-md-6">
-                            මේකේ එරර් එකක් තියනවා
                             <mat-form-field class="example-full-width">
-                                <input  matInput placeholder="Mobile No" [(ngModel)]="mobile">
+                                <input matInput placeholder="Mobile No" [(ngModel)]="mobile">
                             </mat-form-field>
                         </div>
                     </div>
@@ -48,15 +47,13 @@
             </div>
         </div>
 
-        <div class="row" *ngIf="ispayment">
+        <div class="row" >
             <div class="card">
                 <div class="card-header card-header-danger">
                     <h4 class="card-title">Advance payment</h4>
                     <p class="card-category"></p>
                 </div>
                 <div class="card-body">
-
-                    ලොන් නම්බර් එක දාන්න පුළුවන් වෙන්න ඕනේ. පස්සේ අප්ඩේට් කරන්න බලාගෙන
                     <div class="row">
                         <div class="col-md-4">
                             <mat-form-field class="example-full-width">
@@ -82,6 +79,15 @@
                         </div>
                     </div>
 
+
+                    <div class="row">
+                        <div class="col-md-4">
+                            <mat-form-field class="example-full-width">
+                                <input matInput placeholder="File no" [(ngModel)]="refno1">
+                            </mat-form-field>
+                        </div>
+                    </div>
+
                     <button mat-raised-button class="btn btn-success pull-right" (click)="payadvace()">save</button>
 
                 </div>
@@ -90,7 +96,7 @@
 
 
 
-        <div class="row" *ngIf="isnewapp">
+        <div class="row" >
             <div class="card">
                 <div class="card-header card-header-danger">
                     <h4 class="card-title">New Application</h4>
@@ -101,7 +107,7 @@
                     <div class="row">
                         <div class="col-md-6">
                             <mat-form-field class="example-full-width">
-                                <input matInput placeholder="Ref no" [(ngModel)]="refno">
+                                <input matInput placeholder="File no" [(ngModel)]="refno">
                             </mat-form-field>
                         </div>
 

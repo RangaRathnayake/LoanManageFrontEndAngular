@@ -12,6 +12,14 @@ export class FulldetailsComponent implements OnInit {
 
   loannumber;
   cusname;
+
+  mobile;
+  nic;
+  adress;
+  phone;
+
+
+
   totalLoanAmount;
   paid;
   current;
@@ -52,10 +60,22 @@ export class FulldetailsComponent implements OnInit {
 
   getmoreinfo(id) {
     this.apiCall.get('main/' + id, result => {
+
+      
       console.log(result);
       this.mainData = result;
       this.loannumber = result.oderNumber;
       this.cusname = result.customer.name;
+
+      this.mobile=result.customer.mobile;
+      this.nic = result.customer.nic;
+      this.adress  = result.customer.address;
+      this.phone= result.customer.phone;
+
+
+
+
+
       this.rateId = result.interestRateId;
       this.totalLoanAmount = result.totalLoanAmount;
       this.capitalPerMonth = result.capitalPerMonth;

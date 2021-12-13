@@ -62,6 +62,7 @@ export class ProploanComponent implements OnInit {
   project;
 
   lotnum;
+  refno1;
 
   //visivly
 
@@ -284,7 +285,7 @@ export class ProploanComponent implements OnInit {
   }
 
   payadvace(){
-    if(this.cusfullname2 && this.paytype && this.advancepay){
+    if(this.cusfullname2 && this.paytype && this.advancepay && this.refno1){
       if(Number(this.advancepay)){
 
         var nonradvance =0;
@@ -308,6 +309,7 @@ export class ProploanComponent implements OnInit {
           this.apiCall.post('main', {
             main: {
               loanType: "p",
+              oderNumber:this.refno1,
               userId: this.getuser.id,
               NonRefundableAdvance: (Number(nonradvance)).toFixed(2) ,
               downPayment: (Number(downpay)).toFixed(2) ,
