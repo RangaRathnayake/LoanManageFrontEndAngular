@@ -21,8 +21,12 @@
                     <p>Annual interest rate : {{anualRate}}</p>
                 </div>
 
-                <button  mat-raised-button class="btn btn-success pull-right"
-                    (click)="edit()">Edit</button>
+                <button mat-raised-button class="btn btn-success pull-right" (click)="edit()">Edit</button>
+
+                <button mat-raised-button class="btn pull-right" (click)="printOnFile()">Print On
+                    File</button>
+
+                <button mat-raised-button class="btn pull-right" >Print Cheque</button>
 
                 <button *ngIf="user.utype.id<3 && !clickOnApprove" mat-raised-button class="btn btn-warning pull-right"
                     (click)="approve()">Approve This Loan</button>

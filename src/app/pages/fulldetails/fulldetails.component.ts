@@ -62,16 +62,16 @@ export class FulldetailsComponent implements OnInit {
   getmoreinfo(id) {
     this.apiCall.get('main/' + id, result => {
 
-      
+
       console.log(result);
       this.mainData = result;
       this.loannumber = result.oderNumber;
       this.cusname = result.customer.name;
 
-      this.mobile=result.customer.mobile;
+      this.mobile = result.customer.mobile;
       this.nic = result.customer.nic;
-      this.adress  = result.customer.address;
-      this.phone= result.customer.phone;
+      this.adress = result.customer.address;
+      this.phone = result.customer.phone;
 
 
 
@@ -122,8 +122,22 @@ export class FulldetailsComponent implements OnInit {
     });
   }
 
-  edit(){
-    this.router.navigate(['Update',  this.mainId]);
+  edit() {
+    this.router.navigate(['Update', this.mainId]);
+  }
+
+  printOnFile() {
+    console.log("print On file");
+    let obj = {
+      oderNumber: this.mainData.oderNumber,
+      name: this.mainData.customer.name,
+      totalLoanAmount: this.mainData.totalLoanAmount,
+      anualRate: this.anualRate,
+      rental: Number(this.mainData.capitalPerMonth) + Number(this.mainData.interestPerMonth),
+      date: this.mainData.startDate,
+      monthsCount: this.mainData.monthsCount
+    }
+    window.location.href = "http://localhost/LoanPrint/onfile.html?data="+JSON.stringify(obj);
   }
 
 }
