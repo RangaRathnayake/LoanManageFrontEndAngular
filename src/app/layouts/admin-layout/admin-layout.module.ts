@@ -17,6 +17,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatRippleModule } from '@angular/material/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSelectModule } from '@angular/material/select';
 import { UsersComponent } from 'app/pages/users/users.component';
 import { UserlistComponent } from 'app/pages/userlist/userlist.component';
@@ -48,7 +49,7 @@ import { ProcessComponent } from '../../pages/process/process.component';
     MatTooltipModule,
     MatRadioModule,
     MatCheckboxModule,
-
+    MatProgressSpinnerModule
   ],
   declarations: [
     DashboardComponent,

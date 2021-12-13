@@ -4,6 +4,7 @@ import { AlartService } from 'app/service/alart.service';
 import { ApicallService } from 'app/service/apicall.service';
 import { DatePipe } from '@angular/common';
 import { element } from 'protractor';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-moreinfo',
@@ -54,6 +55,8 @@ export class MoreinfoComponent implements OnInit {
   payT = 0;
   over = 0;
   totalOver = 0;
+  today;
+
 
   hasOver = false;
   overMonthCount;
@@ -61,11 +64,12 @@ export class MoreinfoComponent implements OnInit {
   overCapital = 0;
 
   clickOnPay = false;
+  enter = false;
 
   constructor(private router: Router, private arout: ActivatedRoute, private apiCall: ApicallService, private alart: AlartService, private datePipe: DatePipe) { }
 
   ngOnInit(): void {
-
+    this.today = this.datePipe.transform(new Date(), "yyyy-MM-dd")
     this.user = this.apiCall.logedUser()
 
     this.arout.params.subscribe(params => {
@@ -87,8 +91,6 @@ export class MoreinfoComponent implements OnInit {
       this.cusname = result.customer.name;
       this.rateId = result.interestRateId;
       this.totalLoanAmount = result.totalLoanAmount;
-      // this.capitalPerMonth = result.capitalPerMonth;
-      // this.interestPerMonth = result.interestPerMonth;
       this.mainMonthCount = result.monthCount;
       this.getAnualRate();
       this.getArrears(id);
@@ -100,21 +102,6 @@ export class MoreinfoComponent implements OnInit {
       this.anualRate = data.rate;
     })
   }
-
-  // getTransactionData(id) {
-  //   this.apiCall.get('transaction/main/' + id, result => {
-  //     if (result.length > 0) {
-  //       this.transactionData = result;
-  //       this.lastTransactionData = this.transactionData[this.transactionData.length - 1];
-  //       console.log(this.lastTransactionData);
-  //     } else {
-  //       console.log("empty");
-  //       this.paid = 0.00;
-  //       this.current = this.totalLoanAmount;
-  //     }
-  //     console.log(result)
-  //   })
-  // }
 
   getArrears(id) {
     this.apiCall.get('arrears/pending/' + id, data => {
@@ -151,60 +138,127 @@ export class MoreinfoComponent implements OnInit {
     this.arrearsData = this.resetArriasData;
     const length = this.arrearsData.length;
     var i = 0;
-    // console.log(length + "  --  " + value);
-  
+
     if (value <= this.finishAmount && value > 0) {
-
-      this.clickOnPay = false;
-      this.payT = value;
-      this.over = 0;
-      this.payW = 0;
-
-
-
-      this.itarate(i, value);
-
-
-
-
-
+      if (this.enter) {
+        this.resetAll();
+        this.enter = false;
+      } else {
+        this.clickOnPay = false;
+        this.payT = Number(value);
+        this.itarate(i, value);
+        this.enter = true;
+      }
     } else {
       this.alart.showNotification("danger", "Over Value");
       this.clickOnPay = true;
       this.arrearsData = this.resetArriasData;
     }
 
+
+
   }
 
   itarate(x, value) {
-    console.log(this.arrearsData[x].warrant);
-    if (Number(this.arrearsData[x].warrant) > 0) {
-      console.log(">0");
-      if (Number(this.arrearsData[x].warrant) <= value) {
-        console.log("<value");
-        this.arrearsData[x].warrant = 0;
-        console.log(this.arrearsData[x]);
-        this.payW += this.arrearsData[x].warrant;
-        this.over = value - this.arrearsData[x].warrant;
-      } else {
-        console.log(">value");
-        this.arrearsData[x].warrant = this.arrearsData[x].warrant - value;
-        console.log(this.arrearsData[x]);
-        this.payW += value;
-        this.over = 0;
+    this.over = Number(value);
+
+    // console.log(this.arrearsData[x].warrant);
+    try {
+
+      if (this.arrearsData[x].warrant > 0) {
+
+        if (Number(this.arrearsData[x].warrant) <= this.over) {
+          this.payW += Number(this.arrearsData[x].warrant);
+          this.over = this.over - Number(this.arrearsData[x].warrant);
+          this.arrearsData[x].warrantPaid = Number(this.arrearsData[x].warrantPaid) + Number(this.arrearsData[x].warrant);
+          this.arrearsData[x].warrant = 0;
+        } else {
+          this.payW += this.over;
+          this.arrearsData[x].warrantPaid = Number(this.arrearsData[x].warrantPaid) + Number(this.over);
+          this.arrearsData[x].warrant = Number(this.arrearsData[x].warrant) - this.over;
+          this.over = 0;
+        }
       }
-      console.log(this.over);
+
+      if (Number(this.arrearsData[x].interestArrears) > 0 && this.over > 0) {
+        if (Number(this.arrearsData[x].interestArrears) <= this.over) {
+          this.payA += Number(this.arrearsData[x].interestArrears);
+          this.over = this.over - Number(this.arrearsData[x].interestArrears);
+          this.arrearsData[x].interestPaid = Number(this.arrearsData[x].interestPaid) + Number(this.arrearsData[x].interestArrears);
+          this.arrearsData[x].interestArrears = 0;
+        } else {
+          this.payA += this.over;
+          this.arrearsData[x].interestPaid = Number(this.arrearsData[x].interestPaid) + Number(this.over);
+          this.arrearsData[x].interestArrears = Number(this.arrearsData[x].interestArrears) - this.over;
+          this.over += 0;
+        }
+      }
+
+      if (Number(this.arrearsData[x].capitalArrears) > 0 && this.over > 0) {
+        if (Number(this.arrearsData[x].capitalArrears) <= this.over) {
+          this.payA += Number(this.arrearsData[x].capitalArrears);
+          this.over = this.over - Number(this.arrearsData[x].capitalArrears);
+          this.arrearsData[x].capitalPaid = Number(this.arrearsData[x].capitalPaid) + Number(this.arrearsData[x].capitalArrears);
+          this.arrearsData[x].capitalArrears = 0;
+          this.arrearsData[x].status = 1
+          this.arrearsData[x].completeDate = this.today;
+        } else {
+          this.payA += this.over;
+          this.arrearsData[x].capitalPaid = Number(this.over) + Number(this.arrearsData[x].capitalPaid);
+          this.arrearsData[x].capitalArrears = Number(this.arrearsData[x].capitalArrears) - this.over;
+          this.over = 0;
+        }
+      }
+
+      if (Number(this.arrearsData[x].interest) > 0 && this.over > 0) {
+        if (Number(this.arrearsData[x].interest) <= this.over) {
+          this.payI += Number(this.arrearsData[x].interest);
+          this.arrearsData[x].interestPaid = Number(this.arrearsData[x].interestPaid) + Number(this.arrearsData[x].interest);
+          this.over = this.over - Number(this.arrearsData[x].interest);
+          this.arrearsData[x].interest = 0;
+        } else {
+          this.payI += this.over;
+          this.arrearsData[x].interestPaid = Number(this.arrearsData[x].interestPaid) + Number(this.over);
+          this.arrearsData[x].interest = Number(this.arrearsData[x].interest) - this.over;
+          this.over = 0;
+        }
+      }
+
+      if (Number(this.arrearsData[x].capital) > 0 && this.over > 0) {
+        if (Number(this.arrearsData[x].capital) <= this.over) {
+          this.payC += Number(this.arrearsData[x].capital);
+          this.arrearsData[x].capitalPaid = Number(this.arrearsData[x].capitalPaid) + Number(this.arrearsData[x].capital);
+          this.over = this.over - Number(this.arrearsData[x].capital);
+          this.arrearsData[x].capital = 0;
+          this.arrearsData[x].status = 1;
+          this.arrearsData[x].completeDate = this.today;
+        } else {
+          this.payC += this.over;
+          this.arrearsData[x].capitalPaid = Number(this.arrearsData[x].capitalPaid) + Number(this.over);
+          this.arrearsData[x].capital = Number(this.arrearsData[x].capital) - this.over;
+          this.over = 0;
+        }
+      }
+
+      if (this.arrearsData.length > x - 1 && this.over > 0) {
+        x++;
+        this.itarate(x, this.over);
+      }
+    } catch (error) {
+      console.log(error);
     }
 
   }
 
 
-
-
-  cal(value) {
-
-    console.log(value);
-    this.payT = value;
+  resetAll() {
+    this.arrearsData = null;
+    this.arrears = 0;
+    this.warrant = 0;
+    this.totalHaveToPay = 0;
+    this.finishAmount = 0;
+    this.getArrears(this.mainId);
+    this.payT = 0;
     this.payW = 0;
     this.payA = 0;
     this.payC = 0;
@@ -212,134 +266,13 @@ export class MoreinfoComponent implements OnInit {
     this.over = 0;
     this.pendingMonthCount = 0;
     this.isCompleteThisMonth = 0;
-
-    this.overMonthCount;
-    this.overInterest = 0;
-    this.overCapital = 0;
-    this.hasOver = false;
-
-    if (this.finishAmount >= this.payT) {
-      this.clickOnPay = false;
-      if (value > 0) {
-        if (this.warrant <= value) {
-          this.payW = this.warrant;
-          this.over = value - this.warrant;
-        } else {
-          this.payW = value;
-          this.over = 0;
-        }
-
-        if (this.over > 0) {
-          if (this.arrears <= this.over) {
-            this.payA = this.arrears;
-            this.over = this.over - this.arrears;
-          } else {
-            this.payA = this.over;
-            this.over = 0;
-          }
-        }
-
-        if (this.over > 0) {
-          if (this.interestPerMonth <= this.over) {
-            this.payI = this.interestPerMonth;
-            this.over = this.over - this.interestPerMonth;
-          } else {
-            this.payI = this.over;
-            this.over = 0;
-          }
-        }
-
-        if (this.over > 0) {
-          if (this.capitalPerMonth <= this.over) {
-            this.payC = this.capitalPerMonth;
-            this.over = this.over - this.capitalPerMonth;
-            this.isCompleteThisMonth = 1;
-          } else {
-            this.payC = this.over;
-            this.over = 0;
-          }
-        }
-
-
-      }
-
-      console.log(this.over);
-      this.totalOver = this.over;
-      if (this.over > 0) {
-        this.hasOver = true;
-        var nextMonth: number = Number(this.capitalPerMonth) + Number(this.interestPerMonth);
-        console.log(nextMonth);
-        var overCount = this.over / nextMonth;
-        if (overCount > 1) {
-          this.overMonthCount = Math.floor(overCount);
-          this.over = this.over - (nextMonth * this.overMonthCount);
-
-          if (this.over > 0) {
-            if (this.over >= this.interestPerMonth) {
-              this.overInterest = this.interestPerMonth;
-              this.over = this.over - this.interestPerMonth;
-            } else {
-              this.overInterest = this.over;
-              this.over = 0;
-            }
-          }
-
-          if (this.over > 0) {
-            if (this.over >= this.capitalPerMonth) {
-              this.overCapital = this.capitalPerMonth;
-              this.over = this.over - this.capitalPerMonth;
-            } else {
-              this.overCapital = this.over;
-              this.over = 0;
-            }
-          }
-
-          if (this.over > 0) {
-            console.log("ERROR  OVER ")
-          }
-
-        } else {
-          this.overMonthCount = 0;
-          if (this.over > 0) {
-            if (this.over >= this.interestPerMonth) {
-              this.overInterest = this.interestPerMonth;
-              this.over = this.over - this.interestPerMonth;
-            } else {
-              this.overInterest = this.over;
-              this.over = 0;
-            }
-          }
-
-          if (this.over > 0) {
-            if (this.over >= this.capitalPerMonth) {
-              this.overCapital = this.capitalPerMonth;
-              this.over = this.over - this.capitalPerMonth;
-            } else {
-              this.overCapital = this.over;
-              this.over = 0;
-            }
-          }
-
-          if (this.over > 0) {
-            console.log("ERROR  OVER ")
-          }
-
-        }
-      }
-      console.log("Over Count xx = " + this.overMonthCount);
-      console.log("Over interest = " + this.overInterest);
-      console.log("Over capital = " + this.overCapital);
-    } else {
-      this.alart.showNotification("danger", "Over The Amount");
-      this.clickOnPay = true;
-    }
-
-
-
-
-
-
+    this.capitalPerMonth = 0;
+    this.interestPerMonth = 0;
+    this.priviarsOver = 0;
   }
+
+
+
 
   pay() {
     if (this.payT > 0) {
@@ -357,6 +290,7 @@ export class MoreinfoComponent implements OnInit {
           capital: this.payC,
           interest: this.payI,
           warant: this.payW,
+          arrears: this.payA,
           dockCharge: 0,
           monthCount: 1,
           nonRefund: 0,
@@ -395,10 +329,17 @@ export class MoreinfoComponent implements OnInit {
         }
       }
 
+
+      console.log(this.arrearsData);
+
       this.apiCall.post('transaction', obj, data => {
         console.log(data);
-        this.apiCall.post('arrears', { arrears: arrObj }, dd => {
+        this.apiCall.post('arrears/update', { arrearss: this.arrearsData }, dd => {
           console.log(dd);
+          setTimeout(() => {
+            this.resetAll()
+            this.enter = false;
+          }, 1000);
         })
       })
     } else {
