@@ -6,9 +6,9 @@ import { DatePipe } from '@angular/common';
 import { ActivatedRoute, } from '@angular/router';
 import { Router } from '@angular/router';
 
-import {FormControl} from '@angular/forms';
-import {Observable} from 'rxjs';
-import {map, startWith} from 'rxjs/operators';
+import { FormControl } from '@angular/forms';
+import { Observable } from 'rxjs';
+import { map, startWith } from 'rxjs/operators';
 
 @Component({
   selector: 'app-proploan',
@@ -66,9 +66,12 @@ export class ProploanComponent implements OnInit {
 
   //visivly
 
-  iscus:boolean=false;
-  ispayment:boolean=false;
-  isnewapp:boolean=false;
+  iscus: boolean = false;
+  ispayment: boolean = false;
+  isnewapp: boolean = false;
+
+  ischeck = false;
+  ischecksave = false;
 
 
   //dissplay
@@ -79,11 +82,24 @@ export class ProploanComponent implements OnInit {
   ditotal;
   difulltotal;
 
-  constructor(private apiCall: ApicallService, private alart: AlartService , private router: Router) {
+
+  //complete
+  isvisivleone =false;
+  isproseedone = false;
+
+  isvisibletwo =false;
+  isproseedtwo =false;
+
+  isvisibletree =false;
+  isproseedtree =false;
+
+
+  constructor(private apiCall: ApicallService, private alart: AlartService, private router: Router) {
     this.gettate();
     this.getuser = this.apiCall.logedUser();
     console.log(this.getuser);
-    this.iscus=true;
+    this.iscus = true;
+    this.isvisivleone=true;
   }
 
   ngOnInit(): void {
@@ -94,12 +110,12 @@ export class ProploanComponent implements OnInit {
   apply() {
 
 
-    if (this.loanamount   && this.month
-  
-  && this.date  && this.doccharge  && this.rate && this.ratelist && this.refno && this.lotnum && this.project) {
+    if (this.loanamount && this.month
+
+      && this.date && this.doccharge && this.rate && this.ratelist && this.refno && this.lotnum && this.project) {
 
 
-      if (this.validloanamount() && this.validmonth()  && this.vaiddoccharge() ) {
+      if (this.validloanamount() && this.validmonth() && this.vaiddoccharge()) {
         var rateid = this.rate.id
         var rate = this.rate.rate;
 
@@ -135,36 +151,41 @@ export class ProploanComponent implements OnInit {
             max = result.max;
           }
 
-            this.apiCall.post('main', {
-              main: {
-                id:Number(localStorage.getItem("mainid")),
-                loanType: "p",
-                oderNumber: this.refno,
-                loanAmount: this.totloan,
-                dockCharge: this.doccharge,
-                totalLoanAmount: (Number(this.loanamount)).toFixed(2),
-                monthsCount: this.month,
-                interestRate: Number(rate) / 12,
-                interestRateId: rateid,
-                startDate: this.date,
-                userId: this.getuser.id,
-                capitalPerMonth: this.capitalPerMonth,
-                interestPerMonth: this.interestPerMonth,
-                totalPerMonth: this.totalPerMonth,
-                monthlyPayDate: value,
-                status: 0,
-                projectId:Number(this.project.id),
-                projectName: this.project.name,
-                blockNumber: this.lotnum,
-                propertyName: null,
-                propertyCode: null,
-              }
-            }, data => {
-              this.alart.showNotification('success', 'save');
-              if(data){
-                this.router.navigate(['fulldetails', data.id]);
-              }
-            })
+          this.apiCall.post('main', {
+            main: {
+              id: Number(localStorage.getItem("mainid")),
+              loanType: "p",
+              oderNumber: this.refno,
+              loanAmount: this.totloan,
+              dockCharge: this.doccharge,
+              totalLoanAmount: (Number(this.loanamount)).toFixed(2),
+              monthsCount: this.month,
+              interestRate: Number(rate) / 12,
+              interestRateId: rateid,
+              startDate: this.date,
+              userId: this.getuser.id,
+              capitalPerMonth: this.capitalPerMonth,
+              interestPerMonth: this.interestPerMonth,
+              totalPerMonth: this.totalPerMonth,
+              monthlyPayDate: value,
+              status: 0,
+              projectId: Number(this.project.id),
+              projectName: this.project.name,
+              blockNumber: this.lotnum,
+              propertyName: null,
+              propertyCode: null,
+            }
+          }, data => {
+            this.alart.showNotification('success', 'save');
+            this.isvisivleone=false;
+            this.isvisibletwo=false;
+            this.isvisibletree =true;
+
+            this.isproseedtree =true;
+            if (data) {
+              this.router.navigate(['fulldetails', data.id]);
+            }
+          })
 
 
         })
@@ -262,9 +283,9 @@ export class ProploanComponent implements OnInit {
     return isdocvharge;
   }
 
-  savecus(){
-    if(this.nic && this.mobile && this.cusfullname && this.namewithinitial && this.address){
-      if (  this.validnic()  && this.vaidmobile() ) {
+  savecus() {
+    if (this.nic && this.mobile && this.cusfullname && this.namewithinitial && this.address) {
+      if (this.validnic() && this.vaidmobile()) {
         this.apiCall.post('customer', {
           customer: {
             fullName: this.cusfullname,
@@ -280,33 +301,36 @@ export class ProploanComponent implements OnInit {
           }
         }, data => {
           console.log(data);
-          this.cusfullname2=data.name;
-          localStorage.setItem("cusid",data.id);
-          this.iscus=false;
-          this.ispayment=true;
+          this.cusfullname2 = data.name;
+          localStorage.setItem("cusid", data.id);
+          this.isvisivleone=false;
+          this.isvisibletwo=true;
+          this.isvisibletree =false;
+
+          this.isproseedone = true;
         })
       }
-    }else{
+    } else {
       this.alart.showNotification('warning', 'check all feilds');
     }
 
-   
+
   }
 
-  payadvace(){
-    if(this.cusfullname2 && this.paytype && this.advancepay && this.refno1){
-      if(Number(this.advancepay)){
+  payadvace() {
+    if (this.cusfullname2 && this.paytype && this.advancepay && this.refno1) {
+      if (Number(this.advancepay)) {
 
-        var nonradvance =0;
-        var downpay= 0;
+        var nonradvance = 0;
+        var downpay = 0;
 
-        if(this.paytype.id == 1){
-         nonradvance = this.advancepay;
-        }else{
+        if (this.paytype.id == 1) {
+          nonradvance = this.advancepay;
+        } else {
           downpay = this.advancepay;
         }
 
-        this.apiCall.get('main/max/P', result => { 
+        this.apiCall.get('main/max/P', result => {
           if (result.max == null) {
             console.log("okkkkkkk");
             var max = 0;
@@ -318,33 +342,35 @@ export class ProploanComponent implements OnInit {
           this.apiCall.post('main', {
             main: {
               loanType: "P",
-              oderNumber:this.refno1,
+              oderNumber: this.refno1,
               userId: this.getuser.id,
-              NonRefundableAdvance: (Number(nonradvance)).toFixed(2) ,
-              downPayment: (Number(downpay)).toFixed(2) ,
+              NonRefundableAdvance: (Number(nonradvance)).toFixed(2),
+              downPayment: (Number(downpay)).toFixed(2),
               status: 0,
               customer: localStorage.getItem("cusid"), // this is hardcord
               oderNumberInt: Number(max) + 1
             }
           }, data => {
             this.alart.showNotification('success', 'save');
-            localStorage.setItem("mainid",data.id);
-            this.ispayment=false;
-            this.isnewapp=true;
+            localStorage.setItem("mainid", data.id);
+            this.isvisivleone=false;
+            this.isvisibletwo=false;
+            this.isvisibletree =true;
+            this. isproseedtwo =true;
           })
 
 
         })
 
-      }else{
+      } else {
         this.alart.showNotification('warning', 'invalid pay amount');
       }
-    }else{
+    } else {
       this.alart.showNotification('warning', 'check all feilds');
     }
   }
 
-  getallproject(){
+  getallproject() {
     this.apiCall.get('project', result => {
       this.projectlist = result;
       console.log(result);
@@ -353,19 +379,33 @@ export class ProploanComponent implements OnInit {
   }
 
 
-  calloan(){
-    if(this.checked){
-      this.dicapital= ((Number(this.loanamount) + Number(this.doccharge)) /Number(this.month)).toFixed(2);
-    }else{
-      this.dicapital= (Number(this.loanamount)/Number(this.month)).toFixed(2);
+  calloan() {
+
+    if (this.loanamount && this.doccharge && this.month && this.rate) {
+      if (this.validloanamount() && this.vaiddoccharge() && this.validmonth()) {
+
+        if (this.checked) {
+          this.dicapital = ((Number(this.loanamount) + Number(this.doccharge)) / Number(this.month)).toFixed(2);
+        } else {
+          this.dicapital = (Number(this.loanamount) / Number(this.month)).toFixed(2);
+        }
+
+        this.dianualrate = this.rate.rate;
+        this.dimonthrate = (Number(this.dianualrate) / 12).toFixed(2);
+        this.diinstare = (Number(this.dicapital) * Number(this.dimonthrate) / 100).toFixed(2);
+        this.ditotal = (Number(this.dicapital) + Number(this.diinstare)).toFixed(2);
+        this.difulltotal = (Number(this.ditotal) * Number(this.month)).toFixed(2);
+
+        this.ischeck = true;
+        this.ischecksave = true;
+      }
+
+    } else {
+      this.alart.showNotification('warning', 'check all feilds');
     }
-  
-    this.dianualrate=this.rate.rate;
-    this.dimonthrate=(Number(this.dianualrate)/12).toFixed(2);
-    this.diinstare=(Number(this.dicapital)*Number( this.dimonthrate)/100).toFixed(2);
-    this.ditotal=(Number(this.dicapital)+Number(this.diinstare)).toFixed(2);
-    this.difulltotal=(Number(this.ditotal)*Number(this.month)).toFixed(2);
-   
+
+
+
   }
 
 

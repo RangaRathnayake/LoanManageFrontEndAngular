@@ -42,7 +42,7 @@
                         </div>
                     </div>
 
-                    <button mat-raised-button class="btn btn-success pull-right" (click)="savecus()">save</button>
+                    <button mat-raised-button class="btn btn-success pull-right" (click)="savecus()" *ngIf="isvisivleone">save</button>
                 </div>
             </div>
         </div>
@@ -74,7 +74,7 @@
 
                         <div class="col-md-4">
                             <mat-form-field class="example-full-width">
-                                <input matInput placeholder="Pay amount" [(ngModel)]="advancepay">
+                                <input matInput placeholder="Pay amount" [(ngModel)]="advancepay" type="number">
                             </mat-form-field>
                         </div>
                     </div>
@@ -88,7 +88,7 @@
                         </div>
                     </div>
 
-                    <button mat-raised-button class="btn btn-success pull-right" (click)="payadvace()">save</button>
+                    <button mat-raised-button class="btn btn-success pull-right" (click)="payadvace()" *ngIf="isvisibletwo">save</button>
 
                 </div>
             </div>
@@ -116,7 +116,7 @@
                     <div class="row">
                         <div class="col-md-6">
                             <mat-form-field class="example-full-width">
-                                <input matInput placeholder="Loan Amount" [(ngModel)]="loanamount">
+                                <input matInput placeholder="Loan Amount" [(ngModel)]="loanamount" type="number">
                             </mat-form-field>
                         </div>
 
@@ -138,7 +138,7 @@
                     <div class="row">
                         <div class="col-md-6">
                             <mat-form-field class="example-full-width">
-                                <input matInput placeholder="Months" [(ngModel)]="month">
+                                <input matInput placeholder="Months" [(ngModel)]="month" type="number">
                             </mat-form-field>
                         </div>
 
@@ -154,7 +154,7 @@
                     <div class="row">
                         <div class="col-md-4">
                             <mat-form-field class="example-full-width">
-                                <input matInput placeholder="Documant Chage" [(ngModel)]="doccharge">
+                                <input matInput placeholder="Documant Chage" [(ngModel)]="doccharge" type="number">
                             </mat-form-field>
                         </div>
                         <div class="col-md-2">
@@ -188,7 +188,9 @@
                         </div>
                     </div>
 
-                    <div class="row" >
+                    <button mat-raised-button class="btn btn-success pull-right" (click)="calloan()" *ngIf="isvisibletree">calculate</button>
+
+                    <div class="row" *ngIf="ischeck">
                         <div class="col-md-6 offset-md-3">
                             <div class="bold">
                                 <hr>
@@ -234,7 +236,7 @@
                     </div>
 
 
-                    <button mat-raised-button class="btn btn-success pull-right" (click)="apply()">save</button>
+                    <button mat-raised-button class="btn btn-success pull-right" (click)="apply()"  *ngIf="ischeck">save</button>
 
 
                 </div>
