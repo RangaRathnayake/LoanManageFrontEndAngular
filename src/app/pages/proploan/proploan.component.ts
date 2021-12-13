@@ -70,6 +70,15 @@ export class ProploanComponent implements OnInit {
   ispayment:boolean=false;
   isnewapp:boolean=false;
 
+
+  //dissplay
+  dicapital;
+  dianualrate;
+  dimonthrate;
+  diinstare;
+  ditotal;
+  difulltotal;
+
   constructor(private apiCall: ApicallService, private alart: AlartService , private router: Router) {
     this.gettate();
     this.getuser = this.apiCall.logedUser();
@@ -297,7 +306,7 @@ export class ProploanComponent implements OnInit {
           downpay = this.advancepay;
         }
 
-        this.apiCall.get('main/max/p', result => { 
+        this.apiCall.get('main/max/P', result => { 
           if (result.max == null) {
             console.log("okkkkkkk");
             var max = 0;
@@ -308,7 +317,7 @@ export class ProploanComponent implements OnInit {
 
           this.apiCall.post('main', {
             main: {
-              loanType: "p",
+              loanType: "P",
               oderNumber:this.refno1,
               userId: this.getuser.id,
               NonRefundableAdvance: (Number(nonradvance)).toFixed(2) ,
@@ -341,6 +350,22 @@ export class ProploanComponent implements OnInit {
       console.log(result);
 
     })
+  }
+
+
+  calloan(){
+    if(this.checked){
+      this.dicapital= ((Number(this.loanamount) + Number(this.doccharge)) /Number(this.month)).toFixed(2);
+    }else{
+      this.dicapital= (Number(this.loanamount)/Number(this.month)).toFixed(2);
+    }
+  
+    this.dianualrate=this.rate.rate;
+    this.dimonthrate=(Number(this.dianualrate)/12).toFixed(2);
+    this.diinstare=(Number(this.dicapital)*Number( this.dimonthrate)/100).toFixed(2);
+    this.ditotal=(Number(this.dicapital)+Number(this.diinstare)).toFixed(2);
+    this.difulltotal=(Number(this.ditotal)*Number(this.month)).toFixed(2);
+   
   }
 
 

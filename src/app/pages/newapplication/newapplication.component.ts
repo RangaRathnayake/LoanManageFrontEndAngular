@@ -3,6 +3,7 @@ import { ApicallService } from 'app/service/apicall.service';
 import { AlartService } from 'app/service/alart.service';
 import { Pipe, PipeTransform } from '@angular/core';
 import { DatePipe } from '@angular/common';
+import { ActivatedRoute, Router } from '@angular/router';
 
 
 @Component({
@@ -50,7 +51,7 @@ export class NewapplicationComponent implements OnInit {
   ditotal;
   difulltotal;
 
-  constructor(private apiCall: ApicallService, private alart: AlartService) {
+  constructor(private apiCall: ApicallService, private alart: AlartService ,private router: Router, private arout: ActivatedRoute) {
     this.gettate();
     this.getuser = this.apiCall.logedUser();
     console.log(this.getuser);
@@ -110,7 +111,7 @@ export class NewapplicationComponent implements OnInit {
       let value = datePipe.transform(dt, 'dd');
       console.log(value);
 
-      this.apiCall.get('main/max/l', result => {
+      this.apiCall.get('main/max/L', result => {
        
         if(result.max == null ){
           console.log("okkkkkkk");
@@ -141,7 +142,7 @@ export class NewapplicationComponent implements OnInit {
   
           this.apiCall.post('main', {
             main: {
-              loanType: "l",
+              loanType: "L",
               oderNumber: "L"+this.nextnum,
               loanAmount: this.totloan,
               dockCharge: this.doccharge,
@@ -170,6 +171,7 @@ export class NewapplicationComponent implements OnInit {
             if(data){
               this.ischecksave = false;
               this.alart.showNotification('success', 'save');
+              this.router.navigate(['fulldetails', data.id]);
             }
           })
   
