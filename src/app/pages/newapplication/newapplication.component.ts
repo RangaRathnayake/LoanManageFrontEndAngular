@@ -39,6 +39,17 @@ export class NewapplicationComponent implements OnInit {
   labelPosition: 'before' | 'after' = 'after';
   disabled = false;
 
+  ischeck =false;
+  ischecksave = false;
+
+  //dissplay
+  dicapital;
+  dianualrate;
+  dimonthrate;
+  diinstare;
+  ditotal;
+  difulltotal;
+
   constructor(private apiCall: ApicallService, private alart: AlartService) {
     this.gettate();
     this.getuser = this.apiCall.logedUser();
@@ -156,7 +167,10 @@ export class NewapplicationComponent implements OnInit {
               oderNumberInt:Number(max)+1
             }
           }, data => {
-            this.alart.showNotification('success', 'save');
+            if(data){
+              this.ischecksave = false;
+              this.alart.showNotification('success', 'save');
+            }
           })
   
         })
@@ -262,5 +276,21 @@ export class NewapplicationComponent implements OnInit {
     return isdocvharge;
   }
 
+
+calloan(){
+  if(this.checked){
+    this.dicapital= ((Number(this.loanamount) + Number(this.doccharge)) /Number(this.month)).toFixed(2);
+  }else{
+    this.dicapital= (Number(this.loanamount)/Number(this.month)).toFixed(2);
+  }
+
+  this.dianualrate=this.rate.rate;
+  this.dimonthrate=(Number(this.dianualrate)/12).toFixed(2);
+  this.diinstare=(Number(this.dicapital)*Number( this.dimonthrate)/100).toFixed(2);
+  this.ditotal=(Number(this.dicapital)+Number(this.diinstare)).toFixed(2);
+  this.difulltotal=(Number(this.ditotal)*Number(this.month)).toFixed(2);
+  this.ischeck=true;
+  this.ischecksave = true;
+}
 
 }
