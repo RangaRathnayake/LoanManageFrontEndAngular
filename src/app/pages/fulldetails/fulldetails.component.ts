@@ -21,6 +21,7 @@ export class FulldetailsComponent implements OnInit {
   transactionData;
   mainData;
   user;
+  clickOnApprove = false;
 
   totalHaveToPay: number = 0;
   capitalPerMonth: number = 0;
@@ -35,6 +36,7 @@ export class FulldetailsComponent implements OnInit {
   ngOnInit(): void {
 
     this.user = this.apiCall.logedUser()
+    console.log(this.user);
 
     this.arout.params.subscribe(params => {
       const id = params['id'];
@@ -58,6 +60,9 @@ export class FulldetailsComponent implements OnInit {
       this.totalLoanAmount = result.totalLoanAmount;
       this.capitalPerMonth = result.capitalPerMonth;
       this.interestPerMonth = result.interestPerMonth;
+      if (this.mainData.status != 0) {
+        this.clickOnApprove = true;
+      }
       this.totalHaveToPay = parseFloat(this.capitalPerMonth + "") + parseFloat(this.interestPerMonth + "") + parseFloat(this.arrears + "") + parseFloat(this.warrant + ""); // over pay adu karanna one
       this.getAnualRate()
     })
@@ -84,6 +89,16 @@ export class FulldetailsComponent implements OnInit {
 
   more() {
     this.router.navigate(['moreinfo', this.mainId]);
+  }
+
+  approve() {
+    this.clickOnApprove = true;
+    this.mainData.status = 1;
+    this.apiCall.post('main', { main: this.mainData }, data => {
+      this.apiCall.post('main/createArriarsList', { main: this.mainData }, dd => {
+      })
+      this.alart.showNotification("success", "Loan Approved");
+    });
   }
 
 }

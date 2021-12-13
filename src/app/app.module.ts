@@ -26,6 +26,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatCardModule } from '@angular/material/card';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatRadioModule } from '@angular/material/radio';
+import { DatePipe } from '@angular/common';
 
 
 
@@ -63,7 +64,7 @@ import { MatRadioModule } from '@angular/material/radio';
     AdminLayoutComponent,
     LoginComponent,
   ],
-  providers: [],
+  providers: [DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

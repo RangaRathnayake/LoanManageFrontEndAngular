@@ -15,9 +15,24 @@
                     <p>Current Loan Amount : {{current}}</p>
                     <p>Annual interest rate : {{anualRate}}</p>
                 </div>
+
+                <button *ngIf="user.utype.id<3 && !clickOnApprove" mat-raised-button class="btn btn-warning pull-right"
+                    (click)="approve()">Approve This Loan</button>
+                <button *ngIf="mainData && mainData.status==1" mat-raised-button class="btn btn-success pull-right"
+                    (click)="more()">Get Instalment
+                    Payment</button>
             </div>
-            <button mat-raised-button class="btn btn-success pull-right" (click)="more()">Get Instalment
-                Payment</button>
+
+
+
+
+            මැනේජර් ලොග් වෙලා ඉන්නවා නම් එයාට ලොන් එක ඇප්ලයි කරන බට්න් එක දෙන්න ඕනේ.
+            ස්ටේටස් එක 1 වෙන්න ඕනේ.
+            ඊට පස්සේ ෆයිල් එකේ අලවන එක ප්‍රින්ට් කරන්න ඕනේ. <br>
+
+            ඩිඇක්ටිව් එකක් හදන්න ඕනේ, අප්ඩේට් එකත් හදන්න ඕනේ තියන දේවල් වෙනස් කරන්න පුළුවන් වෙන්න ඕනේ අප්රූ වෙලා නැත්තම්
+            විතරක්.
+
         </div>
     </div>
 </div>

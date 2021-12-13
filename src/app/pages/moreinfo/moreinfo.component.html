@@ -10,17 +10,62 @@
 
                 <div class="col-md-8" style="float: none; margin: 0 auto;">
                     <h3>Number : {{loannumber}} <br> Name : {{cusname}}</h3>
-                    <p>Total Loan Amount : {{totalLoanAmount}}</p>
-                    <p>Total Paid : {{paid}}</p>
-                    <p>Current Loan Amount : {{current}}</p>
-                    <p>Annual interest rate : {{anualRate}}</p>
+                    <p>Total Loan Amount : {{totalLoanAmount | currency:' '}}</p>
+                    <p>Annual interest rate : {{anualRate | currency:' '}}</p>
+                    <p><strong>Complete for this month : {{totalHaveToPay | currency:' '}}</strong></p>
+                    <p>Have to pay for finish all : {{finishAmount | currency:' '}}</p>
+
+
+
                 </div>
 
                 <div class="col-md-8" style="float: none; margin: 0 auto;">
                     <mat-form-field appearance="standard" style="text-align: right;">
                         <mat-label>Pay Amount Rs. </mat-label>
-                        <input type="number" matInput (keyup)="cal($event.target.value)" placeholder="Amount" #input>
+                        <input type="number" matInput (keyup.enter)="calByArray($event.target.value)" placeholder="Amount"
+                            #input>
                     </mat-form-field>
+                </div>
+
+
+
+                <div class="row">
+                    <div class="col-md-8" style="float: none; margin: 0 auto;">
+                        <table style="width: 100%; font-size: medium; ">
+                            <thead>
+                                <th>Date</th>
+                                <th style="text-align: right;">Arrears</th>
+                                <th style="text-align: right;">Warrant</th>
+                                <th style="text-align: right;">Capital</th>
+                                <th style="text-align: right;">Interest</th>
+
+                            </thead>
+                            <tbody>
+                                <tr style="color: blue;" *ngFor="let item of arrearsData">
+                                    <td>{{item.payDate}}</td>
+                                    <td style="text-align: right;">{{ item.capitalArrears*1 +
+                                        item.interestArrears*1 | currency:' '}}</td>
+                                    <td style="text-align: right;">{{item.warrant | currency:' '}}</td>
+                                    <td style="text-align: right;">{{item.capital | currency:' '}}</td>
+                                    <td style="text-align: right;">{{item.interest | currency:' '}}</td>
+                                </tr>
+
+                            </tbody>
+                            <tfoot style="font-weight: bold;">
+                                <td>Total</td>
+                                <td style="text-align: right;"></td>
+                                <td style="text-align: right;"></td>
+                                <td style="text-align: right;"></td>
+                                <td style="text-align: right;">{{payT | currency:' '}}</td>
+                            </tfoot>
+                        </table>
+                        <br>
+                        <div>
+                            <button *ngIf="!clickOnPay" mat-raised-button class="btn btn-success pull-right"
+                                (click)="pay()">Get
+                                Payment</button>
+                        </div>
+                    </div>
                 </div>
 
 
@@ -43,21 +88,24 @@
                                     <td style="text-align: right;">{{arrears | currency:' '}}</td>
                                     <td style="text-align: right;">{{payA | currency:' '}}</td>
                                 </tr>
-                                <tr style="color: blue;">
-                                    <td>Capital</td>
-                                    <td style="text-align: right;">{{capitalPerMonth | currency:' '}}</td>
-                                    <td style="text-align: right;">{{payC | currency:' '}}</td>
-                                </tr>
+
                                 <tr style="color: blue;">
                                     <td>Interest</td>
                                     <td style="text-align: right;">{{interestPerMonth | currency:' '}}</td>
                                     <td style="text-align: right;">{{payI | currency:' '}}</td>
                                 </tr>
 
+                                <tr style="color: blue;">
+                                    <td>Capital</td>
+                                    <td style="text-align: right;">{{capitalPerMonth | currency:' '}}</td>
+                                    <td style="text-align: right;">{{payC | currency:' '}}</td>
+                                </tr>
+
+
                                 <tr style="color: green;">
                                     <td>Over Pay</td>
                                     <td style="text-align: right;">{{priviarsOver | currency:' '}}</td>
-                                    <td style="text-align: right;">{{over | currency:' '}}</td>
+                                    <td style="text-align: right;">{{totalOver | currency:' '}}</td>
                                 </tr>
                             </tbody>
                             <tfoot style="font-weight: bold;">
@@ -71,6 +119,8 @@
                             <button *ngIf="!clickOnPay" mat-raised-button class="btn btn-success pull-right"
                                 (click)="pay()">Get
                                 Payment</button>
+
+                            රිසිට් එක ප්‍රින්ට් කරන්න ඕනේ.
                         </div>
                     </div>
                 </div>

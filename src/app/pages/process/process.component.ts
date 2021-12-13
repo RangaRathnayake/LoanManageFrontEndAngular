@@ -31,8 +31,11 @@ export class ProcessComponent implements OnInit {
   }
 
   startProcess() {
-    this.isStart = true;
+    // this.isStart = true;
     console.log("start")
+    this.apiCall.post('main/arrearsProcess', {}, data => {
+      console.log(data);
+    })
   }
 
 }

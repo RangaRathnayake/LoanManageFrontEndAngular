@@ -41,15 +41,15 @@ export class SidebarComponent implements OnInit {
     const user = this.apiCall.logedUser();
     if (user) {
       const ar = [];
-      this.apiCall.get('user/privilage/' + user.utype.id, (data) => {     
+      this.apiCall.get('user/privilage/' + user.utype.id, (data) => {
         data.privilages.forEach(element => {
-          const obj = { path: element.link, title: element.string, icon: element.icon, class: '' }; 
+          const obj = { path: element.link, title: element.string, icon: element.icon, class: '' };
           ar.push(obj);
           ROUTES = ar;
           this.menuItems = ROUTES.filter(menuItem => menuItem);
         });
       })
-    } 
+    }
 
   }
 
@@ -59,4 +59,10 @@ export class SidebarComponent implements OnInit {
     }
     return true;
   };
+
+  logOut() {
+    localStorage.removeItem('user');
+    window.location.href = '/';
+  }
+
 }

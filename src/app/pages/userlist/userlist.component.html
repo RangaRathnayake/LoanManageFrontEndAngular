@@ -95,13 +95,13 @@
                                 </ng-container>
 
                                 <ng-container matColumnDef="utype.name">
-                                    <mat-header-cell mat-sort-header *matHeaderCellDef> Product
+                                    <mat-header-cell mat-sort-header *matHeaderCellDef>Type
                                     </mat-header-cell>
                                     <mat-cell *matCellDef="let element"> {{element.utype.name}} </mat-cell>
                                 </ng-container>
 
                                 <ng-container matColumnDef="id">
-                                    <mat-header-cell mat-sort-header *matHeaderCellDef> select
+                                    <mat-header-cell mat-sort-header *matHeaderCellDef> Select
                                     </mat-header-cell>
                                     <mat-cell *matCellDef="let element"><button mat-button
                                             (click)="getuserdata(element.id)">More</button>
