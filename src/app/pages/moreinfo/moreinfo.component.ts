@@ -37,8 +37,8 @@ export class MoreinfoComponent implements OnInit {
 
   allFinish = false;
 
-
-
+  payType = "Cash";
+  cheaueNumber;
 
   finishAmount: number = 0;
   totalHaveToPay: number = 0;
@@ -105,16 +105,21 @@ export class MoreinfoComponent implements OnInit {
   }
 
   getArrears(id) {
+    console.log(id);
     this.apiCall.get('arrears/pending/' + id, data => {
-      console.log(data);
+
       this.arrearsData = data;
-      this.resetArriasData = data;
+
+
+
       this.arrearsData.forEach(element => {
+
         if (element.status == 2) {
           this.arrears += Number(element.capitalArrears) + Number(element.interestArrears);
           this.warrant += Number(element.warrant);
           this.totalHaveToPay += Number(element.capitalArrears) + Number(element.interestArrears) + Number(element.warrant);
         }
+
         if (element.status == 0) {
           if (!this.firstArrearsData) {
             this.firstArrearsData = element;
@@ -123,12 +128,9 @@ export class MoreinfoComponent implements OnInit {
 
         this.finishAmount += Number(element.capitalArrears) + Number(element.interestArrears) + Number(element.warrant) + Number(element.capital) + Number(element.interest);
 
-
       });
 
-      this.totalHaveToPay += Number(this.firstArrearsData.capital) + Number(this.firstArrearsData.interest);
-
-      console.log(this.arrearsData);
+      if (this.firstArrearsData) this.totalHaveToPay += Number(this.firstArrearsData.capital) + Number(this.firstArrearsData.interest);
 
       console.log(this.firstArrearsData);
 
@@ -136,7 +138,7 @@ export class MoreinfoComponent implements OnInit {
   }
 
   calByArray(value) {
-    this.arrearsData = this.resetArriasData;
+
     const length = this.arrearsData.length;
     var i = 0;
 
@@ -144,7 +146,14 @@ export class MoreinfoComponent implements OnInit {
       if (this.enter) {
         this.resetAll();
         this.enter = false;
+        this.allFinish = false;
       } else {
+        if (this.finishAmount == value) {
+          this.allFinish = true;
+          console.log("ALL FINISH");
+        } else {
+          this.allFinish = false;
+        }
         this.clickOnPay = false;
         this.payT = Number(value);
         this.itarate(i, value);
@@ -153,7 +162,6 @@ export class MoreinfoComponent implements OnInit {
     } else {
       this.alart.showNotification("danger", "Over Value");
       this.clickOnPay = true;
-      this.arrearsData = this.resetArriasData;
     }
 
 
@@ -162,7 +170,7 @@ export class MoreinfoComponent implements OnInit {
 
   itarate(x, value) {
     this.over = Number(value);
-
+    console.log(this.arrearsData);
     // console.log(this.arrearsData[x].warrant);
     try {
 
@@ -202,9 +210,6 @@ export class MoreinfoComponent implements OnInit {
           this.arrearsData[x].capitalPaid = Number(this.arrearsData[x].capitalPaid) + Number(this.arrearsData[x].capitalArrears);
           this.arrearsData[x].capitalArrears = 0;
           this.arrearsData[x].status = 1
-          if (this.arrearsData.length == x - 1) {
-            this.allFinish = true;
-          }
           this.arrearsData[x].completeDate = this.today;
         } else {
           this.payA += this.over;
@@ -235,9 +240,6 @@ export class MoreinfoComponent implements OnInit {
           this.over = this.over - Number(this.arrearsData[x].capital);
           this.arrearsData[x].capital = 0;
           this.arrearsData[x].status = 1;
-          if (this.arrearsData.length == x - 1) {
-            this.allFinish = true;
-          }
           this.arrearsData[x].completeDate = this.today;
         } else {
           this.payC += this.over;
@@ -305,9 +307,9 @@ export class MoreinfoComponent implements OnInit {
           otherPay: 0,
           over: this.totalOver,
           total: this.payT,
-          payType: "installment",
-          cheque: 0,
-          loanType: "l",
+          payType: this.payType,
+          cheque: this.cheaueNumber,
+          loanType: this.mainData.loanType,
           interestRate: this.anualRate / 12,
           status: 1,
           customer: this.mainData.customer.id,
@@ -315,19 +317,7 @@ export class MoreinfoComponent implements OnInit {
           user: this.user.id,
         }
       }
-
       var day = this.datePipe.transform(new Date(), "yyyy-MM-dd")
-
-      let arrObj = {
-        id: this.firstArrearsData.id,
-        completeDate: day,
-        installment: 1,
-        capital: Number(this.capitalPerMonth) - Number(this.payC),
-        interest: Number(this.interestPerMonth) - Number(this.payI),
-        main: this.mainData.id,
-        status: this.isCompleteThisMonth
-      }
-
       if (this.hasOver) {
         if (this.overMonthCount > 0) {
 
@@ -340,13 +330,22 @@ export class MoreinfoComponent implements OnInit {
       console.log(this.arrearsData);
       this.apiCall.post('transaction', obj, data => {
         console.log(data);
+
         this.apiCall.post('arrears/update', { arrearss: this.arrearsData }, dd => {
           console.log(dd);
-          setTimeout(() => {
-            this.resetAll()
-            this.enter = false;
-          }, 1000);
+          this.resetAll()
+          this.enter = false;
         })
+
+        if (this.allFinish) {
+          this.mainData.status = 3;
+          this.apiCall.post('main', { main: this.mainData }, ddd => {
+            console.log(ddd);
+          })
+        }
+
+        window.location.href = "http://localhost/LoanPrint/index.html?data=" + JSON.stringify(data);
+
       })
     } else {
       this.alart.showNotification("danger", "Please Enter Pay Amount Correctly")

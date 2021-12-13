@@ -20,27 +20,19 @@
 
                 </div>
 
-                <div class="col-md-8" style="float: none; margin: 0 auto;">
-                    <!-- <div class="row"> -->
-                    <!-- <div class="col-12"> -->
+                <div class="col-md-8" style="float: none; margin: 0 auto;" *ngIf="firstArrearsData">
                     <mat-form-field appearance="standard" style="text-align: right;">
                         <mat-label>Pay Amount Rs. </mat-label>
                         <input type="number" matInput (keyup.enter)="calByArray($event.target.value)"
                             placeholder="Amount" #input>
                     </mat-form-field>
-                    <!-- </div> -->
-                    <!-- <div class="col-3">
-                            <button mat-raised-button class="btn btn-warning pull-right"
-                                (click)="resetAll()">Reset</button>
-                        </div> -->
-                    <!-- </div> -->
                 </div>
 
 
 
                 <div class="row">
-                    <div class="col-md-8" style="float: none; margin: 0 auto;">
-                        <table style="width: 100%; font-size: medium; " *ngIf="arrearsData">
+                    <div class="col-md-8" style="float: none; margin: 0 auto;" *ngIf="firstArrearsData">
+                        <table style="width: 100%; font-size: medium; ">
                             <thead>
                                 <th>Date</th>
                                 <th style="text-align: right;">Warrant</th>
@@ -69,14 +61,23 @@
                                 <td style="text-align: right;">{{payT | currency:' '}}</td>
                             </tfoot>
                         </table>
-                        <mat-spinner *ngIf="!arrearsData"></mat-spinner>
+
                         <br>
                         <div>
+                            <mat-radio-group aria-label="Select an option" [(ngModel)]="payType">
+                                <mat-radio-button value="Cash">Cash</mat-radio-button> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <mat-radio-button value="Cheque">Cheque</mat-radio-button>
+                            </mat-radio-group>
+
+                            <mat-form-field *ngIf="payType=='Cheque'" appearance="standard">
+                                <input type="text" matInput placeholder="Cheque Number" [(ngModel)]="cheaueNumber" >
+                            </mat-form-field>
+
                             <button *ngIf="!clickOnPay && enter" mat-raised-button class="btn btn-success pull-right"
-                                (click)="pay()">Get
-                                Payment</button>
+                                (click)="pay()">Get Payment</button>
                         </div>
                     </div>
+                    <mat-spinner *ngIf="!arrearsData"></mat-spinner>
                 </div>
 
 
