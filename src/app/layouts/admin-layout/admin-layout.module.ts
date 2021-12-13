@@ -32,6 +32,7 @@ import { ApplistComponent } from 'app/pages/applist/applist.component';
 import { SystemComponent } from '../../pages/system/system.component';
 import { FulldetailsComponent } from 'app/pages/fulldetails/fulldetails.component';
 import { ProcessComponent } from '../../pages/process/process.component';
+import { UpdateComponent } from 'app/pages/update/update.component';
 
 @NgModule({
   imports: [
@@ -69,7 +70,8 @@ import { ProcessComponent } from '../../pages/process/process.component';
     ExpenceseComponent,
     ApplistComponent,
     SystemComponent,
-    ProcessComponent
+    ProcessComponent,
+    UpdateComponent
   ]
 })
 

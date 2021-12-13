@@ -27,6 +27,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatRadioModule } from '@angular/material/radio';
 import { DatePipe } from '@angular/common';
+//import { UpdateComponent } from './pages/update/update.component';
 
 
 
@@ -63,6 +64,7 @@ import { DatePipe } from '@angular/common';
     AppComponent,
     AdminLayoutComponent,
     LoginComponent,
+    //UpdateComponent,
   ],
   providers: [DatePipe],
   bootstrap: [AppComponent]

@@ -19,6 +19,7 @@ import { MoreinfoComponent } from 'app/pages/moreinfo/moreinfo.component';
 import { SystemComponent } from 'app/pages/system/system.component';
 import { FulldetailsComponent } from 'app/pages/fulldetails/fulldetails.component';
 import { ProcessComponent } from '../../pages/process/process.component';
+import { UpdateComponent } from 'app/pages/update/update.component';
 
 export const AdminLayoutRoutes: Routes = [
     { path: 'dashboard', component: DashboardComponent },
@@ -40,6 +41,7 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'system', component: SystemComponent },
     { path: 'fulldetails/:id', component: FulldetailsComponent },
     { path: 'process', component: ProcessComponent },
+    { path: 'Update/:id', component: UpdateComponent },
 
 
 ];
