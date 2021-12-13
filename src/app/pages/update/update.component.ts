@@ -38,6 +38,11 @@ export class UpdateComponent implements OnInit {
   checked;
   mainid;
 
+
+  // is
+  isuserdetails =true;
+  isloan =true;
+
   constructor(private router: Router, private arout: ActivatedRoute, private apiCall: ApicallService, private alart: AlartService) { 
     this.getuser = this.apiCall.logedUser();
   }
@@ -75,6 +80,7 @@ export class UpdateComponent implements OnInit {
         }, data => {
           if (data) {
             this.alart.showNotification('success', 'save');
+            this.isuserdetails=false;
           }
         })
       }
@@ -91,12 +97,13 @@ export class UpdateComponent implements OnInit {
           status: 0,
           userId: this.getuser.id,
           loanType: "l",
-          id:this.mainid,
+          id:Number(this.mainid) ,
           startDate: this.date
         }
       }, data => {
         if(data){
           this.alart.showNotification('success', 'save');
+          this.isloan=false;
         }
       })
     }

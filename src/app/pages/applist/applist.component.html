@@ -7,21 +7,35 @@
           <p class="card-category"></p>
         </div>
         <div class="card-body">
-          මේකට තව ‍ෆිල්ටර් ඔප්සන් එකක් දෙන්න ඕනේ. ලොන් වෙනම සහ ප්‍රොපර්ටි වෙනම ගන්න.
-          තව ඇප්රූ එක වෙලා නැති පෙන්ඩින් ඒවා සහ ඇප්රූ උන ඒවා ස්ටේටස් එක අනුව බලන්න ඕනේ. ඒවට රේඩියෝ බට්න් දාලා ෆිල්ටර් කරන්න ඕනේ. 
-          ටේබල් එකට පේජිනේසන් දාන්න ඕනේ. 
+
           <div class="row">
             <div class="col-md-6 offset-md-3">
               <div class="row">
                 <div class="col-md-10">
-     
+                  <mat-form-field appearance="standard">
+                    <mat-label>Filtet by</mat-label>
+                    <mat-select [(ngModel)]="activestatus" (selectionChange)="onChange()">
+                        <mat-option *ngFor="let list of activelist" [value]="list">
+                            {{list.description}}
+                        </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="row">
+            <div class="col-md-6 offset-md-3">
+              <div class="row">
+                <div class="col-md-10">
                   <mat-form-field appearance="standard">
                     <mat-label>Filter</mat-label>
                     <input matInput (keyup)="applayFilter($event.target.value)" type="text" [(ngModel)]="inputval"
                       placeholder="Search Here" />
                   </mat-form-field>
                 </div>
-              
               </div>
             </div>
           </div>

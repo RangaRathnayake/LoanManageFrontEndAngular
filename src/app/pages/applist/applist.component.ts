@@ -18,6 +18,28 @@ import { MatSort } from '@angular/material/sort';
 
 export class ApplistComponent implements OnInit {
 
+  activestatus;
+  activelist=[
+    {
+      id:10,
+      description:'All'
+    },
+    {
+      id:0,
+      description:'pending for approve'
+    },
+    {
+      id:1,
+      description:'Ongoing'
+    }
+    ,
+    {
+      id:3,
+      description:'payment complete'
+    }
+    
+  ]
+
   ELEMENT_DATA: any[] = []
   inputval;
 
@@ -68,8 +90,45 @@ export class ApplistComponent implements OnInit {
 
   }
 
+  getallcusbystatus(id) {
+    this.ELEMENT_DATA=[];
+    this.apiCall.get('main/status/'+id, result => {
+
+      console.log(result);
+      result.forEach(element => {
+        var obj = {
+          oderNumber: element.oderNumber,
+          Name: element.customer.name,
+          nic: element.customer.nic,
+          mobile: element.customer.mobile,
+          id: element.id
+        }
+        console.log(obj);
+        this.ELEMENT_DATA.push(obj);
+      });
+
+
+      console.log(this.ELEMENT_DATA);
+      this.dataSource = new MatTableDataSource(this.ELEMENT_DATA);
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
+    })
+
+  }
+
   more(id) {
     this.router.navigate(['fulldetails', id]);
+  }
+
+
+  onChange(){
+    var xx= Number(this.activestatus.id) ;
+    if(xx == 10){
+      this.getallcus();
+    }else{
+      console.log(xx);
+      this.getallcusbystatus(xx);
+    }
   }
 
 }
