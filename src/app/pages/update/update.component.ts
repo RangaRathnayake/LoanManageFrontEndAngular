@@ -63,7 +63,7 @@ export class UpdateComponent implements OnInit {
   updatecus() {
     if (this.nic && this.mobile && this.cusfullname && this.namewithinitial && this.address) {
       if (this.validnic() && this.vaidmobile()) {
-        this.apiCall.post('customer', {
+        this.apiCall.post('customer/save', {
           customer: {
             id: this.userid,
             fullName: this.cusfullname,
@@ -92,7 +92,7 @@ export class UpdateComponent implements OnInit {
 
   updateloan(){
     if(this.date){
-      this.apiCall.post('main', {
+      this.apiCall.post('main/save', {
         main: {
           status: 0,
           userId: this.getuser.id,

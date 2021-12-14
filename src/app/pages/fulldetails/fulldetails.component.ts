@@ -137,7 +137,7 @@ export class FulldetailsComponent implements OnInit {
       date: this.mainData.startDate,
       monthsCount: this.mainData.monthsCount
     }
-    window.location.href = "http://localhost/LoanPrint/onfile.html?data="+JSON.stringify(obj);
+    window.location.href = "https://rmcinvesment.com/0LoanPrint/onfile.html?data="+JSON.stringify(obj);
   }
 
 }

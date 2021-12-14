@@ -46,7 +46,7 @@ export class ExpenceseComponent implements OnInit {
         status: 1,
         exptype: this.selectedExType
       }
-      this.apiCall.post('expencese', { expences: expences }, data => {
+      this.apiCall.post('expencese/save', { expences: expences }, data => {
         console.log(data);
       });
     } else {

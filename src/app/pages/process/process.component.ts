@@ -21,7 +21,8 @@ export class ProcessComponent implements OnInit {
   }
 
   getKeyVal() {
-    this.apiCall.get('keyval', data => {
+    this.apiCall.get('keyval/get', data => {
+      console.log(data);
       data.forEach(element => {
         if (element.key == "warrant_day") this.warrant_day = element.val;
         if (element.key == "warrant_rate") this.warrant_rate = element.val;

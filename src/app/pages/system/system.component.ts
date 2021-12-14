@@ -30,7 +30,7 @@ export class SystemComponent implements OnInit {
 
   apply() {
     if (this.rate) {
-      this.apiCall.post('interest', {
+      this.apiCall.post('interest/save', {
         interest: {
           rate: this.rate,
           status: 1
@@ -48,7 +48,7 @@ export class SystemComponent implements OnInit {
   }
 
   getrate() {
-    this.apiCall.get('interest', result => {
+    this.apiCall.get('interest/get', result => {
       this.ratelist = result;
       console.log(result);
 
@@ -71,11 +71,11 @@ export class SystemComponent implements OnInit {
     if (this.daycount && this.rateperdate) {
       this.daycountlist.val = this.daycount;
       this.rateperdatelist.val = this.rateperdate;
-      this.apiCall.post('keyval', {
+      this.apiCall.post('keyval/save', {
         keyval: this.daycountlist
       }, data => {
         if (data) {
-          this.apiCall.post('keyval', {
+          this.apiCall.post('keyval/save', {
             keyval: this.rateperdatelist
           }, data => {
             if (data) {

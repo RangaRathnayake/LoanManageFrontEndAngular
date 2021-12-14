@@ -28,7 +28,7 @@ export class CalloanComponent implements OnInit {
   }
 
   gettate(){
-    this.apiCall.get('interest', result => {
+    this.apiCall.get('interest/get', result => {
       this.ratelist=result;
       console.log(result);
 

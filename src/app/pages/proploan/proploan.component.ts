@@ -142,7 +142,7 @@ export class ProploanComponent implements OnInit {
         let value = datePipe.transform(dt, 'dd');
         console.log(value);
 
-        this.apiCall.get('main/max/p', result => {
+        this.apiCall.get('main/max/P', result => {
           if (result.max == null) {
             console.log("okkkkkkk");
             var max = 0;
@@ -151,10 +151,10 @@ export class ProploanComponent implements OnInit {
             max = result.max;
           }
 
-          this.apiCall.post('main', {
+          this.apiCall.post('main/save', {
             main: {
               id: Number(localStorage.getItem("mainid")),
-              loanType: "p",
+              loanType: "P",
               oderNumber: this.refno,
               loanAmount: this.totloan,
               dockCharge: this.doccharge,
@@ -198,7 +198,7 @@ export class ProploanComponent implements OnInit {
 
 
   gettate() {
-    this.apiCall.get('interest', result => {
+    this.apiCall.get('interest/get', result => {
       this.ratelist = result;
       console.log(result);
 
@@ -211,7 +211,7 @@ export class ProploanComponent implements OnInit {
 
 
   getloanref() {
-    this.apiCall.get('main/max/l', result => {
+    this.apiCall.get('main/max/L', result => {
       console.log(result)
     })
   }
@@ -286,7 +286,7 @@ export class ProploanComponent implements OnInit {
   savecus() {
     if (this.nic && this.mobile && this.cusfullname && this.namewithinitial && this.address) {
       if (this.validnic() && this.vaidmobile()) {
-        this.apiCall.post('customer', {
+        this.apiCall.post('customer/save', {
           customer: {
             fullName: this.cusfullname,
             name: this.namewithinitial,
@@ -339,7 +339,7 @@ export class ProploanComponent implements OnInit {
             max = result.max;
           }
 
-          this.apiCall.post('main', {
+          this.apiCall.post('main/save', {
             main: {
               loanType: "P",
               oderNumber: this.refno1,
@@ -371,7 +371,7 @@ export class ProploanComponent implements OnInit {
   }
 
   getallproject() {
-    this.apiCall.get('project', result => {
+    this.apiCall.get('project/get', result => {
       this.projectlist = result;
       console.log(result);
 

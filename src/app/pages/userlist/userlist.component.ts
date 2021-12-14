@@ -116,7 +116,7 @@ export class UserlistComponent implements OnInit {
 
 
   getusetlist() {
-    this.apiCall.get('user', result => {
+    this.apiCall.get('user/get', result => {
       this.userlist = result;
       this.dataSource = new MatTableDataSource(result);
       this.dataSource.paginator = this.paginatorpen;

@@ -328,7 +328,7 @@ export class MoreinfoComponent implements OnInit {
 
 
       console.log(this.arrearsData);
-      this.apiCall.post('transaction', obj, data => {
+      this.apiCall.post('transaction/save', obj, data => {
         console.log(data);
 
         this.apiCall.post('arrears/update', { arrearss: this.arrearsData }, dd => {
@@ -339,12 +339,12 @@ export class MoreinfoComponent implements OnInit {
 
         if (this.allFinish) {
           this.mainData.status = 3;
-          this.apiCall.post('main', { main: this.mainData }, ddd => {
+          this.apiCall.post('main/save', { main: this.mainData }, ddd => {
             console.log(ddd);
           })
         }
 
-        window.location.href = "http://localhost/LoanPrint/index.html?data=" + JSON.stringify(data);
+        window.location.href = "https://rmcinvesment.com/0LoanPrint/index.html?data=" + JSON.stringify(data);
 
       })
     } else {
