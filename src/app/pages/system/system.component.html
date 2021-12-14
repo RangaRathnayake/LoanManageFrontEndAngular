@@ -1,31 +1,36 @@
 <div class="main-content">
     <div class="container-fluid">
-
-        <div class="col-md-4">
-            <div class="card">
-                <div class="card-header card-header-danger">
-                    <h4 class="card-title">Interest Rate</h4>
-                    <p class="card-category"></p>
-                </div>
-                <div class="card-body">
-                    <mat-form-field class="example-full-width">
-                        <input matInput placeholder="Interest Rate" [(ngModel)]="rate">
-                    </mat-form-field>
-                    <button mat-raised-button class="btn btn-success pull-right" (click)="apply()">save</button>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-md-4">
-            <div class="card">
-                <div class="card-header card-header-danger">
-                    <h4 class="card-title">Interest Rate</h4>
-                    <p class="card-category"></p>
-                </div>
-                <div class="card-body">
-                  
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header card-header-danger">
+                        <h4 class="card-title">Interest Rate</h4>
+                        <p class="card-category"></p>
+                    </div>
+                    <div class="card-body">
+                        <mat-form-field class="example-full-width">
+                            <input matInput placeholder="Interest Rate" [(ngModel)]="rate" type="number">
+                        </mat-form-field>
+                        <button mat-raised-button class="btn btn-success pull-right" (click)="apply()">save</button>
+                    </div>
                 </div>
             </div>
+
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header card-header-danger">
+                        <h4 class="card-title">Interest Rate</h4>
+                        <p class="card-category"></p>
+                    </div>
+                    <div class="card-body">
+                        <div class="row" *ngFor="let rate of ratelist">
+                            <label class="lbl">{{rate.rate}}%</label>
+                            <hr><br>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
 
         <p>වොරන්ට් එක දාන දින ගාන අප්ඩේට් කරන්න හදන්න ඕනේ, වොරන්ට් රේට් එක වෙනස් කරන්න හදන්න ඕනේ</p>
