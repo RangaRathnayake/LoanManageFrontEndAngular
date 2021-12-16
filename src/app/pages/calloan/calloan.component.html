@@ -2,8 +2,8 @@
     <div class="container-fluid">
         <div class="row">
             <div class="card">
-                <div class="card-header card-header-danger">
-                    <h4 class="card-title">Create Users</h4>
+                <div class="card-header card-header-success">
+                    <h4 class="card-title">Loan Calculate</h4>
                     <p class="card-category"></p>
                 </div>
 
@@ -28,19 +28,27 @@
                                 <div class="col-md-6">
                                     <mat-form-field>
                                         <mat-label>Select Rate</mat-label>
-                                        <mat-select [(ngModel)]="rate">
+                                        <mat-select [(ngModel)]="rate" (selectionChange)="doSomething($event)">
                                             <mat-option *ngFor="let prod of ratelist" [value]="prod.rate">
                                                 {{prod.rate}}
                                             </mat-option>
                                         </mat-select>
                                     </mat-form-field>
                                 </div>
-
-
-
                             </div>
 
-                            
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label>Monthly Interest Rate</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <mat-form-field class="example-full-width">
+                                        <input matInput placeholder="Monthly Interest Rate" [(ngModel)]="monthrat" readonly>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+
+
 
                             <div class="row">
                                 <div class="col-md-6">
@@ -48,12 +56,12 @@
                                 </div>
                                 <div class="col-md-6">
                                     <mat-form-field class="example-full-width">
-                                        <input matInput placeholder="Months" [(ngModel)]="month">
+                                        <input matInput placeholder="Months" [(ngModel)]="month" type="number">
                                     </mat-form-field>
                                 </div>
                             </div>
 
-                            <button mat-raised-button class="btn btn-danger pull-right"
+                            <button mat-raised-button class="btn btn-success pull-right"
                                 (click)="cal()">Calculate</button>
                         </div>
                     </div>
@@ -63,38 +71,39 @@
                             <div class="row"><label style="text-align: center;"> Monthly Payment</label></div>
                             <hr>
                             <div class="row">
-                                <div class="col-md-6"><label>Capital</label></div>
+                                <div class="col-md-6"><label>Monthly Capita Payment</label></div>
 
                                 <div class="col-md-6"><label style="text-align: right;">{{Capital}}</label></div>
                             </div>
 
-                            <div class="row">
+                            <!-- <div class="row">
                                 <div class="col-md-6"><label>Annual interest rate</label></div>
 
-                                <div class="col-md-6"><label  style="text-align: right;">{{rate}}%</label></div>
-                            </div>
+                                <div class="col-md-6"><label style="text-align: right;">{{rate}}%</label></div>
+                            </div> -->
 
-                            <div class="row">
+                            <!-- <div class="row">
                                 <div class="col-md-6"><label>Monthly interest rate</label></div>
 
-                                <div class="col-md-6"><label  style="text-align: right;">{{monthrate}}%</label></div>
+                                <div class="col-md-6"><label style="text-align: right;">{{monthrate}}%</label></div>
+                            </div> -->
+
+                            <div class="row">
+                                <div class="col-md-6"><label>Motnly Interest Payment</label></div>
+
+                                <div class="col-md-6"><label style="text-align: right;">{{Interest}}</label></div>
                             </div>
 
                             <div class="row">
-                                <div class="col-md-6"><label>Interest</label></div>
+                                <div class="col-md-6"><label> <b>Motnly Rental</b></label></div>
 
-                                <div class="col-md-6"><label  style="text-align: right;">{{Interest}}</label></div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6"><label >Total</label></div>
-
-                                <div class="col-md-6"><label style="text-align: right;">{{Total}}</label></div>
+                                <div class="col-md-6"><label style="text-align: right;"><b>{{Total}}</b> </label></div>
                             </div>
 
                             <div class="row">
-                                <div class="col-md-6"><label>Full Total </label></div>
+                                <div class="col-md-6"><label>Total Loan Payment</label></div>
 
-                                <div class="col-md-6" ><label style="text-align: right;">{{FullTotal}}</label></div>
+                                <div class="col-md-6"><label style="text-align: right;">{{FullTotal}}</label></div>
                             </div>
 
                         </div>

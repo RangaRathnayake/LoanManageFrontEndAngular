@@ -21,6 +21,8 @@ export class CalloanComponent implements OnInit {
 
   ischeck:boolean=false;
 
+  monthrat;
+
   constructor(private apiCall: ApicallService, private alart: AlartService) { }
 
   ngOnInit(): void {
@@ -53,6 +55,10 @@ export class CalloanComponent implements OnInit {
       console.log("fklglkfdgkgg");
     }
     
+  }
+
+  doSomething(event){
+    this.monthrat=(Number(event.value)/12).toFixed(2) ;
   }
 
 }
