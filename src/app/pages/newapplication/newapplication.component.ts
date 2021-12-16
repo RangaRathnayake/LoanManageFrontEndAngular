@@ -50,6 +50,7 @@ export class NewapplicationComponent implements OnInit {
   diinstare;
   ditotal;
   difulltotal;
+  dilaoanamount;
 
   constructor(private apiCall: ApicallService, private alart: AlartService, private router: Router, private arout: ActivatedRoute) {
 
@@ -70,19 +71,8 @@ export class NewapplicationComponent implements OnInit {
 
     if (this.loanamount && this.cusfullname && this.namewithinitial && this.month
       && this.nic && this.date && this.address && this.doccharge && this.mobile && this.rate && this.ratelist) {
-
-      // if(this.validloanamount()){
-      //   if(this.validmonth()){
-      //     if(this.validnic()){
-      //       if(this.vaiddoccharge()){
-      //         if(this.vaidmobile()){
-
-      //         }
-      //       }
-      //     }
-      //   }
-
-      // }
+        this.ischecksave = false;
+     
 
       if (this.validloanamount() && this.validmonth() && this.validnic() && this.vaiddoccharge() && this.vaidmobile()) {
 
@@ -98,7 +88,7 @@ export class NewapplicationComponent implements OnInit {
         }
 
         this.capitalPerMonth = (Number(this.loanamount) / Number(this.month)).toFixed(2);
-        this.interestPerMonth = (Number(rate) / Number(1200) * Number(this.capitalPerMonth)).toFixed(2);
+        this.interestPerMonth = (Number(rate) / Number(1200) * Number(this.loanamount)).toFixed(2);
         this.totalPerMonth = (Number(this.capitalPerMonth) + Number(this.interestPerMonth)).toFixed(2);
 
 
@@ -107,6 +97,7 @@ export class NewapplicationComponent implements OnInit {
         console.log(this.capitalPerMonth);
         console.log(this.interestPerMonth);
         console.log(this.totalPerMonth);
+        console.log(this.loanamount);
         let dt = new Date(this.date);
         var datePipe = new DatePipe("en-US");
         let value = datePipe.transform(dt, 'dd');
@@ -173,6 +164,8 @@ export class NewapplicationComponent implements OnInit {
                 this.ischecksave = false;
                 this.alart.showNotification('success', 'save');
                 this.router.navigate(['fulldetails', data.id]);
+              }else{
+                this.ischecksave = true;
               }
             })
 
@@ -234,6 +227,7 @@ export class NewapplicationComponent implements OnInit {
       ismobile = true;
     } else {
       this.alart.showNotification('warning', 'Enter valid mobile number');
+      this.ischecksave = true;
     }
     console.log(ismobile);
     return ismobile;
@@ -245,6 +239,7 @@ export class NewapplicationComponent implements OnInit {
       isloanamount = true;
     } else {
       this.alart.showNotification('warning', 'Enter valid loan amount');
+      this.ischecksave = true;
     }
     return isloanamount;
   }
@@ -255,6 +250,7 @@ export class NewapplicationComponent implements OnInit {
       ismonth = true;
     } else {
       this.alart.showNotification('warning', 'Enter valid month');
+      this.ischecksave = true;
     }
     return ismonth;
   }
@@ -265,6 +261,7 @@ export class NewapplicationComponent implements OnInit {
       isnic = true;
     } else {
       this.alart.showNotification('warning', 'Enter valid nic');
+      this.ischecksave = true;
     }
     return isnic;
   }
@@ -275,25 +272,38 @@ export class NewapplicationComponent implements OnInit {
       isdocvharge = true;
     } else {
       this.alart.showNotification('warning', 'Enter valid document charge');
+      this.ischecksave = true;
     }
     return isdocvharge;
   }
 
 
   calloan() {
-    if (this.checked) {
-      this.dicapital = ((Number(this.loanamount) + Number(this.doccharge)) / Number(this.month)).toFixed(2);
-    } else {
-      this.dicapital = (Number(this.loanamount) / Number(this.month)).toFixed(2);
-    }
+    if (this.loanamount && this.cusfullname && this.namewithinitial && this.month
+      && this.nic && this.date && this.address && Number(this.doccharge)  && this.mobile && this.rate && this.ratelist) {
+      // this.ischecksave = false;
+      if (this.validloanamount() && this.validmonth() && this.validnic() && this.vaiddoccharge() && this.vaidmobile()) {
+        if (this.checked) {
+          this.dicapital = ((Number(this.loanamount) + Number(this.doccharge)) / Number(this.month)).toFixed(2);
+          this.dilaoanamount = Number(this.loanamount) + Number(this.doccharge);
+        } else {
+          this.dicapital = (Number(this.loanamount) / Number(this.month)).toFixed(2);
+          this.dilaoanamount = Number(this.loanamount);
+        }
 
-    this.dianualrate = this.rate.rate;
-    this.dimonthrate = (Number(this.dianualrate) / 12).toFixed(2);
-    this.diinstare = (Number(this.dicapital) * Number(this.dimonthrate) / 100).toFixed(2);
-    this.ditotal = (Number(this.dicapital) + Number(this.diinstare)).toFixed(2);
-    this.difulltotal = (Number(this.ditotal) * Number(this.month)).toFixed(2);
-    this.ischeck = true;
-    this.ischecksave = true;
+        this.dianualrate = this.rate.rate;
+        this.dimonthrate = (Number(this.dianualrate) / 12).toFixed(2);
+        this.diinstare = (Number(this.dilaoanamount) * Number(this.dimonthrate) / 100).toFixed(2);
+        this.ditotal = (Number(this.dicapital) + Number(this.diinstare)).toFixed(2);
+        this.difulltotal = (Number(this.ditotal) * Number(this.month)).toFixed(2);
+        this.ischeck = true;
+        this.ischecksave = true;
+      } else {
+        console.log("one");
+      }
+    } else {
+      console.log("two");
+    }
   }
 
 }

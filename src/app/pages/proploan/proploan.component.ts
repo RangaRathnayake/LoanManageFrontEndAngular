@@ -81,6 +81,7 @@ export class ProploanComponent implements OnInit {
   diinstare;
   ditotal;
   difulltotal;
+  dilaoanamount;
 
 
   //complete
@@ -127,7 +128,7 @@ export class ProploanComponent implements OnInit {
         }
 
         this.capitalPerMonth = (Number(this.loanamount) / Number(this.month)).toFixed(2);
-        this.interestPerMonth = (Number(rate) / Number(1200) * Number(this.capitalPerMonth)).toFixed(2);
+        this.interestPerMonth = (Number(rate) / Number(1200) * Number(this.loanamount)).toFixed(2);
         this.totalPerMonth = (Number(this.capitalPerMonth) + Number(this.interestPerMonth)).toFixed(2);
 
 
@@ -234,7 +235,7 @@ export class ProploanComponent implements OnInit {
 
   vaidmobile(): boolean {
     var ismobile = false;
-    if (this.mobile.length == 10 && Number(this.mobile)) {
+    if (this.mobile.length === 10 ) {
       ismobile = true;
     } else {
       this.alart.showNotification('warning', 'Enter valid mobile number');
@@ -285,7 +286,7 @@ export class ProploanComponent implements OnInit {
 
   savecus() {
     if (this.nic && this.mobile && this.cusfullname && this.namewithinitial && this.address) {
-      if (this.validnic() && this.vaidmobile()) {
+      if (this.validnic()) {
         this.apiCall.post('customer/save', {
           customer: {
             fullName: this.cusfullname,
@@ -301,6 +302,7 @@ export class ProploanComponent implements OnInit {
           }
         }, data => {
           console.log(data);
+          this.alart.showNotification('success', 'save');
           this.cusfullname2 = data.name;
           localStorage.setItem("cusid", data.id);
           this.isvisivleone=false;
@@ -381,18 +383,24 @@ export class ProploanComponent implements OnInit {
 
   calloan() {
 
-    if (this.loanamount && this.doccharge && this.month && this.rate) {
-      if (this.validloanamount() && this.vaiddoccharge() && this.validmonth()) {
+    if (this.loanamount && this.month
+
+      && this.date && this.doccharge && this.rate && this.ratelist && this.refno && this.lotnum && this.project) {
+
+
+      if (this.validloanamount() && this.validmonth() && this.vaiddoccharge()) {
 
         if (this.checked) {
           this.dicapital = ((Number(this.loanamount) + Number(this.doccharge)) / Number(this.month)).toFixed(2);
+          this.dilaoanamount=Number(this.loanamount) + Number(this.doccharge);
         } else {
           this.dicapital = (Number(this.loanamount) / Number(this.month)).toFixed(2);
+          this.dilaoanamount=Number(this.loanamount) ;
         }
 
         this.dianualrate = this.rate.rate;
         this.dimonthrate = (Number(this.dianualrate) / 12).toFixed(2);
-        this.diinstare = (Number(this.dicapital) * Number(this.dimonthrate) / 100).toFixed(2);
+        this.diinstare = (Number(this.dilaoanamount) * Number(this.dimonthrate) / 100).toFixed(2);
         this.ditotal = (Number(this.dicapital) + Number(this.diinstare)).toFixed(2);
         this.difulltotal = (Number(this.ditotal) * Number(this.month)).toFixed(2);
 
