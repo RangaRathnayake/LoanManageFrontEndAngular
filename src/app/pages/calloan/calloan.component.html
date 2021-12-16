@@ -16,7 +16,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <mat-form-field class="example-full-width">
-                                        <input matInput placeholder="Loan Amount" [(ngModel)]="loanamount">
+                                        <input matInput placeholder="Loan Amount" [(ngModel)]="loanamount" type="number">
                                     </mat-form-field>
                                 </div>
                             </div>
@@ -71,7 +71,7 @@
                             <div class="row"><label style="text-align: center;"> Monthly Payment</label></div>
                             <hr>
                             <div class="row">
-                                <div class="col-md-6"><label>Monthly Capita Payment</label></div>
+                                <div class="col-md-6"><label class="lab">Monthly Capital Payment</label></div>
 
                                 <div class="col-md-6"><label style="text-align: right;">{{Capital}}</label></div>
                             </div>
@@ -89,13 +89,13 @@
                             </div> -->
 
                             <div class="row">
-                                <div class="col-md-6"><label>Motnly Interest Payment</label></div>
+                                <div class="col-md-6"><label>Monthly Interest Payment</label></div>
 
                                 <div class="col-md-6"><label style="text-align: right;">{{Interest}}</label></div>
                             </div>
 
                             <div class="row">
-                                <div class="col-md-6"><label> <b>Motnly Rental</b></label></div>
+                                <div class="col-md-6"><label> <b>Monthly Rental</b></label></div>
 
                                 <div class="col-md-6"><label style="text-align: right;"><b>{{Total}}</b> </label></div>
                             </div>

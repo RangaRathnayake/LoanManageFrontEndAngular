@@ -47,12 +47,12 @@ export class CalloanComponent implements OnInit {
       this.monthrate=Number(this.rate/12).toFixed(2);
       this.ischeck=true;
 
-      console.log("xxxxxxxxxxx");
-      console.log("rate",this.rate);
-      console.log("month",this.month);
-      console.log("xxxxxxxxxxx");
+      // console.log("xxxxxxxxxxx");
+      // console.log("rate",this.rate);
+      // console.log("month",this.month);
+      // console.log("xxxxxxxxxxx");
     }else{
-      console.log("fklglkfdgkgg");
+      // console.log("fklglkfdgkgg");
     }
     
   }
