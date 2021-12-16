@@ -115,7 +115,7 @@ export class FulldetailsComponent implements OnInit {
   approve() {
     this.clickOnApprove = true;
     this.mainData.status = 1;
-    this.apiCall.post('main', { main: this.mainData }, data => {
+    this.apiCall.post('main/save', { main: this.mainData }, data => {
       this.apiCall.post('main/createArriarsList', { main: this.mainData }, dd => {
       })
       this.alart.showNotification("success", "Loan Approved");

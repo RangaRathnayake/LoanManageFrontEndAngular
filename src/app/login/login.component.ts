@@ -24,14 +24,21 @@ export class LoginComponent implements OnInit {
         email: this.uname,
         password: this.pword
       }, data => {
-        console.log(data);
-        this.alart.showNotification('Success', 'success');
-        localStorage.setItem('user', JSON.stringify(data));
-        window.location.href = '/';
+        if (data) {
+          console.log(data.id);
+          console.log(data);
+          this.alart.showNotification('success', 'Welcome to RMC System');
+          localStorage.setItem('user', JSON.stringify(data));
+          window.location.href = '/';
+        } else {
+          console.log("error logi");
+          this.alart.showNotification('warning', 'Username or password is wrong');
+        }
+
       })
     } else {
 
     }
   }
-  
+
 }
