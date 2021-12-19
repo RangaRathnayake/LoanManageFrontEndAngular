@@ -36,6 +36,7 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'calloan', component: CalloanComponent },
     { path: 'newapplicatin', component: NewapplicationComponent },
     { path: 'proploan', component: ProploanComponent },
+    { path: 'proploan/:id', component: ProploanComponent },
     { path: 'expencese', component: ExpenceseComponent },
     { path: 'applist', component: ApplistComponent },
     { path: 'moreinfo/:id', component: MoreinfoComponent },

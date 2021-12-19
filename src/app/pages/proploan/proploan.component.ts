@@ -94,8 +94,18 @@ export class ProploanComponent implements OnInit {
   isvisibletree =false;
   isproseedtree =false;
 
+  Isone=true;
+  Istwo=true;
+  Isthree=true;
+  isvisibletwobtn=false;
 
-  constructor(private apiCall: ApicallService, private alart: AlartService, private router: Router) {
+  mainid;
+  downpay;
+  nonref;
+  cusid;
+
+
+  constructor(private apiCall: ApicallService, private alart: AlartService, private router: Router , private arout: ActivatedRoute,) {
     this.gettate();
     this.getuser = this.apiCall.logedUser();
     console.log(this.getuser);
@@ -104,8 +114,28 @@ export class ProploanComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getloanref();
-    this.getallproject();
+
+    this.arout.params.subscribe(params => {
+      const id = params['id'];
+      if (id) {
+        console.log("test one");
+        this.Isone=false;
+        this.Istwo=true;
+        this.Isthree=false;
+        this.isvisibletwobtn=true;
+        this.getcus(id);
+
+        this.mainid=id;
+        
+
+      } else {
+        this.getloanref();
+        this.getallproject();
+        console.log("test two");
+      }
+    });
+
+  
   }
 
   apply() {
@@ -372,11 +402,66 @@ export class ProploanComponent implements OnInit {
     }
   }
 
+
+  updatepayadvace(){
+    if (this.cusfullname2 && this.paytype && this.advancepay ) {
+      if (Number(this.advancepay)) {
+
+        this.apiCall.get('main/' + this.mainid, result => {
+          this.nonref=Number(result.NonRefundableAdvance) ;
+          this.downpay=Number(result.downPayment);
+          console.log(result);
+
+
+          // var nonradvance = this.nonref;
+          // var downpay = this.downpay;
+  
+          if (this.paytype.id == 1) {
+            this.nonref = this.advancepay;
+          } else {
+            this.downpay = this.advancepay;
+          }
+  
+          this.apiCall.post('main/save', {
+            main: {
+              loanType: "P",
+             // oderNumber: this.refno1,
+              id:Number(this.mainid) ,
+              userId: this.getuser.id,
+              NonRefundableAdvance: this.nonref,
+              downPayment: this.downpay,
+              status: 0,
+              customer: this.cusid
+            }
+          }, data => {
+            this.alart.showNotification('success', 'save');
+            this.isvisivleone=false;
+            this.isvisibletwo=false;
+            this.isvisibletree =true;
+            this. isproseedtwo =true;
+          })
+
+
+
+        })
+     
+
+
+      }}
+  }
+
   getallproject() {
     this.apiCall.get('project/get', result => {
       this.projectlist = result;
       console.log(result);
 
+    })
+  }
+
+  getcus(id) {
+    this.apiCall.get('main/' + id, result => {
+      this.cusfullname2 = result.customer.name;
+      this.cusid=result.customer.id;
     })
   }
 

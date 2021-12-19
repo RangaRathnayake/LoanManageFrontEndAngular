@@ -1,6 +1,6 @@
 <div class="main-content">
     <div class="container-fluid">
-        <div class="row" >
+        <div class="row" *ngIf="Isone">
             <div class="card">
                 <div class="card-header card-header-success">
                     <h4 class="card-title"> Customer</h4>
@@ -47,7 +47,7 @@
             </div>
         </div>
 
-        <div class="row" >
+        <div class="row" *ngIf="Istwo">
             <div class="card">
                 <div class="card-header card-header-success">
                     <h4 class="card-title">Advance payment</h4>
@@ -80,7 +80,7 @@
                     </div>
 
 
-                    <div class="row">
+                    <div class="row" *ngIf="Isone">
                         <div class="col-md-4">
                             <mat-form-field class="example-full-width">
                                 <input matInput placeholder="File no" [(ngModel)]="refno1">
@@ -89,6 +89,7 @@
                     </div>
 
                     <button mat-raised-button class="btn btn-success pull-right" (click)="payadvace()" *ngIf="isvisibletwo">save</button>
+                    <button mat-raised-button class="btn btn-success pull-right" (click)="updatepayadvace()" *ngIf="isvisibletwobtn">save </button>
 
                 </div>
             </div>
@@ -96,7 +97,7 @@
 
 
 
-        <div class="row" >
+        <div class="row" *ngIf="Isthree">
             <div class="card">
                 <div class="card-header card-header-success">
                     <h4 class="card-title">New Application</h4>

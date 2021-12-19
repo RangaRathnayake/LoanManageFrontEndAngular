@@ -43,6 +43,8 @@ export class FulldetailsComponent implements OnInit {
   constructor(private router: Router, private arout: ActivatedRoute, private apiCall: ApicallService, private alart: AlartService) { }
 
   ngOnInit(): void {
+ 
+
 
     this.user = this.apiCall.logedUser()
     console.log(this.user);
@@ -138,6 +140,10 @@ export class FulldetailsComponent implements OnInit {
       monthsCount: this.mainData.monthsCount
     }
     window.location.href = "https://rmcinvesment.com/0LoanPrint/onfile.html?data="+JSON.stringify(obj);
+  }
+
+  Getadvance(){
+    this.router.navigate(['proploan', this.mainId]);
   }
 
 }
