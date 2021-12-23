@@ -17,3 +17,7 @@
     display: inline-block;
     width: 180px;
   }
+
+  .mat-radio-button ~ .mat-radio-button {
+    margin-left: 16px;
+  }

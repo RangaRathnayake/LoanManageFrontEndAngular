@@ -80,11 +80,22 @@
                     </div>
 
 
-                    <div class="row" *ngIf="Isone">
-                        <div class="col-md-4">
+                    <div class="row">
+                        <div class="col-md-4" *ngIf="Isone">
                             <mat-form-field class="example-full-width">
                                 <input matInput placeholder="File no" [(ngModel)]="refno1">
                             </mat-form-field>
+                        </div>
+                        <div class="col-md-4">
+                            <mat-radio-group aria-label="Select an option" (change)="radioChange($event)"  [(ngModel)]="selectedRadio"  >
+                                <mat-radio-button value="1" >Cash</mat-radio-button>
+                                <mat-radio-button value="2">Cheques</mat-radio-button>
+                            </mat-radio-group>
+                            <div *ngIf="selectedRadio === '2'">
+                                <mat-form-field class="example-full-width">
+                                    <input matInput placeholder="Cheques number" [(ngModel)]="chequeno">
+                                </mat-form-field>
+                            </div>
                         </div>
                     </div>
 
