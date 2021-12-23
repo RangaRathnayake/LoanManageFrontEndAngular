@@ -465,46 +465,94 @@ export class ProploanComponent implements OnInit {
     if (this.cusfullname2 && this.paytype && this.advancepay) {
       if (Number(this.advancepay)) {
 
-        this.apiCall.get('main/' + this.mainid, result => {
-          this.nonref = Number(result.NonRefundableAdvance);
-          this.downpay = Number(result.downPayment);
-          console.log(result);
+        if (this.selectedRadio == 2 && this.chequeno || this.selectedRadio == 1) {
+          // if (this.chequeno) {
+            var paytype;
+            var chequeno;
 
-
-          // var nonradvance = this.nonref;
-          // var downpay = this.downpay;
-
-          if (this.paytype.id == 1) {
-            this.nonref = this.advancepay;
-          } else {
-            this.downpay = this.advancepay;
-          }
-
-          this.apiCall.post('main/save', {
-            main: {
-              loanType: "P",
-              // oderNumber: this.refno1,
-              id: Number(this.mainid),
-              userId: this.getuser.id,
-              NonRefundableAdvance: this.nonref,
-              downPayment: this.downpay,
-              status: 0,
-              customer: this.cusid
+            if (this.selectedRadio == 1) {
+              paytype = "cash";
+              chequeno = "-";
+            } else {
+              paytype = "cheque";
+              chequeno = this.chequeno;
             }
-          }, data => {
-            this.alart.showNotification('success', 'save');
-            this.isvisivleone = false;
-            this.isvisibletwo = false;
-            this.isvisibletree = true;
-            this.isproseedtwo = true;
-          })
+
+            this.apiCall.get('main/' + this.mainid, result => {
+              this.nonref = 0.00;
+              this.downpay = 0.00;
+
+
+              if (this.paytype.id == 1) {
+                this.nonref = this.advancepay;
+              } else {
+                this.downpay = this.advancepay;
+              }
+
+              this.apiCall.post('main/save', {
+                main: {
+                  loanType: "P",
+                  id: Number(this.mainid),
+                  userId: this.getuser.id,
+                  NonRefundableAdvance: this.nonref,
+                  downPayment: this.downpay,
+                  status: 0,
+                  customer: this.cusid
+                }
+              }, data => {
+
+
+                let obj = {
+                  transaction: {
+                    day: new Date(),
+                    capital: 0,
+                    interest: 0,
+                    warant: 0,
+                    arrears: 0,
+                    dockCharge: 0,
+                    monthCount: 0,
+                    nonRefund: this.nonref,
+                    advance: this.downpay,
+                    otherPay: 0,
+                    over: 0,
+                    total: this.advancepay,
+                    payType: paytype,
+                    cheque: chequeno,
+                    loanType: "P",
+                    interestRate: 0,
+                    status: 1,
+                    customer: localStorage.getItem("cusid"),
+                    main: Number(this.mainid),
+                    user: this.getuser.id
+                  }
+                }
+                // var day = this.datePipe.transform(new Date(), "yyyy-MM-dd");
+                this.apiCall.post('transaction/save', obj, datas => {
+                  console.log(datas);
+
+                  // window.location.href = "https://rmcinvesment.com/0LoanPrint/index.html?data=" + JSON.stringify(data);
+                  window.open("https://rmcinvesment.com/0LoanPrint/index.html?data=" + JSON.stringify(datas), '_blank');
+
+                })
+
+
+                this.alart.showNotification('success', 'save');
+                this.isvisivleone = false;
+                this.isvisibletwo = false;
+                this.isvisibletree = true;
+                this.isproseedtwo = true;
+              })
 
 
 
-        })
-
-
-
+            })
+          // } else {
+          //   this.alart.showNotification('warning', 'enter cheque number');
+          // }
+        }else{
+          this.alart.showNotification('warning', 'enter cheque number');
+        }
+        
       }
     }
   }
