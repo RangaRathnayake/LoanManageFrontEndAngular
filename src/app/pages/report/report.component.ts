@@ -12,4 +12,18 @@ export class ReportComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  alltrans(){
+
+    var range = {
+      range: {
+        from: this.from,
+        to: this.to
+      }
+    }
+
+
+    window.open("http://localhost/0LoanPrint/income.html?data=" + JSON.stringify(range), '_blank');
+    
+  }
+
 }
