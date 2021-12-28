@@ -9,7 +9,7 @@ import { LoginComponent } from './login/login.component';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'applist',
+    redirectTo: 'dashboard',
     pathMatch: 'full',
   },
   {
