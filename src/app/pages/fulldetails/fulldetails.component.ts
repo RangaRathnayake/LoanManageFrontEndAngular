@@ -39,6 +39,8 @@ export class FulldetailsComponent implements OnInit {
   warrant: number = 0;
   priviarsOver: number = 0;
 
+  loanType;
+
 
   constructor(private router: Router, private arout: ActivatedRoute, private apiCall: ApicallService, private alart: AlartService) { }
 
@@ -74,6 +76,8 @@ export class FulldetailsComponent implements OnInit {
       this.nic = result.customer.nic;
       this.adress = result.customer.address;
       this.phone = result.customer.phone;
+
+      this.loanType=result.loanType;
 
 
 

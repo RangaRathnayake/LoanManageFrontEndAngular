@@ -21,7 +21,7 @@
                     <p>Annual interest rate : {{anualRate}}</p>
                 </div>
 
-                <button mat-raised-button class="btn btn-success pull-right" (click)="Getadvance()">Advance</button>
+                <button mat-raised-button class="btn btn-success pull-right" (click)="Getadvance()" *ngIf="loanType === 'P'">Advance</button>
 
                 <button mat-raised-button class="btn btn-success pull-right" (click)="edit()">Edit</button>
 
