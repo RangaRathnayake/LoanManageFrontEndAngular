@@ -528,7 +528,8 @@ export class ProploanComponent implements OnInit {
                   user: this.getuser.id
                 }
               }
-              // var day = this.datePipe.transform(new Date(), "yyyy-MM-dd");
+
+              
               this.apiCall.post('transaction/save', obj, datas => {
                 console.log(datas);
 

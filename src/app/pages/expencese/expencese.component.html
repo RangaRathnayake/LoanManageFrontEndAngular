@@ -9,12 +9,43 @@
 
                 <mat-form-field>
                     <mat-label>Select Expence Type</mat-label>
-                    <mat-select [(ngModel)]="selectedExType">
+                    <mat-select [(ngModel)]="selectedExType" (selectionChange)="someMethod($event.value)">
                         <mat-option *ngFor="let t of exTypes" [value]="t.id">
                             {{t.type}}
                         </mat-option>
                     </mat-select>
                 </mat-form-field>
+
+                <mat-form-field class="example-full-width" *ngIf="isdoccharfe">
+                    <input matInput placeholder="loan number" [(ngModel)]="loannum" (keyup.enter)="search(loannum)">
+                </mat-form-field>
+
+                
+
+                <mat-nav-list *ngIf="islist">
+                    <mat-list-item *ngFor="let link of doclist">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <label>{{link.oderNumber}}</label>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label>{{link.dockCharge}}</label>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <button mat-button (click)="more(link.id)">Add</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </mat-list-item>
+                </mat-nav-list>
+
+                <mat-form-field class="example-full-width" *ngIf="isdocchargeamount">
+                    <input matInput placeholder="Document charge" [(ngModel)]="dockCharge" readonly>
+                </mat-form-field>
+
 
                 <mat-form-field class="example-full-width">
                     <input matInput placeholder="Description" [(ngModel)]="description">
@@ -36,7 +67,7 @@
 
             </div>
 
-        
+
 
         </div>
     </div>

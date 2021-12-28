@@ -16,8 +16,21 @@ export class ExpenceseComponent implements OnInit {
   date;
   to;
   amount;
+  isdoccharfe = false;
+  isdocchargeamount=false;
+  islist=false;
+  loannum;
+  doclist;
+  dockCharge;
+  mainid;
 
-  constructor(private apiCall: ApicallService, private alart: AlartService) { }
+  getuser;
+  cusid;
+
+
+  constructor(private apiCall: ApicallService, private alart: AlartService) {
+    this.getuser = this.apiCall.logedUser();
+  }
 
   ngOnInit(): void {
     this.getExpenceType();
@@ -28,6 +41,44 @@ export class ExpenceseComponent implements OnInit {
       this.exTypes = data;
       console.log(this.exTypes);
     });
+  }
+
+  someMethod(evnt) {
+    if (evnt == 1) {
+      this.isdoccharfe = true;
+      this.loannum=undefined;
+    } else {
+      this.isdoccharfe = false;
+
+      this.islist=false;
+      this.isdocchargeamount=false;
+      this.isdoccharfe=false;
+    }
+  }
+
+  more(id) {
+    this.mainid = id;
+    this.apiCall.get('main/' + id, data => {
+      this.dockCharge = data.dockCharge;
+      this.cusid = data.customer.id;
+      this.isdocchargeamount=true;
+    });
+  }
+
+  search(num) {
+    if (num) {
+      this.apiCall.get('main/getByNumber/' + num, data => {
+        this.doclist = data;
+        this.dockCharge=undefined;
+        this.isdocchargeamount=false;
+        if(this.doclist.length >0){
+          this.islist=true;
+        }else{
+          this.islist=true;
+        }
+      });
+
+    }
   }
 
   apply() {
@@ -47,7 +98,40 @@ export class ExpenceseComponent implements OnInit {
         exptype: this.selectedExType
       }
       this.apiCall.post('expencese/save', { expences: expences }, data => {
-        console.log(data);
+
+        let obj = {
+          transaction: {
+            day: new Date(),
+            capital: 0,
+            interest: 0,
+            warant: 0,
+            arrears: 0,
+            dockCharge: Number(this.amount) * Number(-1),
+            monthCount: 0,
+            nonRefund: 0,
+            advance: 0,
+            otherPay: 0,
+            over: 0,
+            total: 0,
+            payType: '-',
+            cheque: '-',
+            loanType: "-",
+            interestRate: 0,
+            status: 1,
+            customer: this.cusid,
+            main: this.mainid,
+            user: this.getuser.id
+          }
+        }
+
+        if (this.isdoccharfe) {
+          this.apiCall.post('transaction/save', obj, datas => {
+            console.log(datas);
+          })
+
+        }
+
+
       });
     } else {
       this.alart.showNotification('warning', 'Please recheck your input');
