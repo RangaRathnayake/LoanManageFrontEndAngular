@@ -22,7 +22,7 @@ export class ReportComponent implements OnInit {
     }
 
 
-    window.open("http://localhost/0LoanPrint/income.html?data=" + JSON.stringify(range), '_blank');
+    window.open("https://rmcinvesment.com/0LoanPrint/income.html?data=" + JSON.stringify(range), '_blank');
     
   }
 
