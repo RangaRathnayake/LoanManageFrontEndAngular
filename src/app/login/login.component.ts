@@ -25,8 +25,10 @@ export class LoginComponent implements OnInit {
         password: this.pword
       }, data => {
         if (data) {
-          console.log(data.id);
+          console.log('-----------------');
           console.log(data);
+          console.log(data.id);
+          console.log('-----------------');
           this.alart.showNotification('success', 'Welcome to RMC System');
           localStorage.setItem('user', JSON.stringify(data));
           window.location.href = '/';

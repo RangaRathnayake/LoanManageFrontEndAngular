@@ -5,7 +5,7 @@
 
 export const environment = {
   production: false,
-   apiUrl: 'http://localhost:3000/',
- // apiUrl: 'https://api.rmcinvesment.com/',
+  apiUrl: 'http://localhost:3000/',
+  //  apiUrl: 'https://api.rmcinvesment.com/',
   TOKEN_KEY: 'secret'
 };

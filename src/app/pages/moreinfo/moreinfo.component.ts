@@ -6,6 +6,7 @@ import { DatePipe } from '@angular/common';
 import { element } from 'protractor';
 import { Observable } from 'rxjs';
 
+
 @Component({
   selector: 'app-moreinfo',
   templateUrl: './moreinfo.component.html',
@@ -31,6 +32,7 @@ export class MoreinfoComponent implements OnInit {
   lastTransactionData;
 
   arrearsData;
+  dayCount;
   resetArriasData;
   firstArrearsData;
   isCompleteThisMonth = 0;
@@ -95,6 +97,7 @@ export class MoreinfoComponent implements OnInit {
       this.mainMonthCount = result.monthCount;
       this.getAnualRate();
       this.getArrears(id);
+      this.getDayCount(id);
     })
   }
 
@@ -109,8 +112,6 @@ export class MoreinfoComponent implements OnInit {
     this.apiCall.get('arrears/pending/' + id, data => {
 
       this.arrearsData = data;
-
-
 
       this.arrearsData.forEach(element => {
 
@@ -135,6 +136,13 @@ export class MoreinfoComponent implements OnInit {
       console.log(this.firstArrearsData);
 
     })
+  }
+
+  getDayCount(id) {
+    this.apiCall.get('main/count/' + id, data => {
+      console.log(data);
+      this.dayCount = data.count;
+    });
   }
 
   calByArray(value) {
@@ -162,6 +170,7 @@ export class MoreinfoComponent implements OnInit {
     } else {
       this.alart.showNotification("danger", "Over Value");
       this.clickOnPay = true;
+      this.resetAll();
     }
 
 

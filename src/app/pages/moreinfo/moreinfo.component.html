@@ -26,6 +26,10 @@
                         <input type="number" matInput (keyup.enter)="calByArray($event.target.value)"
                             placeholder="Amount" #input>
                     </mat-form-field>
+                    <h4 *ngIf="arrearsData && arrearsData[0].warrant>0" style="text-align: right; color: red;"> Day
+                        Count :
+                        {{dayCount}} Fined : {{arrearsData[0].warrant | currency:' '}} </h4>
+                    <mat-spinner *ngIf="!arrearsData"></mat-spinner>
                 </div>
 
 
@@ -35,7 +39,6 @@
                         <table style="width: 100%; font-size: medium; ">
                             <thead>
                                 <th>Date</th>
-                                <th style="text-align: right;">Warrant</th>
                                 <th style="text-align: right;">Arrears</th>
                                 <th style="text-align: right;">Capital</th>
                                 <th style="text-align: right;">Interest</th>
@@ -44,7 +47,6 @@
 
                                 <tr style="color: blue;" *ngFor="let item of arrearsData">
                                     <td>{{item.payDate}}</td>
-                                    <td style="text-align: right; color: red;">{{item.warrant | currency:' '}}</td>
                                     <td style="text-align: right;  color: red;">{{ item.capitalArrears*1 +
                                         item.interestArrears*1 | currency:' '}}</td>
                                     <td style="text-align: right;">{{item.capital | currency:' '}}</td>
@@ -55,7 +57,6 @@
                             <br>
                             <tfoot style="font-weight: bold;">
                                 <td>Total Payment</td>
-                                <td style="text-align: right;"></td>
                                 <td style="text-align: right;"></td>
                                 <td style="text-align: right;"></td>
                                 <td style="text-align: right;">{{payT | currency:' '}}</td>
@@ -70,14 +71,13 @@
                             </mat-radio-group>
 
                             <mat-form-field *ngIf="payType=='Cheque'" appearance="standard">
-                                <input type="text" matInput placeholder="Cheque Number" [(ngModel)]="cheaueNumber" >
+                                <input type="text" matInput placeholder="Cheque Number" [(ngModel)]="cheaueNumber">
                             </mat-form-field>
 
                             <button *ngIf="!clickOnPay && enter" mat-raised-button class="btn btn-success pull-right"
                                 (click)="pay()">Get Payment</button>
                         </div>
                     </div>
-                    <mat-spinner *ngIf="!arrearsData"></mat-spinner>
                 </div>
 
 
