@@ -27,6 +27,7 @@ import { ProploanComponent } from 'app/pages/proploan/proploan.component';
 import { MoreinfoComponent } from 'app/pages/moreinfo/moreinfo.component';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import {MatListModule} from '@angular/material/list';
 import { ExpenceseComponent } from '../../pages/expencese/expencese.component';
 import { ApplistComponent } from 'app/pages/applist/applist.component';
 import { SystemComponent } from '../../pages/system/system.component';
@@ -50,6 +51,7 @@ import { ReportComponent } from '../../pages/report/report.component';
     MatTooltipModule,
     MatRadioModule,
     MatCheckboxModule,
+    MatListModule,
     MatProgressSpinnerModule
   ],
   declarations: [
