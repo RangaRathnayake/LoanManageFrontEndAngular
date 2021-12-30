@@ -46,7 +46,7 @@
                             <input matInput placeholder="Warrant excuse day count " [(ngModel)]="daycount" type="number">
                         </mat-form-field>
                         <mat-form-field class="example-full-width">
-                            <input matInput placeholder="Warrant rate per day (%)" [(ngModel)]="rateperdate" type="number">
+                            <input matInput placeholder="Warrant rate per month (%)" [(ngModel)]="rateperdate" type="number">
                         </mat-form-field>
                         <button mat-raised-button class="btn btn-success pull-right" (click)="savewarrent()">save</button>
                     </div>
@@ -61,7 +61,44 @@
                     </div>
                     <div class="card-body">
                         <p>Warrant excuse day count - {{daycount}}</p>
-                        <p>Warrant rate per day - {{rateperdate}}%</p>
+                        <p>Warrant rate per month - {{rateperdate}}%</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header card-header-danger">
+                        <h4 class="card-title">New Project</h4>
+                        <p class="card-category"></p>
+                    </div>
+                    <div class="card-body">
+                        <mat-form-field class="example-full-width">
+                            <input matInput placeholder="Project name" [(ngModel)]="projectname" >
+                        </mat-form-field>
+                        <mat-form-field class="example-full-width">
+                            <input matInput placeholder="location" [(ngModel)]="location" >
+                        </mat-form-field>
+                        <mat-form-field class="example-full-width">
+                            <input matInput placeholder="Lot count" [(ngModel)]="lotcount" >
+                        </mat-form-field>
+                        <button mat-raised-button class="btn btn-success pull-right" (click)="saveproject()">save</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header card-header-danger">
+                        <h4 class="card-title">warrent details</h4>
+                        <p class="card-category"></p>
+                    </div>
+                    <div class="card-body">
+                        <p>Warrant excuse day count - {{daycount}}</p>
+                        <p>Warrant rate per month - {{rateperdate}}%</p>
                     </div>
                 </div>
             </div>

@@ -21,6 +21,10 @@ export class SystemComponent implements OnInit {
 
   keyvallist;
 
+  projectname;
+  location;
+  lotcount;
+
   constructor(private apiCall: ApicallService, private alart: AlartService) { }
 
   ngOnInit(): void {
@@ -90,6 +94,10 @@ export class SystemComponent implements OnInit {
     } else {
       this.alart.showNotification('warning', 'check all feilds');
     }
+  }
+
+  saveproject(){
+
   }
 
 }
