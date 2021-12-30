@@ -268,7 +268,7 @@ export class NewapplicationComponent implements OnInit {
 
   vaiddoccharge(): boolean {
     var isdocvharge = false;
-    if (Number(this.doccharge)) {
+    if (Number(this.doccharge) >= 0) {
       isdocvharge = true;
     } else {
       this.alart.showNotification('warning', 'Enter valid document charge');
@@ -280,7 +280,7 @@ export class NewapplicationComponent implements OnInit {
 
   calloan() {
     if (this.loanamount && this.cusfullname && this.namewithinitial && this.month
-      && this.nic && this.date && this.address && Number(this.doccharge)  && this.mobile && this.rate && this.ratelist) {
+      && this.nic && this.date && this.address   && this.mobile && this.rate && this.ratelist) {
       // this.ischecksave = false;
       if (this.validloanamount() && this.validmonth() && this.validnic() && this.vaiddoccharge() && this.vaidmobile()) {
         if (this.checked) {
