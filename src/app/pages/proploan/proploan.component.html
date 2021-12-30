@@ -3,7 +3,7 @@
         <div class="row" *ngIf="Isone">
             <div class="card">
                 <div class="card-header card-header-success">
-                    <h4 class="card-title"> Customer</h4>
+                    <h4 class="card-title"> Loan infomation</h4>
                     <p class="card-category"></p>
                 </div>
                 <div class="card-body">
@@ -130,11 +130,11 @@
 
 
                     <div class="row">
-                        <div class="col-md-4" *ngIf="Isone">
+                        <!-- <div class="col-md-4" *ngIf="Isone">
                             <mat-form-field class="example-full-width">
                                 <input matInput placeholder="File no" [(ngModel)]="refno1">
                             </mat-form-field>
-                        </div>
+                        </div> -->
                         <div class="col-md-4">
                             <mat-radio-group aria-label="Select an option" (change)="radioChange($event)"
                                 [(ngModel)]="selectedRadio">
@@ -168,14 +168,14 @@
                 </div>
                 <div class="card-body">
 
-                    <div class="row">
+                    <!-- <div class="row">
                         <div class="col-md-6">
                             <mat-form-field class="example-full-width">
                                 <input matInput placeholder="File no" [(ngModel)]="refno">
                             </mat-form-field>
                         </div>
 
-                    </div>
+                    </div> -->
 
                     <div class="row">
                         <div class="col-md-6">
@@ -230,7 +230,7 @@
                                 </mat-checkbox>
                             </section>
                         </div>
-                        <div class="col-md-6">
+                        <!-- <div class="col-md-6">
 
                             <mat-form-field>
                                 <mat-label>Select project</mat-label>
@@ -240,17 +240,17 @@
                                     </mat-option>
                                 </mat-select>
                             </mat-form-field>
-                        </div>
+                        </div> -->
 
                     </div>
 
-                    <div class="row">
+                    <!-- <div class="row">
                         <div class="col-md-6">
                             <mat-form-field class="example-full-width">
                                 <input matInput placeholder="Lot number" [(ngModel)]="lotnum">
                             </mat-form-field>
                         </div>
-                    </div>
+                    </div> -->
 
                     <button mat-raised-button class="btn btn-success pull-right" (click)="calloan()"
                         *ngIf="isvisibletree">calculate</button>

@@ -150,10 +150,15 @@ export class ProploanComponent implements OnInit {
 
   apply() {
 
+    console.log(this.loanamount);
+    console.log(this.month);
+    console.log(this.date);
+    console.log(this.doccharge);
+    console.log(this.rate);
+    console.log(this.ratelist);
 
-    if (this.loanamount && this.month
 
-      && this.date && this.doccharge && this.rate && this.ratelist && this.refno && this.lotnum && this.project) {
+    if (this.loanamount && this.month && this.date && this.doccharge && this.rate && this.ratelist ) {
 
 
       if (this.validloanamount() && this.validmonth() && this.vaiddoccharge()) {
@@ -397,7 +402,7 @@ export class ProploanComponent implements OnInit {
   }
 
   payadvace() {
-    if (this.cusfullname2 && this.paytype && this.advancepay && this.refno1) {
+    if (this.cusfullname2 && this.paytype && this.advancepay ) {
       if (Number(this.advancepay)) {
 
         if (this.selectedRadio == "2" && this.chequeno || this.selectedRadio == "1") {
@@ -624,7 +629,7 @@ export class ProploanComponent implements OnInit {
 
     if (this.loanamount && this.month
 
-      && this.date && this.rate && this.ratelist && this.refno && this.lotnum && this.project) {
+      && this.date && this.rate && this.ratelist  ) {
 
 
       if (this.validloanamount() && this.validmonth() && this.vaiddoccharge()) {
