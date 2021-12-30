@@ -55,7 +55,7 @@ export class ApplistComponent implements OnInit {
   @ViewChild(MatSort, { static: false }) sort: MatSort;
 
   constructor(private apiCall: ApicallService, private aroute: ActivatedRoute, private router: Router) {
-    this.getallcus();
+    //this.getallcus();
   }
 
   ngOnInit(): void {
