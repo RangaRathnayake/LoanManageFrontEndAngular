@@ -5,6 +5,7 @@ import { ApicallService } from 'app/service/apicall.service';
 import { DatePipe } from '@angular/common';
 import { element } from 'protractor';
 import { Observable } from 'rxjs';
+import { threadId } from 'worker_threads';
 
 
 @Component({
@@ -69,6 +70,9 @@ export class MoreinfoComponent implements OnInit {
   clickOnPay = false;
   enter = false;
 
+  totalCapital = 0;
+  totalInterest = 0;
+
   constructor(private router: Router, private arout: ActivatedRoute, private apiCall: ApicallService, private alart: AlartService, private datePipe: DatePipe) { }
 
   ngOnInit(): void {
@@ -114,11 +118,15 @@ export class MoreinfoComponent implements OnInit {
       this.arrearsData = data;
 
       this.arrearsData.forEach(element => {
+        this.totalCapital += Number(element.capital);
+        this.totalInterest += Number(element.interest);
 
         if (element.status == 2) {
           this.arrears += Number(element.capitalArrears) + Number(element.interestArrears);
           this.warrant += Number(element.warrant);
           this.totalHaveToPay += Number(element.capitalArrears) + Number(element.interestArrears) + Number(element.warrant);
+
+
         }
 
         if (element.status == 0) {
@@ -287,6 +295,8 @@ export class MoreinfoComponent implements OnInit {
     this.capitalPerMonth = 0;
     this.interestPerMonth = 0;
     this.priviarsOver = 0;
+    this.totalInterest = 0;
+    this.totalCapital =0;
   }
 
 

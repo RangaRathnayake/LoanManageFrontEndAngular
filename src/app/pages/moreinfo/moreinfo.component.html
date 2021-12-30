@@ -27,8 +27,10 @@
                             placeholder="Amount" #input>
                     </mat-form-field>
                     <h4 *ngIf="arrearsData && arrearsData[0].warrant>0" style="text-align: right; color: red;"> Day
-                        Count :
-                        {{dayCount}} Fined : {{arrearsData[0].warrant | currency:' '}} </h4>
+                        Day count :
+                         {{dayCount}} x per day : {{arrearsData[0].warrant/dayCount }} = Fined : {{arrearsData[0].warrant | currency:'
+                        '}}
+                    </h4>
                     <mat-spinner *ngIf="!arrearsData"></mat-spinner>
                 </div>
 
@@ -51,6 +53,14 @@
                                         item.interestArrears*1 | currency:' '}}</td>
                                     <td style="text-align: right;">{{item.capital | currency:' '}}</td>
                                     <td style="text-align: right;">{{item.interest | currency:' '}}</td>
+                                </tr>
+                                <br>
+                                <tr>
+                                    <td>Total</td>
+                                    <td style="text-align: right;">{{arrears | currency:' '}}</td>
+                                    <td style="text-align: right;">{{totalCapital | currency:' '}}</td>
+                                    <td style="text-align: right;">{{totalInterest | currency:' '}}</td>
+
                                 </tr>
 
                             </tbody>
