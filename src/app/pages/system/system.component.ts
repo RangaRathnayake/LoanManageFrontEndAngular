@@ -24,12 +24,14 @@ export class SystemComponent implements OnInit {
   projectname;
   location;
   lotcount;
+  projectlist;
 
   constructor(private apiCall: ApicallService, private alart: AlartService) { }
 
   ngOnInit(): void {
     this.getrate();
     this.getwarrentdetails();
+    this.getproject();
   }
 
   apply() {
@@ -43,6 +45,7 @@ export class SystemComponent implements OnInit {
         if (data) {
           this.alart.showNotification('success', 'save');
           this.getrate();
+          this.rate=undefined;
         }
 
       })
@@ -97,7 +100,39 @@ export class SystemComponent implements OnInit {
   }
 
   saveproject(){
+    if(this.projectname && this.location && this.lotcount){
 
+      this.apiCall.post('project/save', {
+        project: {
+          name: this.projectname,
+          location: this.location,
+          officer:'-',
+          lotCount:this.lotcount
+        }
+      }, data => {
+        if (data) {
+          this.alart.showNotification('success', 'save');
+          this.getproject();
+          this.projectname=undefined;
+          this.location=undefined;
+          this.lotcount=undefined;
+        }
+
+      })
+
+
+    }else{
+      this.alart.showNotification('warning', 'check all feilds');
+    }
+
+  }
+
+  getproject(){
+    this.apiCall.get('project/get', result => {
+      this.projectlist=result;
+      console.log(result);
+     
+    })
   }
 
 }

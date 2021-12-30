@@ -83,7 +83,7 @@
                             <input matInput placeholder="location" [(ngModel)]="location" >
                         </mat-form-field>
                         <mat-form-field class="example-full-width">
-                            <input matInput placeholder="Lot count" [(ngModel)]="lotcount" >
+                            <input matInput placeholder="Lot count" [(ngModel)]="lotcount" type="number">
                         </mat-form-field>
                         <button mat-raised-button class="btn btn-success pull-right" (click)="saveproject()">save</button>
                     </div>
@@ -93,12 +93,16 @@
             <div class="col-md-6">
                 <div class="card">
                     <div class="card-header card-header-danger">
-                        <h4 class="card-title">warrent details</h4>
+                        <h4 class="card-title">Project details</h4>
                         <p class="card-category"></p>
                     </div>
                     <div class="card-body">
-                        <p>Warrant excuse day count - {{daycount}}</p>
-                        <p>Warrant rate per month - {{rateperdate}}%</p>
+                        <div class="row" *ngFor="let project of projectlist">
+                            <div class="col-md-6">
+                                <label >{{project.name}}</label>
+                            </div>
+                            <hr><br>
+                        </div>
                     </div>
                 </div>
             </div>
