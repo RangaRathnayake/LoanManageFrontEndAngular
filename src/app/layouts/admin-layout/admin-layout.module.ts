@@ -35,6 +35,7 @@ import { FulldetailsComponent } from 'app/pages/fulldetails/fulldetails.componen
 import { ProcessComponent } from '../../pages/process/process.component';
 import { UpdateComponent } from 'app/pages/update/update.component';
 import { ReportComponent } from '../../pages/report/report.component';
+import { SettlementComponent } from '../../pages/settlement/settlement.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -74,7 +75,8 @@ import { ReportComponent } from '../../pages/report/report.component';
     SystemComponent,
     ProcessComponent,
     UpdateComponent,
-    ReportComponent
+    ReportComponent,
+    SettlementComponent
   ]
 })
 

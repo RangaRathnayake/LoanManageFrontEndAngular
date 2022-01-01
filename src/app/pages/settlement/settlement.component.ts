@@ -1,18 +1,15 @@
+import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AlartService } from 'app/service/alart.service';
 import { ApicallService } from 'app/service/apicall.service';
-import { DatePipe } from '@angular/common';
-
-
 
 @Component({
-  selector: 'app-moreinfo',
-  templateUrl: './moreinfo.component.html',
-  styleUrls: ['./moreinfo.component.scss']
+  selector: 'app-settlement',
+  templateUrl: './settlement.component.html',
+  styleUrls: ['./settlement.component.scss']
 })
-export class MoreinfoComponent implements OnInit {
-
+export class SettlementComponent implements OnInit {
   user;
   loannumber;
   cusname;

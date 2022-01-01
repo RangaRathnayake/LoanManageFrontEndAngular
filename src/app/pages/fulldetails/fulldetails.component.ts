@@ -118,6 +118,10 @@ export class FulldetailsComponent implements OnInit {
     this.router.navigate(['moreinfo', this.mainId]);
   }
 
+  settlement() {
+    this.router.navigate(['settlement', this.mainId]);
+  }
+
   approve() {
     this.clickOnApprove = true;
     this.mainData.status = 1;
