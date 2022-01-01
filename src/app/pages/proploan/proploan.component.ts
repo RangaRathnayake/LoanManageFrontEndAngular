@@ -103,9 +103,15 @@ export class ProploanComponent implements OnInit {
   downpay;
   nonref;
   cusid;
-  selectedRadio ="1";
+  selectedRadio = "1";
 
   chequeno;
+
+
+  val;
+  diss;
+  perches;
+  mainids;
 
 
   constructor(private apiCall: ApicallService, private alart: AlartService, private router: Router, private arout: ActivatedRoute, private datePipe: DatePipe) {
@@ -144,10 +150,15 @@ export class ProploanComponent implements OnInit {
 
   apply() {
 
+    console.log(this.loanamount);
+    console.log(this.month);
+    console.log(this.date);
+    console.log(this.doccharge);
+    console.log(this.rate);
+    console.log(this.ratelist);
 
-    if (this.loanamount && this.month
 
-      && this.date && this.doccharge && this.rate && this.ratelist && this.refno && this.lotnum && this.project) {
+    if (this.loanamount && this.month && this.date && this.doccharge && this.rate && this.ratelist ) {
 
 
       if (this.validloanamount() && this.validmonth() && this.vaiddoccharge()) {
@@ -310,7 +321,7 @@ export class ProploanComponent implements OnInit {
 
   vaiddoccharge(): boolean {
     var isdocvharge = false;
-    if (Number(this.doccharge)) {
+    if (Number(this.doccharge) >= 0) {
       isdocvharge = true;
     } else {
       this.alart.showNotification('warning', 'Enter valid document charge');
@@ -336,7 +347,7 @@ export class ProploanComponent implements OnInit {
           }
         }, data => {
           console.log(data);
-          this.alart.showNotification('success', 'save');
+         
           this.cusfullname2 = data.name;
           localStorage.setItem("cusid", data.id);
           this.isvisivleone = false;
@@ -344,6 +355,43 @@ export class ProploanComponent implements OnInit {
           this.isvisibletree = false;
 
           this.isproseedone = true;
+
+
+          this.apiCall.get('main/max/P', result => {
+            if (result.max == null) {
+              console.log("okkkkkkk");
+              var max = 0;
+            } else {
+              console.log("noooo");
+              max = result.max;
+            }
+
+            this.apiCall.post('main/save', {
+              main: {
+                loanType: "P",
+                oderNumber: this.refno1,
+                userId: this.getuser.id,
+                NonRefundableAdvance: 0,
+                downPayment: 0,
+                status: 0,
+                customer: localStorage.getItem("cusid"), // this is hardcord
+                oderNumberInt: Number(max) + 1,
+                value: this.val,
+                projectId: Number(this.project.id),
+                projectName: this.project.name,
+                blockNumber: this.lotnum,
+                perches: this.perches,
+                discount: this.diss
+
+              }
+            }, datamain => {
+              this.alart.showNotification('success', 'save');
+              this.mainids=datamain.id;
+            })
+
+
+          })
+
         })
       }
     } else {
@@ -354,7 +402,7 @@ export class ProploanComponent implements OnInit {
   }
 
   payadvace() {
-    if (this.cusfullname2 && this.paytype && this.advancepay && this.refno1) {
+    if (this.cusfullname2 && this.paytype && this.advancepay ) {
       if (Number(this.advancepay)) {
 
         if (this.selectedRadio == "2" && this.chequeno || this.selectedRadio == "1") {
@@ -391,6 +439,7 @@ export class ProploanComponent implements OnInit {
 
             this.apiCall.post('main/save', {
               main: {
+                id:Number( this.mainids),
                 loanType: "P",
                 oderNumber: this.refno1,
                 userId: this.getuser.id,
@@ -529,7 +578,7 @@ export class ProploanComponent implements OnInit {
                 }
               }
 
-              
+
               this.apiCall.post('transaction/save', obj, datas => {
                 console.log(datas);
 
@@ -580,7 +629,7 @@ export class ProploanComponent implements OnInit {
 
     if (this.loanamount && this.month
 
-      && this.date && this.doccharge && this.rate && this.ratelist && this.refno && this.lotnum && this.project) {
+      && this.date && this.rate && this.ratelist  ) {
 
 
       if (this.validloanamount() && this.validmonth() && this.vaiddoccharge()) {
