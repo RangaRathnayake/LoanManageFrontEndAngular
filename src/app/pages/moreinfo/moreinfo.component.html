@@ -28,7 +28,8 @@
                     </mat-form-field>
                     <h4 *ngIf="arrearsData && arrearsData[0].warrant>0" style="text-align: right; color: red;"> Day
                         Day count :
-                         {{dayCount}} x per day : {{arrearsData[0].warrant/dayCount }} = Fined : {{arrearsData[0].warrant | currency:'
+                        {{dayCount}} x per day : {{arrearsData[0].warrant/dayCount | currency:' '}} = Fined :
+                        {{arrearsData[0].warrant | currency:'
                         '}}
                     </h4>
                     <mat-spinner *ngIf="!arrearsData"></mat-spinner>

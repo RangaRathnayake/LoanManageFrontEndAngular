@@ -68,6 +68,9 @@ export class SettlementComponent implements OnInit {
   totalCapital = 0;
   totalInterest = 0;
 
+  newFind;
+  newRate;
+  newval;
   constructor(private router: Router, private arout: ActivatedRoute, private apiCall: ApicallService, private alart: AlartService, private datePipe: DatePipe) { }
 
   ngOnInit(): void {
@@ -291,7 +294,7 @@ export class SettlementComponent implements OnInit {
     this.interestPerMonth = 0;
     this.priviarsOver = 0;
     this.totalInterest = 0;
-    this.totalCapital =0;
+    this.totalCapital = 0;
   }
 
 
@@ -358,12 +361,66 @@ export class SettlementComponent implements OnInit {
           })
         }
 
-        // window.location.href = "https://rmcinvesment.com/0LoanPrint/index.html?data=" + JSON.stringify(data);
+        window.location.href = "https://rmcinvesment.com/0LoanPrint/index.html?data=" + JSON.stringify(data);
 
       })
     } else {
       this.alart.showNotification("danger", "Please Enter Pay Amount Correctly")
     }
   }
+
+  setFind() {
+    if (Number(this.newFind) >= 0) {
+      console.log(this.newFind);
+
+      let values = {
+        mid: this.mainData.id,
+        warrant: this.newFind
+      }
+      this.apiCall.post("arrears/updateWarant", { values: values }, data => {
+        console.log(data);
+        this.resetAll();
+        this.alart.showNotification("success", "Fine Updated")
+      });
+
+    } else {
+      this.alart.showNotification("danger", "Please Enter Valid Fine")
+    }
+
+  }
+
+
+  setInterest() {
+    if (Number(this.newRate) >= 0) {
+      console.log(this.newRate);
+      this.newval = Number(this.totalInterest) * Number(this.newRate) / 100;
+      console.log(this.newval);
+
+      let values = {
+        mid: this.mainData.id,
+        newval: this.newval
+      }
+      this.apiCall.post("arrears/updateInterest", { values: values }, data => {
+        console.log(data);
+        this.resetAll();
+        this.alart.showNotification("success", "Fine Updated")
+      });
+
+    } else {
+      this.alart.showNotification("danger", "Please Enter Valid Rate")
+    }
+  }
+
+  calNewRate(value) {
+    if (Number(value) >= 0) {
+      console.log(value);
+      this.newval = Number(this.totalInterest) * Number(value) / 100;
+      console.log(this.newval);
+
+    } else {
+      this.alart.showNotification("danger", "Please Enter Valid Rate")
+    }
+  }
+
 
 }
