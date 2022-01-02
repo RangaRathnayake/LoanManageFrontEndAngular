@@ -50,7 +50,7 @@ export class ProploanComponent implements OnInit {
     },
     {
       id: 2,
-      type: 'advance payment'
+      type: 'Further advance payment'
     }
   ]
 
@@ -381,7 +381,8 @@ export class ProploanComponent implements OnInit {
                 projectName: this.project.name,
                 blockNumber: this.lotnum,
                 perches: this.perches,
-                discount: this.diss
+                discount: this.diss,
+                sellingPrice:Number(this.val)-Number(this.diss)
 
               }
             }, datamain => {
@@ -483,11 +484,12 @@ export class ProploanComponent implements OnInit {
                 }
               }
               // var day = this.datePipe.transform(new Date(), "yyyy-MM-dd");
-              this.apiCall.post('transaction/save', obj, data => {
+              this.apiCall.post('main/saveTransaction', obj, data => {
+                console.log("xxxxxx"); 
                 console.log(data);
+                console.log("xxxxxx"); 
 
-                // window.location.href = "https://rmcinvesment.com/0LoanPrint/index.html?data=" + JSON.stringify(data);
-                window.open("https://rmcinvesment.com/0LoanPrint/index.html?data=" + JSON.stringify(data), '_blank');
+                window.location.href = "https://rmcinvesment.com/0LoanPrint/index.html?data=" + JSON.stringify(data);
 
               })
 
@@ -579,11 +581,11 @@ export class ProploanComponent implements OnInit {
               }
 
 
-              this.apiCall.post('transaction/save', obj, datas => {
+              this.apiCall.post('main/saveTransaction', obj, datas => {
                 console.log(datas);
 
-                // window.location.href = "https://rmcinvesment.com/0LoanPrint/index.html?data=" + JSON.stringify(data);
-                window.open("https://rmcinvesment.com/0LoanPrint/index.html?data=" + JSON.stringify(datas), '_blank');
+                window.location.href = "http://localhost/0LoanPrint/prop.html?data=" + JSON.stringify(data);
+                // window.open("https://rmcinvesment.com/0LoanPrint/index.html?data=" + JSON.stringify(datas), '_blank');
 
               })
 
