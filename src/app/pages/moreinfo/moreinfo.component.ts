@@ -362,6 +362,7 @@ export class MoreinfoComponent implements OnInit {
         }
 
         // window.location.href = "https://rmcinvesment.com/0LoanPrint/index.html?data=" + JSON.stringify(data);
+        
 
       })
     } else {
