@@ -330,7 +330,7 @@ export class ProploanComponent implements OnInit {
   }
 
   savecus() {
-    if (this.nic && this.mobile && this.cusfullname && this.namewithinitial && this.address) {
+    if (this.nic && this.mobile && this.cusfullname && this.namewithinitial && this.address && this.refno1 && this.project && this.lotnum && this.perches && this.diss) {
       if (this.validnic()) {
         this.apiCall.post('customer/save', {
           customer: {
@@ -489,7 +489,8 @@ export class ProploanComponent implements OnInit {
                 console.log(data);
                 console.log("xxxxxx"); 
 
-                window.location.href = "https://rmcinvesment.com/0LoanPrint/index.html?data=" + JSON.stringify(data);
+                // window.location.href = "https://rmcinvesment.com/0LoanPrint/prop.html?data=" + JSON.stringify(data);
+                 window.open("https://rmcinvesment.com/0LoanPrint/prop.html?data" + JSON.stringify(data), '_blank');
 
               })
 
@@ -584,7 +585,7 @@ export class ProploanComponent implements OnInit {
               this.apiCall.post('main/saveTransaction', obj, datas => {
                 console.log(datas);
 
-                window.location.href = "http://localhost/0LoanPrint/prop.html?data=" + JSON.stringify(data);
+                window.open("https://rmcinvesment.com/0LoanPrint/prop.html?data" + JSON.stringify(data), '_blank');
                 // window.open("https://rmcinvesment.com/0LoanPrint/index.html?data=" + JSON.stringify(datas), '_blank');
 
               })
