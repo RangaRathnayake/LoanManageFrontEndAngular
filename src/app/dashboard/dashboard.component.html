@@ -2,175 +2,27 @@
     <div class="container-fluid">
         <div class="row">
 
+            <div  class="col-lg-3 col-md-6 col-sm-6" *ngFor="let item of menuItems" >
+                <div [routerLink]="[item.path]">
+                    <div class="card card-stats">
+                        <div class="card-header card-header-warning card-header-icon">
+                            <div class="card-icon">
+                                <i class="material-icons">{{item.icon}}</i>
+                            </div>
 
-            <div class="col-lg-3 col-md-6 col-sm-6" [routerLink]="['/calloan']">
-                <div class="card card-stats">
-                    <div class="card-header card-header-warning card-header-icon">
-                        <div class="card-icon">
-                            <i class="material-icons">calculate</i>
+                            <h5 class="card-title">{{item.title}}</h5>
                         </div>
-
-                        <h3 class="card-title">Loan Calculator</h3>
-                    </div>
-                    <div class="card-footer">
-                        <div class="stats">
-                            <!-- <i class="material-icons text-danger">warning</i>
+                        <div class="card-footer">
+                            <div class="stats">
+                                <!-- <i class="material-icons text-danger">warning</i>
                           <a href="javascript:void(0)">Get More Space...</a> -->
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div class="col-lg-3 col-md-6 col-sm-6" [routerLink]="['/userlist']">
-                <div class="card card-stats">
-                    <div class="card-header card-header-warning card-header-icon">
-                        <div class="card-icon">
-                            <i class="material-icons">person</i>
-                        </div>
-
-                        <h3 class="card-title">Users</h3>
-                    </div>
-                    <div class="card-footer">
-                        <div class="stats">
-                            <!-- <i class="material-icons text-danger">warning</i>
-                        <a href="javascript:void(0)">Get More Space...</a> -->
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-lg-3 col-md-6 col-sm-6" [routerLink]="['/newapplicatin']">
-                <div class="card card-stats">
-                    <div class="card-header card-header-warning card-header-icon">
-                        <div class="card-icon">
-                            <i class="material-icons">description</i>
-                        </div>
-
-                        <h3 class="card-title">New applicaton</h3>
-                    </div>
-                    <div class="card-footer">
-                        <div class="stats">
-                            <!-- <i class="material-icons text-danger">warning</i>
-                        <a href="javascript:void(0)">Get More Space...</a> -->
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-lg-3 col-md-6 col-sm-6" [routerLink]="['/proploan']">
-                <div class="card card-stats">
-                    <div class="card-header card-header-warning card-header-icon">
-                        <div class="card-icon">
-                            <i class="material-icons">real_estate_agent</i>
-                        </div>
-
-                        <h3 class="card-title">New Property</h3>
-                    </div>
-                    <div class="card-footer">
-                        <div class="stats">
-                            <!-- <i class="material-icons text-danger">warning</i>
-                        <a href="javascript:void(0)">Get More Space...</a> -->
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-lg-3 col-md-6 col-sm-6" [routerLink]="['/applist']">
-                <div class="card card-stats">
-                    <div class="card-header card-header-warning card-header-icon">
-                        <div class="card-icon">
-                            <i class="material-icons">find_in_page</i>
-                        </div>
-
-                        <h3 class="card-title">Search Application</h3>
-                    </div>
-                    <div class="card-footer">
-                        <div class="stats">
-                            <!-- <i class="material-icons text-danger">warning</i>
-                        <a href="javascript:void(0)">Get More Space...</a> -->
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-lg-3 col-md-6 col-sm-6" [routerLink]="['/system']">
-                <div class="card card-stats">
-                    <div class="card-header card-header-warning card-header-icon">
-                        <div class="card-icon">
-                            <i class="material-icons">settings_applications</i>
-                        </div>
-
-                        <h3 class="card-title">System</h3>
-                    </div>
-                    <div class="card-footer">
-                        <div class="stats">
-                            <!-- <i class="material-icons text-danger">warning</i>
-                        <a href="javascript:void(0)">Get More Space...</a> -->
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-lg-3 col-md-6 col-sm-6" [routerLink]="['/expencese']">
-                <div class="card card-stats">
-                    <div class="card-header card-header-warning card-header-icon">
-                        <div class="card-icon">
-                            <i class="material-icons">request_quote</i>
-                        </div>
-
-                        <h3 class="card-title">Expencese</h3>
-                    </div>
-                    <div class="card-footer">
-                        <div class="stats">
-                            <!-- <i class="material-icons text-danger">warning</i>
-                        <a href="javascript:void(0)">Get More Space...</a> -->
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-lg-3 col-md-6 col-sm-6" [routerLink]="['/reports']">
-                <div class="card card-stats">
-                    <div class="card-header card-header-warning card-header-icon">
-                        <div class="card-icon">
-                            <i class="material-icons">receipt_long</i>
-                        </div>
-
-                        <h3 class="card-title">Reports</h3>
-                    </div>
-                    <div class="card-footer">
-                        <div class="stats">
-                            <!-- <i class="material-icons text-danger">warning</i>
-                        <a href="javascript:void(0)">Get More Space...</a> -->
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-
-
-            <!-- <div class="col-lg-3 col-md-6 col-sm-6">
-                <div class="card card-stats">
-                    <div class="card-header card-header-warning card-header-icon">
-                        <div class="card-icon">
-                            <i class="material-icons">content_copy</i>
-                        </div>
-                        <p class="card-category">Used Space</p>
-                        <h3 class="card-title">49/50
-                            <small>GB</small>
-                        </h3>
-                    </div>
-                    <div class="card-footer">
-                        <div class="stats">
-                            <i class="material-icons text-danger">warning</i>
-                            <a href="javascript:void(0)">Get More Space...</a>
-                        </div>
-                    </div>
-                </div>
-            </div> -->
-
-
-
+        
         </div>
     </div>
 </div>
