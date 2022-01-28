@@ -22,6 +22,7 @@ import { ProcessComponent } from '../../pages/process/process.component';
 import { UpdateComponent } from 'app/pages/update/update.component';
 import { ReportComponent } from 'app/pages/report/report.component';
 import { SettlementComponent } from '../../pages/settlement/settlement.component';
+import { ReceiptComponent } from '../../pages/receipt/receipt.component';
 export const AdminLayoutRoutes: Routes = [
     { path: 'dashboard', component: DashboardComponent },
     { path: 'user-profile', component: UserProfileComponent },
@@ -46,6 +47,5 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'Update/:id', component: UpdateComponent },
     { path: 'reports', component: ReportComponent },
     { path: 'settlement/:id', component: SettlementComponent },   
-
-
+    { path: 'receipt', component: ReceiptComponent },   
 ];

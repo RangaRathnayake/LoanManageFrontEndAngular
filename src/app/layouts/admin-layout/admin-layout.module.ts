@@ -36,6 +36,8 @@ import { ProcessComponent } from '../../pages/process/process.component';
 import { UpdateComponent } from 'app/pages/update/update.component';
 import { ReportComponent } from '../../pages/report/report.component';
 import { SettlementComponent } from '../../pages/settlement/settlement.component';
+import { ReceiptComponent } from '../../pages/receipt/receipt.component';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -76,7 +78,8 @@ import { SettlementComponent } from '../../pages/settlement/settlement.component
     ProcessComponent,
     UpdateComponent,
     ReportComponent,
-    SettlementComponent
+    SettlementComponent,
+    ReceiptComponent
   ]
 })
 
