@@ -27,7 +27,7 @@ import { ProploanComponent } from 'app/pages/proploan/proploan.component';
 import { MoreinfoComponent } from 'app/pages/moreinfo/moreinfo.component';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatCheckboxModule } from '@angular/material/checkbox';
-import {MatListModule} from '@angular/material/list';
+import { MatListModule } from '@angular/material/list';
 import { ExpenceseComponent } from '../../pages/expencese/expencese.component';
 import { ApplistComponent } from 'app/pages/applist/applist.component';
 import { SystemComponent } from '../../pages/system/system.component';
@@ -37,6 +37,7 @@ import { UpdateComponent } from 'app/pages/update/update.component';
 import { ReportComponent } from '../../pages/report/report.component';
 import { SettlementComponent } from '../../pages/settlement/settlement.component';
 import { ReceiptComponent } from '../../pages/receipt/receipt.component';
+import { ExpDockComponent } from '../../pages/exp-dock/exp-dock.component';
 
 @NgModule({
   imports: [
@@ -55,7 +56,7 @@ import { ReceiptComponent } from '../../pages/receipt/receipt.component';
     MatRadioModule,
     MatCheckboxModule,
     MatListModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
   ],
   declarations: [
     DashboardComponent,
@@ -79,8 +80,8 @@ import { ReceiptComponent } from '../../pages/receipt/receipt.component';
     UpdateComponent,
     ReportComponent,
     SettlementComponent,
-    ReceiptComponent
-  ]
+    ReceiptComponent,
+    ExpDockComponent,
+  ],
 })
-
-export class AdminLayoutModule { }
+export class AdminLayoutModule {}

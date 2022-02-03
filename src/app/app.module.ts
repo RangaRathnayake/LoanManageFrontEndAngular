@@ -12,8 +12,6 @@ import { AppComponent } from './app.component';
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
 import { LoginComponent } from './login/login.component';
 
-
-
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
@@ -27,13 +25,6 @@ import { MatCardModule } from '@angular/material/card';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatRadioModule } from '@angular/material/radio';
 import { DatePipe } from '@angular/common';
-
-
-
-
-
-
-
 
 @NgModule({
   imports: [
@@ -58,12 +49,8 @@ import { DatePipe } from '@angular/common';
     MatCardModule,
     MatPaginatorModule,
   ],
-  declarations: [
-    AppComponent,
-    AdminLayoutComponent,
-    LoginComponent
-  ],
+  declarations: [AppComponent, AdminLayoutComponent, LoginComponent],
   providers: [DatePipe],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

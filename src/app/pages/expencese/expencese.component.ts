@@ -5,10 +5,9 @@ import { ApicallService } from 'app/service/apicall.service';
 @Component({
   selector: 'app-expencese',
   templateUrl: './expencese.component.html',
-  styleUrls: ['./expencese.component.scss']
+  styleUrls: ['./expencese.component.scss'],
 })
 export class ExpenceseComponent implements OnInit {
-
   exTypes;
   selectedExType;
 
@@ -17,8 +16,8 @@ export class ExpenceseComponent implements OnInit {
   to;
   amount;
   isdoccharfe = false;
-  isdocchargeamount=false;
-  islist=false;
+  isdocchargeamount = false;
+  islist = false;
   loannum;
   doclist;
   dockCharge;
@@ -26,7 +25,6 @@ export class ExpenceseComponent implements OnInit {
 
   getuser;
   cusid;
-
 
   constructor(private apiCall: ApicallService, private alart: AlartService) {
     this.getuser = this.apiCall.logedUser();
@@ -37,7 +35,7 @@ export class ExpenceseComponent implements OnInit {
   }
 
   getExpenceType() {
-    this.apiCall.get('expencese/type', data => {
+    this.apiCall.get('expencese/type', (data) => {
       this.exTypes = data;
       console.log(this.exTypes);
     });
@@ -46,59 +44,62 @@ export class ExpenceseComponent implements OnInit {
   someMethod(evnt) {
     if (evnt == 1) {
       this.isdoccharfe = true;
-      this.loannum=undefined;
+      this.loannum = undefined;
     } else {
       this.isdoccharfe = false;
 
-      this.islist=false;
-      this.isdocchargeamount=false;
-      this.isdoccharfe=false;
+      this.islist = false;
+      this.isdocchargeamount = false;
+      this.isdoccharfe = false;
     }
   }
 
   more(id) {
     this.mainid = id;
-    this.apiCall.get('main/' + id, data => {
+    this.apiCall.get('main/' + id, (data) => {
       this.dockCharge = data.dockCharge;
       this.cusid = data.customer.id;
-      this.isdocchargeamount=true;
+      this.isdocchargeamount = true;
     });
   }
 
   search(num) {
     if (num) {
-      this.apiCall.get('main/getByNumber/' + num, data => {
+      this.apiCall.get('main/getByNumber/' + num, (data) => {
         this.doclist = data;
-        this.dockCharge=undefined;
-        this.isdocchargeamount=false;
-        if(this.doclist.length >0){
-          this.islist=true;
-        }else{
-          this.islist=true;
+        this.dockCharge = undefined;
+        this.isdocchargeamount = false;
+        if (this.doclist.length > 0) {
+          this.islist = true;
+        } else {
+          this.islist = true;
         }
       });
-
     }
   }
 
   apply() {
     console.log(this.selectedExType);
-    console.log(this.description)
-    console.log(this.date)
-    console.log(this.to)
-    console.log(this.amount)
+    console.log(this.description);
+    console.log(this.date);
+    console.log(this.to);
+    console.log(this.amount);
 
-    if (this.selectedExType && this.selectedExType > 0 && this.date && this.amount > 0) {
+    if (
+      this.selectedExType &&
+      this.selectedExType > 0 &&
+      this.date &&
+      this.amount > 0
+    ) {
       const expences = {
         description: this.description,
         day: this.date,
         to: this.to,
         amount: this.amount,
         status: 1,
-        exptype: this.selectedExType
-      }
-      this.apiCall.post('expencese/save', { expences: expences }, data => {
-
+        exptype: this.selectedExType,
+      };
+      this.apiCall.post('expencese/save', { expences: expences }, (data) => {
         let obj = {
           transaction: {
             day: new Date(),
@@ -115,28 +116,23 @@ export class ExpenceseComponent implements OnInit {
             total: 0,
             payType: '-',
             cheque: '-',
-            loanType: "-",
+            loanType: '-',
             interestRate: 0,
             status: 1,
             customer: this.cusid,
             main: this.mainid,
-            user: this.getuser.id
-          }
-        }
+            user: this.getuser.id,
+          },
+        };
 
         if (this.isdoccharfe) {
-          this.apiCall.post('transaction/save', obj, datas => {
+          this.apiCall.post('transaction/save', obj, (datas) => {
             console.log(datas);
-          })
-
+          });
         }
-
-
       });
     } else {
       this.alart.showNotification('warning', 'Please recheck your input');
     }
-
   }
-
 }
