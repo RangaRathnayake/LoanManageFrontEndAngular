@@ -22,6 +22,7 @@ export class ExpenceseComponent implements OnInit {
   doclist;
   dockCharge;
   mainid;
+  loanNumber;
 
   getuser;
   cusid;
@@ -59,6 +60,7 @@ export class ExpenceseComponent implements OnInit {
     this.apiCall.get('main/' + id, (data) => {
       this.dockCharge = data.dockCharge;
       this.cusid = data.customer.id;
+      this.loanNumber = data.oderNumber;
       this.isdocchargeamount = true;
     });
   }
@@ -98,39 +100,45 @@ export class ExpenceseComponent implements OnInit {
         to: this.to,
         amount: this.amount,
         status: 1,
+        mainId: this.mainid,
+        loanNumber: this.loanNumber,
         exptype: this.selectedExType,
       };
       this.apiCall.post('expencese/save', { expences: expences }, (data) => {
-        let obj = {
-          transaction: {
-            day: new Date(),
-            capital: 0,
-            interest: 0,
-            warant: 0,
-            arrears: 0,
-            dockCharge: Number(this.amount) * Number(-1),
-            monthCount: 0,
-            nonRefund: 0,
-            advance: 0,
-            otherPay: 0,
-            over: 0,
-            total: 0,
-            payType: '-',
-            cheque: '-',
-            loanType: '-',
-            interestRate: 0,
-            status: 3,
-            customer: this.cusid,
-            main: this.mainid,
-            user: this.getuser.id,
-          },
-        };
+        console.log('------------');
+        console.log(data);
+        console.log('------------');
+        // let obj = {
+        //   transaction: {
+        //     day: new Date(),
+        //     capital: 0,
+        //     interest: 0,
+        //     warant: 0,
+        //     arrears: 0,
+        //     dockCharge: Number(this.amount) * Number(-1),
+        //     monthCount: 0,
+        //     nonRefund: 0,
+        //     advance: 0,
+        //     otherPay: 0,
+        //     over: 0,
+        //     total: 0,
+        //     payType: '-',
+        //     cheque: '-',
+        //     loanType: '-',
+        //     interestRate: 0,
+        //     status: 3,
+        //     customer: this.cusid,
+        //     main: this.mainid,
+        //     user: this.getuser.id,
+        //     expenceId: data.id,
+        //   },
+        // };
 
-        if (this.isdoccharfe) {
-          this.apiCall.post('transaction/save', obj, (datas) => {
-            console.log(datas);
-          });
-        }
+        // if (this.isdoccharfe) {
+        //   this.apiCall.post('transaction/save', obj, (datas) => {
+        //     console.log(datas);
+        //   });
+        // }
       });
     } else {
       this.alart.showNotification('warning', 'Please recheck your input');
