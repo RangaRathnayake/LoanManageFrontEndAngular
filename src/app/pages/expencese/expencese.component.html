@@ -1,73 +1,94 @@
 <div class="main-content">
-    <div class="container-fluid">
-        <div class="card">
-            <div class="card-header card-header-danger">
-                <h4 class="card-title">Expences</h4>
-                <p class="card-category"></p>
+  <div class="container-fluid">
+    <div class="card">
+      <div class="card-header card-header-danger">
+        <h4 class="card-title">Expences</h4>
+        <p class="card-category"></p>
+      </div>
+      <div class="card-body">
+        <mat-form-field>
+          <mat-label>Select Expence Type</mat-label>
+          <mat-select
+            [(ngModel)]="selectedExType"
+            (selectionChange)="someMethod($event.value)"
+          >
+            <mat-option *ngFor="let t of exTypes" [value]="t.id">
+              {{ t.type }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width" *ngIf="isdoccharfe">
+          <input
+            matInput
+            placeholder="loan number"
+            [(ngModel)]="loannum"
+            (keyup.enter)="search(loannum)"
+          />
+        </mat-form-field>
+
+        <mat-nav-list *ngIf="islist">
+          <mat-list-item *ngFor="let link of doclist">
+            <div class="row">
+              <div class="col-md-4">
+                <label>{{ link.oderNumber }}</label>
+              </div>
+
+              <div class="col-md-4">
+                <label>{{ link.dockCharge }}</label>
+              </div>
+
+              <div class="col-md-4">
+                <button
+                  class="btn btn-success pull-right"
+                  mat-button
+                  (click)="more(link.id)"
+                >
+                  Add
+                </button>
+              </div>
             </div>
-            <div class="card-body">
+          </mat-list-item>
+        </mat-nav-list>
 
-                <mat-form-field>
-                    <mat-label>Select Expence Type</mat-label>
-                    <mat-select [(ngModel)]="selectedExType" (selectionChange)="someMethod($event.value)">
-                        <mat-option *ngFor="let t of exTypes" [value]="t.id">
-                            {{t.type}}
-                        </mat-option>
-                    </mat-select>
-                </mat-form-field>
+        <mat-form-field class="example-full-width" *ngIf="isdocchargeamount">
+          <input
+            matInput
+            placeholder="Document charge"
+            [(ngModel)]="dockCharge"
+            readonly
+          />
+        </mat-form-field>
 
-                <mat-form-field class="example-full-width" *ngIf="isdoccharfe">
-                    <input matInput placeholder="loan number" [(ngModel)]="loannum" (keyup.enter)="search(loannum)">
-                </mat-form-field>
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="Description" [(ngModel)]="description" />
+        </mat-form-field>
 
-                
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="Date" type="date" [(ngModel)]="date" />
+        </mat-form-field>
 
-                <mat-nav-list *ngIf="islist">
-                    <mat-list-item *ngFor="let link of doclist">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="row">
-                                    <div class="col-md-4">
-                                        <label>{{link.oderNumber}}</label>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label>{{link.dockCharge}}</label>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <button mat-button (click)="more(link.id)">Add</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </mat-list-item>
-                </mat-nav-list>
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="To Whom" [(ngModel)]="to" />
+        </mat-form-field>
 
-                <mat-form-field class="example-full-width" *ngIf="isdocchargeamount">
-                    <input matInput placeholder="Document charge" [(ngModel)]="dockCharge" readonly>
-                </mat-form-field>
+        <mat-form-field class="example-full-width">
+          <input
+            matInput
+            type="number"
+            placeholder="Amount"
+            [(ngModel)]="amount"
+          />
+        </mat-form-field>
 
-
-                <mat-form-field class="example-full-width">
-                    <input matInput placeholder="Description" [(ngModel)]="description">
-                </mat-form-field>
-
-                <mat-form-field class="example-full-width">
-                    <input matInput placeholder="Date" type="date" [(ngModel)]="date">
-                </mat-form-field>
-
-                <mat-form-field class="example-full-width">
-                    <input matInput placeholder="To Whom" [(ngModel)]="to">
-                </mat-form-field>
-
-                <mat-form-field class="example-full-width">
-                    <input matInput type="number" placeholder="Amount" [(ngModel)]="amount">
-                </mat-form-field>
-
-                <button mat-raised-button class="btn btn-success pull-right" (click)="apply()">save</button>
-
-            </div>
-
-
-
-        </div>
+        <button
+          mat-raised-button
+          class="btn btn-success pull-right"
+          (click)="apply()"
+        >
+          save
+        </button>
+      </div>
     </div>
+  </div>
+</div>

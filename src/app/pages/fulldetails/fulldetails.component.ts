@@ -3,14 +3,12 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AlartService } from 'app/service/alart.service';
 import { ApicallService } from 'app/service/apicall.service';
 
-
 @Component({
   selector: 'app-fulldetails',
   templateUrl: './fulldetails.component.html',
-  styleUrls: ['./fulldetails.component.scss']
+  styleUrls: ['./fulldetails.component.scss'],
 })
 export class FulldetailsComponent implements OnInit {
-
   loannumber;
   cusname;
 
@@ -18,8 +16,6 @@ export class FulldetailsComponent implements OnInit {
   nic;
   adress;
   phone;
-
-
 
   totalLoanAmount;
   paid;
@@ -41,32 +37,30 @@ export class FulldetailsComponent implements OnInit {
 
   loanType;
 
-
-  constructor(private router: Router, private arout: ActivatedRoute, private apiCall: ApicallService, private alart: AlartService) { }
+  constructor(
+    private router: Router,
+    private arout: ActivatedRoute,
+    private apiCall: ApicallService,
+    private alart: AlartService
+  ) {}
 
   ngOnInit(): void {
- 
-
-
-    this.user = this.apiCall.logedUser()
+    this.user = this.apiCall.logedUser();
     console.log(this.user);
 
-    this.arout.params.subscribe(params => {
+    this.arout.params.subscribe((params) => {
       const id = params['id'];
       this.mainId = id;
       if (id) {
         this.getmoreinfo(id);
         this.getTransactionData(id);
       } else {
-
       }
     });
   }
 
   getmoreinfo(id) {
-    this.apiCall.get('main/' + id, result => {
-
-
+    this.apiCall.get('main/' + id, (result) => {
       console.log(result);
       this.mainData = result;
       this.loannumber = result.oderNumber;
@@ -77,11 +71,7 @@ export class FulldetailsComponent implements OnInit {
       this.adress = result.customer.address;
       this.phone = result.customer.phone;
 
-      this.loanType=result.loanType;
-
-
-
-
+      this.loanType = result.loanType;
 
       this.rateId = result.interestRateId;
       this.totalLoanAmount = result.totalLoanAmount;
@@ -90,28 +80,32 @@ export class FulldetailsComponent implements OnInit {
       if (this.mainData.status != 0) {
         this.clickOnApprove = true;
       }
-      this.totalHaveToPay = parseFloat(this.capitalPerMonth + "") + parseFloat(this.interestPerMonth + "") + parseFloat(this.arrears + "") + parseFloat(this.warrant + ""); // over pay adu karanna one
-      this.getAnualRate()
-    })
+      this.totalHaveToPay =
+        parseFloat(this.capitalPerMonth + '') +
+        parseFloat(this.interestPerMonth + '') +
+        parseFloat(this.arrears + '') +
+        parseFloat(this.warrant + ''); // over pay adu karanna one
+      this.getAnualRate();
+    });
   }
 
   getTransactionData(id) {
-    this.apiCall.get('transaction/main/' + id, result => {
+    this.apiCall.get('transaction/main/' + id, (result) => {
       if (result.length > 0) {
         this.transactionData = result;
       } else {
-        console.log("empty");
-        this.paid = 0.00;
+        console.log('empty');
+        this.paid = 0.0;
         this.current = this.totalLoanAmount;
       }
-      console.log(result)
-    })
+      console.log(result);
+    });
   }
 
   getAnualRate() {
-    this.apiCall.get('interest/' + this.rateId, data => {
+    this.apiCall.get('interest/' + this.rateId, (data) => {
       this.anualRate = data.rate;
-    })
+    });
   }
 
   more() {
@@ -125,10 +119,13 @@ export class FulldetailsComponent implements OnInit {
   approve() {
     this.clickOnApprove = true;
     this.mainData.status = 1;
-    this.apiCall.post('main/save', { main: this.mainData }, data => {
-      this.apiCall.post('main/createArriarsList', { main: this.mainData }, dd => {
-      })
-      this.alart.showNotification("success", "Loan Approved");
+    this.apiCall.post('main/save', { main: this.mainData }, (data) => {
+      this.apiCall.post(
+        'main/createArriarsList',
+        { main: this.mainData },
+        (dd) => {}
+      );
+      this.alart.showNotification('success', 'Loan Approved');
     });
   }
 
@@ -137,21 +134,24 @@ export class FulldetailsComponent implements OnInit {
   }
 
   printOnFile() {
-    console.log("print On file");
+    console.log('print On file');
     let obj = {
       oderNumber: this.mainData.oderNumber,
       name: this.mainData.customer.name,
       totalLoanAmount: this.mainData.totalLoanAmount,
       anualRate: this.anualRate,
-      rental: Number(this.mainData.capitalPerMonth) + Number(this.mainData.interestPerMonth),
+      rental:
+        Number(this.mainData.capitalPerMonth) +
+        Number(this.mainData.interestPerMonth),
       date: this.mainData.startDate,
-      monthsCount: this.mainData.monthsCount
-    }
-    window.location.href = "https://rmcinvesment.com/0LoanPrint/onfile.html?data="+JSON.stringify(obj);
+      monthsCount: this.mainData.monthsCount,
+    };
+    window.location.href =
+      'https://rmcinvesment.com/0LoanPrint/onfile.html?data=' +
+      JSON.stringify(obj);
   }
 
-  Getadvance(){
+  Getadvance() {
     this.router.navigate(['proploan', this.mainId]);
   }
-
 }

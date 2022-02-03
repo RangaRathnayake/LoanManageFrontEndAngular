@@ -1,48 +1,90 @@
 <div class="main-content">
-    <div class="container-fluid">
+  <div class="container-fluid">
+    <div class="card">
+      <div class="card-header card-header-success">
+        <h4 class="card-title">Get Payment : {{ loannumber }}</h4>
+        <p class="card-category"></p>
+      </div>
+      <div class="card-body">
+        <div class="col-md-8" style="float: none; margin: 0 auto">
+          <h3>
+            Number : {{ loannumber }} <br />
+            Name : {{ cusname }}
+          </h3>
 
-        <div class="card">
-            <div class="card-header card-header-success">
-                <h4 class="card-title">Get Payment : {{loannumber}}</h4>
-                <p class="card-category"></p>
-            </div>
-            <div class="card-body">
-
-                <div class="col-md-8" style="float: none; margin: 0 auto;">
-                    <h3>Number : {{loannumber}} <br> Name : {{cusname}}</h3>
-
-                    <p>Adress : {{adress}}</p>
-                    <p>Mobile : {{mobile}}</p>
-                    <p>Phone : {{phone}}</p>
-                    <p>NIC : {{nic}}</p>
-                    <p>Total Loan Amount : {{totalLoanAmount}}</p>
-                    <p>Total Paid : {{paid}}</p>
-                    <p>Current Loan Amount : {{current}}</p>
-                    <p>Annual interest rate : {{anualRate}}</p>
-                </div>
-
-                <button *ngIf="mainData && mainData.status==1" mat-raised-button class="btn btn-danger pull-right"
-                (click)="settlement()">Settlement</button>
-
-                <button mat-raised-button class="btn btn-success pull-right" (click)="Getadvance()"
-                    *ngIf="loanType === 'P'">Advance</button>
-
-                <button mat-raised-button class="btn btn-success pull-right" (click)="edit()">Edit</button>
-
-                <button mat-raised-button class="btn pull-right" (click)="printOnFile()">Print On
-                    File</button>
-
-                <button mat-raised-button class="btn pull-right">Print Cheque</button>
-
-                <button *ngIf="user.utype.id<3 && !clickOnApprove" mat-raised-button class="btn btn-warning pull-right"
-                    (click)="approve()">Approve This Loan</button>
-
-                <button *ngIf="mainData && mainData.status==1" mat-raised-button class="btn btn-success pull-right"
-                    (click)="more()">Get Instalment
-                    Payment</button>
-
-              
-            </div>
+          <p>Adress : {{ adress }}</p>
+          <p>Mobile : {{ mobile }}</p>
+          <p>Phone : {{ phone }}</p>
+          <p>NIC : {{ nic }}</p>
+          <p>Total Loan Amount : {{ totalLoanAmount }}</p>
+          <p>Total Paid : {{ paid }}</p>
+          <p>Current Loan Amount : {{ current }}</p>
+          <p>Annual interest rate : {{ anualRate }}</p>
         </div>
+
+        <button
+          *ngIf="mainData && mainData.status == 1"
+          mat-raised-button
+          class="btn btn-danger pull-right"
+          (click)="settlement()"
+        >
+          Settlement
+        </button>
+
+        <button
+          mat-raised-button
+          class="btn btn-success pull-right"
+          (click)="Getadvance()"
+          *ngIf="loanType === 'P'"
+        >
+          Advance
+        </button>
+
+        <button
+          mat-raised-button
+          class="btn btn-success pull-right"
+          (click)="edit()"
+        >
+          Edit
+        </button>
+
+        <button
+          mat-raised-button
+          class="btn pull-right"
+          (click)="printOnFile()"
+        >
+          Print On File
+        </button>
+
+        <button mat-raised-button class="btn pull-right">Print Cheque</button>
+
+        <button
+          *ngIf="user.utype.id < 3 && !clickOnApprove"
+          mat-raised-button
+          class="btn btn-warning pull-right"
+          (click)="approve()"
+        >
+          Approve This Loan
+        </button>
+
+        <button
+          *ngIf="mainData && mainData.status == 1"
+          mat-raised-button
+          class="btn btn-success pull-right"
+          (click)="more()"
+        >
+          Get Instalment Payment
+        </button>
+
+        <button
+          *ngIf="mainData && mainData.status == 1"
+          mat-raised-button
+          class="btn btn-success pull-right"
+          (click)="more()"
+        >
+          Get Instalment Payment
+        </button>
+      </div>
     </div>
+  </div>
 </div>

@@ -37,7 +37,6 @@ import { UpdateComponent } from 'app/pages/update/update.component';
 import { ReportComponent } from '../../pages/report/report.component';
 import { SettlementComponent } from '../../pages/settlement/settlement.component';
 import { ReceiptComponent } from '../../pages/receipt/receipt.component';
-import { ExpDockComponent } from '../../pages/exp-dock/exp-dock.component';
 
 @NgModule({
   imports: [
@@ -81,7 +80,6 @@ import { ExpDockComponent } from '../../pages/exp-dock/exp-dock.component';
     ReportComponent,
     SettlementComponent,
     ReceiptComponent,
-    ExpDockComponent,
   ],
 })
 export class AdminLayoutModule {}

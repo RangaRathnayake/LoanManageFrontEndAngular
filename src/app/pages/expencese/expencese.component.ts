@@ -67,6 +67,7 @@ export class ExpenceseComponent implements OnInit {
     if (num) {
       this.apiCall.get('main/getByNumber/' + num, (data) => {
         this.doclist = data;
+        console.log(this.doclist);
         this.dockCharge = undefined;
         this.isdocchargeamount = false;
         if (this.doclist.length > 0) {
@@ -118,7 +119,7 @@ export class ExpenceseComponent implements OnInit {
             cheque: '-',
             loanType: '-',
             interestRate: 0,
-            status: 1,
+            status: 3,
             customer: this.cusid,
             main: this.mainid,
             user: this.getuser.id,
