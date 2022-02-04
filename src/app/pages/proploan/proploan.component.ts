@@ -158,7 +158,7 @@ export class ProploanComponent implements OnInit {
     console.log(this.ratelist);
 
 
-    if (this.loanamount && this.month && this.date && this.doccharge && this.rate && this.ratelist ) {
+    if (this.loanamount && this.month && this.date &&  this.rate && this.ratelist ) {
 
 
       if (this.validloanamount() && this.validmonth() && this.vaiddoccharge()) {
