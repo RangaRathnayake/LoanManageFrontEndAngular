@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { environment } from 'environments/environment';
+import { Component, OnInit } from "@angular/core";
+import { environment } from "environments/environment";
 @Component({
-  selector: 'app-report',
-  templateUrl: './report.component.html',
-  styleUrls: ['./report.component.scss'],
+  selector: "app-report",
+  templateUrl: "./report.component.html",
+  styleUrls: ["./report.component.scss"],
 })
 export class ReportComponent implements OnInit {
   from;
@@ -18,11 +18,26 @@ export class ReportComponent implements OnInit {
       range: {
         from: this.from,
         to: this.to,
+        type: "L",
       },
     };
     window.open(
-      this.reportPath + 'income.html?data=' + JSON.stringify(range),
-      '_blank'
+      this.reportPath + "income.html?data=" + JSON.stringify(range),
+      "_blank"
+    );
+  }
+
+  alltransprop() {
+    var range = {
+      range: {
+        from: this.from,
+        to: this.to,
+        type: "P",
+      },
+    };
+    window.open(
+      this.reportPath + "incomeprop.html?data=" + JSON.stringify(range),
+      "_blank"
     );
   }
 
@@ -34,8 +49,8 @@ export class ReportComponent implements OnInit {
       },
     };
     window.open(
-      this.reportPath + 'income.html?data=' + JSON.stringify(range),
-      '_blank'
+      this.reportPath + "income.html?data=" + JSON.stringify(range),
+      "_blank"
     );
   }
 }
