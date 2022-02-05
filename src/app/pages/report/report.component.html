@@ -26,29 +26,12 @@
         </div>
         <div class="row">
           <div class="col-4">
-            <button mat-raised-button class="btn btn-success">
-              Income Report
-            </button>
-          </div>
-          <div class="col-4">
-            <button mat-raised-button class="btn btn-success">Income</button>
-          </div>
-          <div class="col-4">
-            <button mat-raised-button class="btn btn-success">Income</button>
-          </div>
-          <div class="col-4">
-            <button mat-raised-button class="btn btn-success">Income</button>
-          </div>
-          <div class="col-4">
-            <button mat-raised-button class="btn btn-success">Income</button>
-          </div>
-          <div class="col-4">
             <button
               mat-raised-button
               class="btn btn-success"
-              (click)="expenses()"
+              (click)="alltrans()"
             >
-              expenses
+              All Income
             </button>
           </div>
 
@@ -56,9 +39,19 @@
             <button
               mat-raised-button
               class="btn btn-success"
-              (click)="alltrans()"
+              (click)="expenses()"
             >
-              All transaction - Loan
+              All expenses
+            </button>
+          </div>
+
+          <div class="col-4">
+            <button
+              mat-raised-button
+              class="btn btn-success"
+              (click)="alltransLoan()"
+            >
+              Income Loan
             </button>
           </div>
 
@@ -68,7 +61,7 @@
               class="btn btn-success"
               (click)="alltransprop()"
             >
-              All transaction - Property
+              Income Property
             </button>
           </div>
         </div>
