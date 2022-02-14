@@ -112,6 +112,10 @@ export class FulldetailsComponent implements OnInit {
     this.router.navigate(['moreinfo', this.mainId]);
   }
 
+  dockCharge() {
+    this.router.navigate(['dockCharge', this.mainId]);
+  }
+
   settlement() {
     this.router.navigate(['settlement', this.mainId]);
   }

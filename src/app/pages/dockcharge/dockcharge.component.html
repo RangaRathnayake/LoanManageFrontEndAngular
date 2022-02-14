@@ -1,0 +1,62 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="card">
+      <div class="card-header card-header-success">
+        <h4 class="card-title">Get Document Charge : {{ loannumber }}</h4>
+        <p class="card-category"></p>
+      </div>
+      <div class="card-body">
+        <div class="col-md-8" style="float: none; margin: 0 auto">
+          <h3>
+            Number : {{ loannumber }} <br />
+            Name : {{ cusname }}
+          </h3>
+          <h4 *ngIf="mainData">
+            Total Loan Amount : {{ totalLoanAmount | currency: ' ' }}<br />
+            Document Charge : {{ mainData.dockCharge | currency: ' ' }}<br />
+            <br />
+          </h4>
+
+          <mat-form-field appearance="standard" style="text-align: right">
+            <mat-label>Pay Amount Rs. </mat-label>
+            <input
+              type="number"
+              [(ngModel)]="charge"
+              matInput
+              placeholder="Amount"
+              #input
+            />
+          </mat-form-field>
+
+          <div>
+            <mat-radio-group
+              aria-label="Select an option"
+              [(ngModel)]="payType"
+            >
+              <mat-radio-button value="Cash">Cash</mat-radio-button>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <mat-radio-button value="Cheque">Cheque</mat-radio-button>
+            </mat-radio-group>
+
+            <mat-form-field *ngIf="payType == 'Cheque'" appearance="standard">
+              <input
+                type="text"
+                matInput
+                placeholder="Cheque Number"
+                [(ngModel)]="cheaueNumber"
+              />
+            </mat-form-field>
+
+            <button
+              mat-raised-button
+              class="btn btn-success pull-right"
+              (click)="pay()"
+            >
+              Get Payment
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
