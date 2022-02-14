@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AlartService } from 'app/service/alart.service';
 import { ApicallService } from 'app/service/apicall.service';
 import { DatePipe } from '@angular/common';
-
+import { environment } from 'environments/environment';
 @Component({
   selector: 'app-moreinfo',
   templateUrl: './moreinfo.component.html',
@@ -66,6 +66,8 @@ export class MoreinfoComponent implements OnInit {
 
   totalCapital = 0;
   totalInterest = 0;
+
+  reportPath = environment.reportPath;
 
   constructor(
     private router: Router,
@@ -379,10 +381,8 @@ export class MoreinfoComponent implements OnInit {
           });
         }
 
-        // window.location.href = "https://rmcinvesment.com/0LoanPrint/index.html?data=" + JSON.stringify(data);
         window.location.href =
-          'http://localhost//0LoanPrint/index.html?data=' +
-          JSON.stringify(data);
+          this.reportPath + 'index.html?data=' + JSON.stringify(data);
       });
     } else {
       this.alart.showNotification(

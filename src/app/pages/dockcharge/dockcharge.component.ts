@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AlartService } from 'app/service/alart.service';
 import { ApicallService } from 'app/service/apicall.service';
 import { DatePipe } from '@angular/common';
-
+import { environment } from 'environments/environment';
 @Component({
   selector: 'app-dockcharge',
   templateUrl: './dockcharge.component.html',
@@ -23,6 +23,7 @@ export class DockchargeComponent implements OnInit {
   cheaueNumber;
   anualRate;
   charge;
+  reportPath = environment.reportPath;
 
   constructor(
     private router: Router,
@@ -90,10 +91,8 @@ export class DockchargeComponent implements OnInit {
         this.apiCall.post('main/saveTransaction', obj, (data) => {
           console.log(data);
 
-          // window.location.href = "https://rmcinvesment.com/0LoanPrint/index.html?data=" + JSON.stringify(data);
           window.location.href =
-            'http://localhost//0LoanPrint/index.html?data=' +
-            JSON.stringify(data);
+            this.reportPath + 'index.html?data=' + JSON.stringify(data);
         });
       } else {
         this.alart.showNotification('danger', 'Please Enter Valid Amount');
