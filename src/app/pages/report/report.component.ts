@@ -67,4 +67,17 @@ export class ReportComponent implements OnInit {
       '_blank'
     );
   }
+
+  arrearsReport() {
+    var range = {
+      range: {
+        from: this.from,
+        to: this.to,
+      },
+    };
+    window.open(
+      this.reportPath + 'arrearsReport.html?data=' + JSON.stringify(range),
+      '_blank'
+    );
+  }
 }
