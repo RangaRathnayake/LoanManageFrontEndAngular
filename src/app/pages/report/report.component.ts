@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { environment } from 'environments/environment';
+import { Component, OnInit } from "@angular/core";
+import { environment } from "environments/environment";
 @Component({
-  selector: 'app-report',
-  templateUrl: './report.component.html',
-  styleUrls: ['./report.component.scss'],
+  selector: "app-report",
+  templateUrl: "./report.component.html",
+  styleUrls: ["./report.component.scss"],
 })
 export class ReportComponent implements OnInit {
   from;
@@ -18,12 +18,12 @@ export class ReportComponent implements OnInit {
       range: {
         from: this.from,
         to: this.to,
-        type: 'L',
+        type: "L",
       },
     };
     window.open(
-      this.reportPath + 'all.html?data=' + JSON.stringify(range),
-      '_blank'
+      this.reportPath + "all.html?data=" + JSON.stringify(range),
+      "_blank"
     );
   }
 
@@ -32,12 +32,12 @@ export class ReportComponent implements OnInit {
       range: {
         from: this.from,
         to: this.to,
-        type: 'L',
+        type: "L",
       },
     };
     window.open(
-      this.reportPath + 'incomeLoan.html?data=' + JSON.stringify(range),
-      '_blank'
+      this.reportPath + "incomeLoan.html?data=" + JSON.stringify(range),
+      "_blank"
     );
   }
 
@@ -46,12 +46,12 @@ export class ReportComponent implements OnInit {
       range: {
         from: this.from,
         to: this.to,
-        type: 'P',
+        type: "P",
       },
     };
     window.open(
-      this.reportPath + 'incomeProp.html?data=' + JSON.stringify(range),
-      '_blank'
+      this.reportPath + "incomeProp.html?data=" + JSON.stringify(range),
+      "_blank"
     );
   }
 
@@ -63,8 +63,8 @@ export class ReportComponent implements OnInit {
       },
     };
     window.open(
-      this.reportPath + 'expences.html?data=' + JSON.stringify(range),
-      '_blank'
+      this.reportPath + "expences.html?data=" + JSON.stringify(range),
+      "_blank"
     );
   }
 
@@ -76,8 +76,21 @@ export class ReportComponent implements OnInit {
       },
     };
     window.open(
-      this.reportPath + 'arrearsReport.html?data=' + JSON.stringify(range),
-      '_blank'
+      this.reportPath + "arrearsReport.html?data=" + JSON.stringify(range),
+      "_blank"
+    );
+  }
+
+  newloandetails() {
+    var range = {
+      range: {
+        from: this.from,
+        to: this.to,
+      },
+    };
+    window.open(
+      this.reportPath + "newloandetails.html?data=" + JSON.stringify(range),
+      "_blank"
     );
   }
 }
