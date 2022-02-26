@@ -24,7 +24,7 @@ export class ProploanComponent implements OnInit {
   nic;
   date: Date;
   address;
-  doccharge;
+  doccharge = 0;
   mobile;
   rate;
   ratelist;
@@ -149,7 +149,7 @@ export class ProploanComponent implements OnInit {
     console.log(this.month);
     console.log(this.date);
     console.log(this.doccharge);
-    console.log(this.rate);
+    console.log(this.rate.rate);
     console.log(this.ratelist);
 
     if (
@@ -269,7 +269,7 @@ export class ProploanComponent implements OnInit {
     this.month = "";
     this.nic = "";
     this.address = "";
-    this.doccharge = "";
+    // this.doccharge = "";
     this.mobile = "";
     this.rate = "";
     this.ratelist = "";
