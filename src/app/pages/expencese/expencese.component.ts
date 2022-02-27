@@ -100,7 +100,7 @@ export class ExpenceseComponent implements OnInit {
         to: this.to,
         amount: this.amount,
         status: 1,
-        mainId: this.mainid,
+        main: this.mainid,
         loanNumber: this.loanNumber,
         exptype: this.selectedExType,
       };
