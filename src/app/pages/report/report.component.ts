@@ -93,4 +93,8 @@ export class ReportComponent implements OnInit {
       "_blank"
     );
   }
+
+  incomeexpence() {
+    window.open(this.reportPath + "incomeexpence.html?data=", "_blank");
+  }
 }

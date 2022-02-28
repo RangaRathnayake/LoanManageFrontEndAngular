@@ -109,6 +109,8 @@ export class ProploanComponent implements OnInit {
   perches;
   mainids;
 
+  data = [];
+
   constructor(
     private apiCall: ApicallService,
     private alart: AlartService,
@@ -499,16 +501,22 @@ export class ProploanComponent implements OnInit {
                     user: this.getuser.id,
                   },
                 };
-                // var day = this.datePipe.transform(new Date(), "yyyy-MM-dd");
                 this.apiCall.post("main/saveTransaction", obj, (data) => {
                   console.log("xxxxxx");
                   console.log(data);
                   console.log("xxxxxx");
 
-                  // window.location.href = "https://rmcinvesment.com/0LoanPrint/prop.html?data=" + JSON.stringify(data);
+                  var datapay = {
+                    paymod: this.paytype.type,
+                    payamount: this.advancepay,
+                  };
+
+                  this.data.push(data);
+                  this.data.push(datapay);
+
                   window.open(
                     "https://rmcinvesment.com/0LoanPrint/prop.html?data=" +
-                      JSON.stringify(data),
+                      JSON.stringify(this.data),
                     "_blank"
                   );
                 });
@@ -601,9 +609,17 @@ export class ProploanComponent implements OnInit {
                 this.apiCall.post("main/saveTransaction", obj, (datas) => {
                   console.log(datas);
 
+                  var datapay = {
+                    paymod: this.paytype.type,
+                    payamount: this.advancepay,
+                  };
+
+                  this.data.push(datas);
+                  this.data.push(datapay);
+
                   window.open(
                     "https://rmcinvesment.com/0LoanPrint/prop.html?data=" +
-                      JSON.stringify(datas),
+                      JSON.stringify(this.data),
                     "_blank"
                   );
                   // window.open("https://rmcinvesment.com/0LoanPrint/index.html?data=" + JSON.stringify(datas), '_blank');
