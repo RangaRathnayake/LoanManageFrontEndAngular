@@ -108,6 +108,20 @@ export class ExpenceseComponent implements OnInit {
         console.log('------------');
         console.log(data);
         console.log('------------');
+        if (data.id > 0) {
+          this.alart.showNotification('success', 'Success');
+          this.description = null;
+          this.date = null;
+          this.amount = null;
+          this.mainid = null;
+          this.loanNumber = null;
+          this.selectedExType = null;
+          this.dockCharge = null;
+          this.loannum = null;
+          this.to = null;
+          this.doclist = null;
+        }
+
         // let obj = {
         //   transaction: {
         //     day: new Date(),
