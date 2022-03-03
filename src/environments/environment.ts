@@ -5,10 +5,10 @@
 
 export const environment = {
   production: false,
-  apiUrl: "http://localhost:3000/",
-  reportPath: "http://localhost/0LoanPrint/",
+  apiUrl: 'http://localhost:3000/',
+  reportPath: 'http://localhost/0LoanPrint/',
 
   // apiUrl: "https://api.rmcinvesment.com/",
   // reportPath: "https://rmcinvesment.com/0LoanPrint/",
-  TOKEN_KEY: "secret",
+  TOKEN_KEY: 'secret',
 };
