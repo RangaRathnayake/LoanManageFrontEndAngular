@@ -227,7 +227,7 @@ export class UpdateComponent implements OnInit {
       this.dianualrate = this.rate.rate;
       this.dimonthrate = Number(this.rate.rate / 12).toFixed(2);
       this.diinstare = Number(
-        this.dicapital * (this.dimonthrate / 100)
+        this.loanamount * (this.dimonthrate / 100)
       ).toFixed(2);
       this.ditotal = Number(this.dicapital) + Number(this.diinstare);
       this.difulltotal = Number(this.ditotal * this.month).toFixed(2);
