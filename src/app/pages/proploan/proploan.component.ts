@@ -558,8 +558,8 @@ export class ProploanComponent implements OnInit {
           }
 
           this.apiCall.get("main/" + this.mainid, (result) => {
-            this.nonref = 0.0;
-            this.downpay = 0.0;
+            this.nonref = result.NonRefundableAdvance;
+            this.downpay = result.downPayment;
 
             if (this.paytype.id == 1) {
               this.nonref = this.advancepay;
