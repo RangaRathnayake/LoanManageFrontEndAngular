@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>R M C CREDIT & INVESTMENT (PVT) LTD</title>
+    <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <style>
+      table {
+        border-collapse: collapse;
+        border: 1px solid black;
+      }
+
+      th,
+      td {
+        border: 1px solid black;
+      }
+
+      table.c {
+        table-layout: auto;
+        width: 100%;
+        padding-top: 70px;
+      }
+
+      @media print {
+        .no-print,
+        .no-print * {
+          display: none !important;
+        }
+      }
+
+      @media print {
+        #printPageButton {
+          display: none;
+        }
+      }
+
+      .mar {
+        /* font: 14px sans-serif;
+            color: darkslateblue;
+            border: 5px dashed darkslateblue; */
+        margin: 100px;
+        padding: 10px;
+        text-align: center;
+      }
+    </style>
+  </head>
+
+  <body>
+    <h2 style="text-align: center"><u>Income and Expenses</u></h2>
+
+    <!-- <div class="mar">
+      <table id="myTable" class="c">
+        <tr>
+          <th></th>
+          <th></th>
+        </tr>
+      </table>
+    </div> -->
+
+    <div class="mar">
+      <table id="tbl" class="c"></table>
+    </div>
+
+    <br />
+
+    <hr class="no-print" />
+    <button class="no-print" id="printPageButton" onclick="window.print()">
+      PRINT
+    </button>
+    <br />
+
+    <script>
+      let searchParams = new URLSearchParams(window.location.search);
+      // console.log(searchParams);
+      searchParams.has('data'); // true
+      if (searchParams.has('data')) {
+        let param = JSON.parse(searchParams.get('data'));
+        console.log(param.type);
+
+        try {
+          $.ajax({
+            method: 'POST',
+            // url: 'http://localhost:3000/main/findExpenceseWithLone',
+            url: 'https://api.rmcinvesment.com/main/findExpenceseWithLone',
+            data: param,
+            success: function (data) {
+              console.log(data);
+
+              let head = ` 
+          <table style="width: 100%; margin-top: 10px; font-size: 0.8em" border="1px">
+  <tr align="center">
+    <th  style="text-align:center">Loan number</th>
+    <th  style="text-align:right" >Loan amount</th>
+    <th  style="text-align:right">Doc charge</th>
+    <th  > Expenses </th>
+    <th  style="text-align:right"> Balance </th>
+  </tr>
+  
+</table>
+          `;
+
+              for (let i = 0; i < data.length; i++) {
+                let dd = data[i];
+
+                var ithuru = 0.0;
+                var viyadama = 0.0;
+                dd.expenceses.forEach((ex) => {
+                  viyadama += Number(ex.amount);
+                });
+
+                console.log(viyadama);
+
+                ithuru = Number(dd.dockCharge) - Number(viyadama);
+
+                console.log(ithuru);
+
+                head += `  <tr>
+            <td style="text-align:center">${dd.oderNumber}</td>
+            <td style="text-align:right">${dd.loanAmount}</td>
+            <td style="text-align:right">${dd.dockCharge}</td>        
+            <td id="${dd.id}"></td>
+            <td style="text-align:right">${ithuru}</td>
+            </tr>`;
+              }
+
+              $('#tbl').html(head);
+
+              data.forEach((dd) => {
+                let inerData = `<table  style="width:100%; border: 1px solid white; border-collapse: collapse;">`;
+                dd.expenceses.forEach((element) => {
+                  inerData +=
+                    `<tr ><td >` +
+                    element.amount +
+                    `</td><td>` +
+                    element.description +
+                    `</td></tr>`;
+                });
+                inerData += `</table>`;
+                $('#' + dd.id).html(inerData);
+              });
+            },
+          });
+        } catch (error) {
+          console.log(error);
+        }
+      }
+    </script>
+  </body>
+</html>

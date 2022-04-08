@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>R M C CREDIT & INVESTMENT (PVT) LTD</title>
+    <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <style>
+      table {
+        border-collapse: collapse;
+        border: 1px solid black;
+      }
+
+      th,
+      td {
+        border: 1px solid black;
+      }
+
+      table.c {
+        table-layout: auto;
+        width: 100%;
+        padding-top: 70px;
+      }
+
+      @media print {
+        .no-print,
+        .no-print * {
+          display: none !important;
+        }
+      }
+
+      @media print {
+        #printPageButton {
+          display: none;
+        }
+      }
+
+      .mar {
+        /* font: 14px sans-serif;
+            color: darkslateblue;
+            border: 5px dashed darkslateblue; */
+        margin: 50px;
+        padding: 10px;
+        text-align: center;
+      }
+    </style>
+    <script async src="/cdn-cgi/bm/cv/669835187/api.js"></script>
+  </head>
+
+  <body>
+    <h2 style="text-align: center"><u>Arrears Report</u></h2>
+
+    <div class="mar">
+      <table id="myTable" class="c">
+        <tr>
+          <th></th>
+          <th></th>
+        </tr>
+      </table>
+    </div>
+    <br />
+    <hr class="no-print" />
+    <button class="no-print" id="printPageButton" onclick="window.print()">
+      PRINT
+    </button>
+    <br />
+
+    <script>
+      let searchParams = new URLSearchParams(window.location.search);
+      // console.log(searchParams);
+      searchParams.has('data'); // true
+      if (searchParams.has('data')) {
+        let param = JSON.parse(searchParams.get('data'));
+        console.log(param.range.from);
+
+        var table = document.getElementById('myTable');
+
+        $.ajax({
+          method: 'POST',
+          // url: 'http://localhost:3000/main/arrearsReport',
+          url: 'https://api.rmcinvesment.com/main/arrearsReport',
+          data: param,
+          success: function (data) {
+            // console.log(data);
+            let tot_warrant = 0;
+            let tot_full_total = 0;
+            let tot_arrearsInterest = 0;
+            let tot_arrearsCapital = 0;
+
+            for (let i = 0; i < data.length; i++) {
+              // console.log(data[i]);
+
+              var row = table.insertRow(i);
+
+              var cell1 = row.insertCell(0);
+              var cell2 = row.insertCell(1);
+              var cell3 = row.insertCell(2);
+              var cell4 = row.insertCell(3);
+              // var cell5 = row.insertCell(4);
+              var cell6 = row.insertCell(4);
+              var cell7 = row.insertCell(5);
+              var cell8 = row.insertCell(6);
+
+              //  var dt = new Date(d.production_date);
+
+              let d = new Date(data[i].day);
+              let month = d.getMonth() + 1;
+              let day = String(d.getDate()).padStart(2, '0');
+              let year = d.getFullYear();
+              let output = year + '/' + month + '/' + day;
+
+              console.log('------------------');
+
+              let arr =
+                Number(data[i].arrearsInterest) +
+                Number(data[i].arrearsCapital);
+
+              // console.log(arr);
+              console.log('------------------');
+
+              cell1.innerHTML = data[i].loanNumber;
+              cell2.innerHTML = data[i].customer;
+              cell3.innerHTML = data[i].mobile;
+              cell4.innerHTML = arr.toFixed(2);
+              // cell5.innerHTML = data[i].arrearsInterest.toFixed(2);
+              cell6.innerHTML = data[i].warrant.toFixed(2);
+              cell7.innerHTML = data[i].full_total.toFixed(2);
+              cell8.innerHTML = data[i].count;
+
+              cell1.style.textAlign = 'left';
+              cell2.style.textAlign = 'left';
+              cell3.style.textAlign = 'left';
+              cell4.style.textAlign = 'right';
+              // cell5.style.textAlign = 'right';
+              cell6.style.textAlign = 'right';
+              cell7.style.textAlign = 'right';
+              cell8.style.textAlign = 'right';
+
+              tot_arrearsCapital +=
+                Number(data[i].arrearsCapital) +
+                Number(data[i].arrearsInterest);
+
+              tot_arrearsInterest += Number(data[i].arrearsInterest);
+              tot_warrant += Number(data[i].warrant);
+              tot_full_total += Number(data[i].full_total);
+            }
+
+            var newRow = table.insertRow();
+            var celtot1 = newRow.insertCell(0);
+            var celtot11 = newRow.insertCell(1);
+            var celtot12 = newRow.insertCell(2);
+            var celtot2 = newRow.insertCell(3);
+            // var celtot3 = newRow.insertCell(4);
+            var celtot4 = newRow.insertCell(4);
+            var celtot5 = newRow.insertCell(5);
+            var celtot6 = newRow.insertCell(6);
+
+            celtot1.innerHTML = 'Total';
+            celtot11.innerHTML = '';
+            celtot12.innerHTML = '';
+            celtot2.innerHTML = tot_arrearsCapital.toFixed(2);
+            // celtot3.innerHTML = tot_arrearsInterest.toFixed(2);
+            celtot4.innerHTML = tot_warrant.toFixed(2);
+            celtot5.innerHTML = tot_full_total.toFixed(2);
+            celtot6.innerHTML = '';
+
+            celtot1.style.fontWeight = 'bold';
+            celtot2.style.fontWeight = 'bold';
+            // celtot3.style.fontWeight = 'bold';
+            celtot4.style.fontWeight = 'bold';
+            celtot5.style.fontWeight = 'bold';
+
+            var rows = table.insertRow(0);
+            var cell11 = rows.insertCell(0);
+            var cell21 = rows.insertCell(1);
+            var cell31 = rows.insertCell(2);
+            var cell41 = rows.insertCell(3);
+            // var cell51 = rows.insertCell(4);
+            var cell61 = rows.insertCell(4);
+            var cell71 = rows.insertCell(5);
+            var cell81 = rows.insertCell(6);
+
+            cell11.innerHTML = '<b> L/No </b>';
+            cell21.innerHTML = ' <b> Customer </b>';
+            cell31.innerHTML = ' <b> Mobile </b>';
+            cell41.innerHTML = '<b> Arrears</b>';
+            // cell51.innerHTML = ' <b> Arrears Interest </b>';
+            cell61.innerHTML = '<b> Warrant </b>';
+            cell71.innerHTML = '<b> Total </b>';
+            cell81.innerHTML = '<b> Count </b>';
+
+            cell11.style.textAlign = 'center';
+            cell21.style.textAlign = 'center';
+            cell31.style.textAlign = 'center';
+            cell41.style.textAlign = 'center';
+            // cell51.style.textAlign = 'center';
+            cell61.style.textAlign = 'center';
+
+            celtot11.style.textAlign = 'right';
+            celtot12.style.textAlign = 'right';
+            celtot2.style.textAlign = 'right';
+            // celtot3.style.textAlign = 'right';
+            celtot4.style.textAlign = 'right';
+            celtot5.style.textAlign = 'right';
+          },
+        });
+      }
+    </script>
+  </body>
+</html>

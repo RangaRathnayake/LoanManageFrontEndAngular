@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>R M C CREDIT & INVESTMENT (PVT) LTD</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .center {
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .left {
+            text-align: left;
+        }
+
+        .right {
+            text-align: left;
+        }
+
+        .alr {
+            text-align: right;
+        }
+
+        .one {
+            border-style: solid;
+            border-color: black;
+            padding: 30px;
+            border-radius: 20px;
+        }
+
+        @media print {
+
+            .no-print,
+            .no-print * {
+                display: none !important;
+            }
+        }
+
+        @media print {
+            #printPageButton {
+                display: none;
+            }
+        }
+    </style>
+</head>
+
+<body style="margin: 20px;">
+
+    <div style="text-align: center;">
+        <div style="width: 90%;" class="one">
+            <h2>R M C CREDIT & INVESTMENT (PVT) LTD<h2>
+                    <table class="center">
+                        <tr>
+                            <td class="left">Loan Number</td>
+                            <td> : </td>
+                            <td class="right" id="oderNumber"></td>
+                        </tr>
+                        <tr>
+                            <td class="left">Customer Name </td>
+                            <td> : </td>
+                            <td class="right"  id="name"></td>
+                        </tr>
+                        <tr>
+                            <td class="left">Loan Amount </td>
+                            <td> : </td>
+                            <td class="right"  id="totalLoanAmount"></td>
+                        </tr>
+                        <tr>
+                            <td class="left">Interest </td>
+                            <td> : </td>
+                            <td class="right"  id="anualRate"></td>
+                        </tr>
+                        <tr>
+                            <td class="left">Rental </td>
+                            <td> : </td>
+                            <td class="right"  id="rental"> </td>
+                        </tr>
+                        <tr>
+                            <td class="left">Rental Date </td>
+                            <td> : </td>
+                            <td class="right" id="date"></td>
+                        </tr>
+                        <tr>
+                            <td class="left">Agreement Period </td>
+                            <td> : </td>
+                            <td class="right"  id="monthsCount"></td>
+                        </tr>
+                    </table>
+
+        </div>
+
+
+
+
+
+        <div style="text-align: justify;">
+
+        </div>
+        <hr class="no-print">
+        <button class="no-print" id="printPageButton" onclick="window.print()">PRINT</button>
+        <!-- <a class="no-print" href="https://sw.smartwin.lk/#/invoice">Back </a> -->
+        <br>
+    </div>
+
+
+    <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript">
+
+
+
+        let searchParams = new URLSearchParams(window.location.search);
+
+        searchParams.has('data') // true
+        if (searchParams.has('data')) {
+            let param = JSON.parse(searchParams.get('data'));
+            $("#oderNumber").html(param.oderNumber);
+            $("#name").html(param.name);
+            $("#totalLoanAmount").html((param.totalLoanAmount));
+            $("#anualRate").html((param.anualRate));
+            $("#rental").html((param.rental));
+            $("#date").html((param.date));
+            $("#monthsCount").html(param.monthsCount+" Months");
+        }
+    </script>
+</body>
+
+</html>

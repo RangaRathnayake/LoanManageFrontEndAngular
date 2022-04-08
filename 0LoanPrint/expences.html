@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>R M C CREDIT & INVESTMENT (PVT) LTD</title>
+    <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <style>
+      table {
+        border-collapse: collapse;
+        border: 1px solid black;
+      }
+
+      th,
+      td {
+        border: 1px solid black;
+      }
+
+      table.c {
+        table-layout: auto;
+        width: 100%;
+        padding-top: 70px;
+      }
+
+      @media print {
+        .no-print,
+        .no-print * {
+          display: none !important;
+        }
+      }
+
+      @media print {
+        #printPageButton {
+          display: none;
+        }
+      }
+
+      .mar {
+        /* font: 14px sans-serif;
+            color: darkslateblue;
+            border: 5px dashed darkslateblue; */
+        margin: 50px;
+        padding: 10px;
+        text-align: center;
+      }
+    </style>
+    <script async src="/cdn-cgi/bm/cv/669835187/api.js"></script>
+  </head>
+
+  <body>
+    <h2 style="text-align: center"><u>Expenses</u></h2>
+
+    <div class="mar">
+      <table id="myTable" class="c">
+        <tr>
+          <th></th>
+          <th></th>
+        </tr>
+      </table>
+    </div>
+    <br />
+    <hr class="no-print" />
+    <button class="no-print" id="printPageButton" onclick="window.print()">
+      PRINT
+    </button>
+    <br />
+
+    <script>
+      let searchParams = new URLSearchParams(window.location.search);
+      // console.log(searchParams);
+      searchParams.has('data'); // true
+      if (searchParams.has('data')) {
+        let param = JSON.parse(searchParams.get('data'));
+        console.log(param.range.from);
+
+        var table = document.getElementById('myTable');
+
+        $.ajax({
+          method: 'POST',
+          // url: 'http://localhost:3000/expencese/getRange',
+          url: 'https://api.rmcinvesment.com/expencese/getRange',
+          data: param,
+          success: function (data) {
+            let amount = 0;
+            for (let i = 0; i < data.length; i++) {
+              console.log(data[i]);
+
+              var row = table.insertRow(i);
+
+              var cell1 = row.insertCell(0);
+              var cell2 = row.insertCell(1);
+              var cell3 = row.insertCell(2);
+              var cell4 = row.insertCell(3);
+              var cell5 = row.insertCell(4);
+              var cell6 = row.insertCell(5);
+
+              //  var dt = new Date(d.production_date);
+
+              let d = new Date(data[i].day);
+              let month = d.getMonth() + 1;
+              let day = String(d.getDate()).padStart(2, '0');
+              let year = d.getFullYear();
+              let output = year + '/' + month + '/' + day;
+
+              cell1.innerHTML = output;
+              cell2.innerHTML = data[i].exptype.type;
+              cell3.innerHTML = data[i].loanNumber;
+              cell4.innerHTML = data[i].description;
+              cell5.innerHTML = data[i].to;
+              cell6.innerHTML = data[i].amount;
+
+              cell1.style.textAlign = 'left';
+              cell2.style.textAlign = 'left';
+              cell3.style.textAlign = 'left';
+              cell4.style.textAlign = 'left';
+              cell5.style.textAlign = 'right';
+              cell6.style.textAlign = 'right';
+
+              amount = Number(amount) + Number(data[i].amount);
+            }
+
+            var newRow = table.insertRow();
+            var celtot1 = newRow.insertCell(0);
+            var celtot11 = newRow.insertCell(1);
+            var celtot12 = newRow.insertCell(2);
+            var celtot2 = newRow.insertCell(3);
+            var celtot3 = newRow.insertCell(4);
+            var celtot4 = newRow.insertCell(5);
+
+            celtot1.innerHTML = 'Total';
+            celtot11.innerHTML = '';
+            celtot12.innerHTML = '';
+            celtot2.innerHTML = '';
+            celtot3.innerHTML = '';
+            celtot4.innerHTML = amount.toFixed(2);
+
+            celtot1.style.fontWeight = 'bold';
+            celtot4.style.fontWeight = 'bold';
+
+            var rows = table.insertRow(0);
+            var cell11 = rows.insertCell(0);
+            var cell21 = rows.insertCell(1);
+            var cell31 = rows.insertCell(2);
+            var cell41 = rows.insertCell(3);
+            var cell51 = rows.insertCell(4);
+            var cell61 = rows.insertCell(5);
+
+            cell11.innerHTML = '<b> Date </b>';
+            cell21.innerHTML = ' <b> Type </b>';
+            cell31.innerHTML = ' <b> Loan Number </b>';
+            cell41.innerHTML = '<b> Description </b>';
+            cell51.innerHTML = ' <b> To </b>';
+            cell61.innerHTML = '<b> Amount </b>';
+
+            cell11.style.textAlign = 'center';
+            cell21.style.textAlign = 'center';
+            cell31.style.textAlign = 'center';
+            cell41.style.textAlign = 'center';
+            cell51.style.textAlign = 'center';
+            cell61.style.textAlign = 'center';
+
+            celtot11.style.textAlign = 'right';
+            celtot12.style.textAlign = 'right';
+            celtot2.style.textAlign = 'right';
+            celtot3.style.textAlign = 'right';
+          },
+        });
+      }
+    </script>
+  </body>
+</html>

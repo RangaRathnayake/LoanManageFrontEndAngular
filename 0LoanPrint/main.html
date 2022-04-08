@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>R M C CREDIT & INVESTMENT (PVT) LTD</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        font-size: small;
+      }
+
+      .center {
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .left {
+        text-align: left;
+      }
+
+      .right {
+        text-align: left;
+      }
+
+      .alr {
+        text-align: right;
+      }
+
+      #customers {
+        font-family: Arial, Helvetica, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+      }
+
+      #customers td,
+      #customers th {
+        border: 1px solid #ddd;
+        padding: 8px;
+      }
+
+      #customers tr:nth-child(even) {
+        background-color: #f2f2f2;
+      }
+
+      #customers tr:hover {
+        background-color: #ddd;
+      }
+
+      #customers th {
+        padding-top: 12px;
+        padding-bottom: 12px;
+        text-align: left;
+        background-color: #04aa6d;
+        color: white;
+      }
+
+      @media print {
+        .no-print,
+        .no-print * {
+          display: none !important;
+        }
+      }
+
+      @media print {
+        #printPageButton {
+          display: none;
+        }
+      }
+    </style>
+  </head>
+
+  <body style="margin: 20px">
+    <div style="text-align: center">
+      <h3 style="text-align: center">Summary</h3>
+
+      <div>
+        <table
+          style="margin-left: 10px; margin-right: 10px; width: 100%"
+          id="customers"
+        ></table>
+      </div>
+      <div style="text-align: justify"></div>
+      <hr class="no-print" />
+      <button class="no-print" id="printPageButton" onclick="window.print()">
+        PRINT
+      </button>
+    </div>
+    <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript">
+      //   let searchParams = new URLSearchParams(window.location.search);
+
+      // searchParams.has('data'); // true
+      //   if (searchParams.has('data')) {
+      // let param = JSON.parse(searchParams.get('data'));
+
+      // let d = new Date(param.day);
+      //
+
+      var table = document.getElementById('myTable');
+
+      $.ajax({
+        method: 'POST',
+        // url: 'http://localhost:3000/main/mainReport',
+        url: 'https://api.rmcinvesment.com/main/mainReport',
+        data: {},
+        success: function (data) {
+          // console.log(data);
+          let loanAmount = 0.0;
+          let dockCharge = 0.0;
+          let capital = 0;
+          let interest = 0;
+          let pCapital = 0;
+          let pInterest = 0;
+          let pWarant = 0;
+          let aCapital = 0;
+          let aInterest = 0;
+          let aWarrant = 0;
+
+          let htmlBody = `<thad>
+                  <th>#</th>
+                  <th>Number</th>
+                  <th>Loan Amount</th>
+                  <th>Dock Charge</th>
+                  <th>M.I. Rate</th>
+                  <th>Rental P.M</th>
+                  <th>T Capita</th>
+                  <th>T Interest</th>
+                  <th>T P Captial</th>
+                  <th>T P Interest</th>
+                  <th>T P Warrant</th>                 
+                  <th style="background-color: #aa0404;">T A Capital</th>
+                  <th  style="background-color: #aa0404;">T A Interest</th>
+                  <th  style="background-color: #aa0404;">T A Warrant</th>
+                  </thad>`;
+
+          for (let i = 0; i <= data.length; i++) {
+            htmlBody += `<tr id="x${i}"></tr>`;
+          }
+
+          $('#customers').html(htmlBody);
+          for (let i = 0; i < data.length; i++) {
+            let d = data[i];
+            loanAmount += Number(d.totalLoanAmount);
+            dockCharge += Number(d.dockCharge);
+            capital += Number(d.TC);
+            interest += Number(d.TI);
+            pCapital += Number(d.TPC);
+            pInterest += Number(d.TPI);
+            pWarant += Number(d.TPW);
+            aCapital += Number(d.TCA);
+            aInterest += Number(d.TIA);
+            aWarrant += Number(d.TWA);
+            $('#x' + i).html(
+              `<td >${i}</td>
+              <td>${d.oderNumber}</td>
+                    <td style="text-align: right;">${d.totalLoanAmount}</td>
+                    <td style="text-align: right;">${d.dockCharge}</td>
+                    <td style="text-align: right;">${d.interestRate}</td>
+                    <td style="text-align: right;">${d.totalPerMonth}</td>
+                    <td style="text-align: right;">${d.TC}</td>
+                    <td style="text-align: right;">${d.TI}</td>
+                    <td style="text-align: right;">${d.TPC}</td>
+                    <td style="text-align: right;">${d.TPI}</td>
+                    <td style="text-align: right;">${d.TPW}</td>                   
+                    <td style="text-align: right;">${d.TCA}</td>
+                    <td style="text-align: right;">${d.TIA}</td>
+                    <td style="text-align: right;">${d.TWA}</td>
+                    `
+            );
+          }
+          $('#x' + data.length).html(
+            `<td style=" font-weight:bold; ">Total</td>
+              <td></td>
+                    <td style="text-align: right; font-weight:bold;  ">${loanAmount.toFixed(
+                      2
+                    )}</td>
+                    <td style="text-align: right; font-weight:bold; ">${dockCharge.toFixed(
+                      2
+                    )}</td>
+                    <td style="text-align: right;"></td>
+                    <td style="text-align: right;"></td>
+                    <td style="text-align: right; font-weight:bold; ">${capital.toFixed(
+                      2
+                    )}</td>
+                    <td style="text-align: right; font-weight:bold; ">${interest.toFixed(
+                      2
+                    )}</td>
+                    <td style="text-align: right; font-weight:bold; ">${pCapital.toFixed(
+                      2
+                    )}</td>
+                    <td style="text-align: right; font-weight:bold; ">${pInterest.toFixed(
+                      2
+                    )}</td>
+                    <td style="text-align: right; font-weight:bold; ">${pWarant.toFixed(
+                      2
+                    )}</td>                   
+                    <td style="text-align: right; font-weight:bold; ">${aCapital.toFixed(
+                      2
+                    )}</td>
+                    <td style="text-align: right; font-weight:bold; ">${aInterest.toFixed(
+                      2
+                    )}</td>
+                    <td style="text-align: right; font-weight:bold; ">${aWarrant.toFixed(
+                      2
+                    )}</td>
+                    `
+          );
+
+          console.log(loanAmount);
+        },
+      });
+
+      //       {
+      //     "mainId": 1,
+      //     "TC": "583333.31",
+      //     "TI": "175000.00",
+      //     "TPC": "0.00",
+      //     "TPI": "25000.00",
+      //     "TCA": "416666.65",
+      //     "TIA": "100000.00",
+      //     "TWA": "15500.13",
+      //     "TPW": "0.00",
+      //     "loanType": "L",
+      //     "oderNumber": "L1",
+      //     "loanAmount": "1000000.00",
+      //     "dockCharge": "15000.00",
+      //     "totalLoanAmount": "1000000.00",
+      //     "monthsCount": 12,
+      //     "interestRate": "2.50",
+      //     "interestRateId": 3,
+      //     "startDate": "2021-10-04T18:30:00.000Z",
+      //     "capitalPerMonth": "83333.33",
+      //     "interestPerMonth": "25000.00",
+      //     "totalPerMonth": "108333.33",
+      //     "NonRefundableAdvance": "0.00",
+      //     "downPayment": "0.00",
+      //     "projectId": null,
+      //     "projectName": null,
+      //     "blockNumber": null,
+      //     "propertyName": null,
+      //     "propertyCode": null,
+      //     "status": 1,
+      //     "customerId": 1,
+      //     "oderNumberInt": 1,
+      //     "monthlyPayDate": "05",
+      //     "value": "0.00",
+      //     "discount": "0.00",
+      //     "sellingPrice": "0.00",
+      //     "finaladvance": "0.00",
+      //     "ep": "0.00",
+      //     "perches": null
+      // }
+
+      //   }
+    </script>
+  </body>
+</html>

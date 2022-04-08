@@ -79,22 +79,34 @@
             <button
               mat-raised-button
               class="btn btn-success"
-              (click)="incomeexpence()"
+              (click)="incomeexpenceLoan()"
             >
-              Income and Expenses
+              Income & Expenses Credit
             </button>
           </div>
         </div>
 
         <hr />
-
-        <button
-          mat-raised-button
-          class="btn btn-warning"
-          (click)="arrearsReport()"
-        >
-          Arrears Report
-        </button>
+        <div class="row">
+          <div class="col-4">
+            <button
+              mat-raised-button
+              class="btn btn-warning"
+              (click)="arrearsReport()"
+            >
+              Arrears Report
+            </button>
+          </div>
+          <div class="col-4">
+            <button
+              mat-raised-button
+              class="btn btn-info"
+              (click)="creditMain()"
+            >
+              Credit Main
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   </div>
