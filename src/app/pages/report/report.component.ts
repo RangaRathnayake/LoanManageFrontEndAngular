@@ -21,10 +21,21 @@ export class ReportComponent implements OnInit {
         type: 'L',
       },
     };
-    window.open(
-      this.reportPath + 'all.html?data=' + JSON.stringify(range),
-      '_blank'
-    );
+
+    if (range.range.from != null && range.range.to != null) {
+      console.log('range Ok');
+      window.open(
+        this.reportPath + 'all.html?data=' + JSON.stringify(range),
+        '_blank'
+      );
+    } else {
+      range.range.from = '2021-01-01';
+      range.range.to = '2035-01-01';
+      window.open(
+        this.reportPath + 'all.html?data=' + JSON.stringify(range),
+        '_blank'
+      );
+    }
   }
 
   alltransLoan() {
@@ -35,10 +46,21 @@ export class ReportComponent implements OnInit {
         type: 'L',
       },
     };
-    window.open(
-      this.reportPath + 'incomeLoan.html?data=' + JSON.stringify(range),
-      '_blank'
-    );
+
+    if (range.range.from != null && range.range.to != null) {
+      console.log('range Ok');
+      window.open(
+        this.reportPath + 'incomeLoan.html?data=' + JSON.stringify(range),
+        '_blank'
+      );
+    } else {
+      range.range.from = '2021-01-01';
+      range.range.to = '2035-01-01';
+      window.open(
+        this.reportPath + 'incomeLoan.html?data=' + JSON.stringify(range),
+        '_blank'
+      );
+    }
   }
 
   alltransprop() {
@@ -49,10 +71,21 @@ export class ReportComponent implements OnInit {
         type: 'P',
       },
     };
-    window.open(
-      this.reportPath + 'incomeProp.html?data=' + JSON.stringify(range),
-      '_blank'
-    );
+
+    if (range.range.from != null && range.range.to != null) {
+      console.log('range Ok');
+      window.open(
+        this.reportPath + 'incomeProp.html?data=' + JSON.stringify(range),
+        '_blank'
+      );
+    } else {
+      range.range.from = '2021-01-01';
+      range.range.to = '2035-01-01';
+      window.open(
+        this.reportPath + 'incomeProp.html?data=' + JSON.stringify(range),
+        '_blank'
+      );
+    }
   }
 
   expenses() {
@@ -62,10 +95,21 @@ export class ReportComponent implements OnInit {
         to: this.to,
       },
     };
-    window.open(
-      this.reportPath + 'expences.html?data=' + JSON.stringify(range),
-      '_blank'
-    );
+
+    if (range.range.from != null && range.range.to != null) {
+      console.log('range Ok');
+      window.open(
+        this.reportPath + 'expences.html?data=' + JSON.stringify(range),
+        '_blank'
+      );
+    } else {
+      range.range.from = '2021-01-01';
+      range.range.to = '2035-01-01';
+      window.open(
+        this.reportPath + 'expences.html?data=' + JSON.stringify(range),
+        '_blank'
+      );
+    }
   }
 
   arrearsReport() {
@@ -75,10 +119,21 @@ export class ReportComponent implements OnInit {
         to: this.to,
       },
     };
-    window.open(
-      this.reportPath + 'arrearsReport.html?data=' + JSON.stringify(range),
-      '_blank'
-    );
+
+    if (range.range.from != null && range.range.to != null) {
+      console.log('range Ok');
+      window.open(
+        this.reportPath + 'arrearsReport.html?data=' + JSON.stringify(range),
+        '_blank'
+      );
+    } else {
+      range.range.from = '2021-01-01';
+      range.range.to = '2035-01-01';
+      window.open(
+        this.reportPath + 'arrearsReport.html?data=' + JSON.stringify(range),
+        '_blank'
+      );
+    }
   }
 
   creditMain() {
@@ -98,10 +153,21 @@ export class ReportComponent implements OnInit {
         to: this.to,
       },
     };
-    window.open(
-      this.reportPath + 'newloandetails.html?data=' + JSON.stringify(range),
-      '_blank'
-    );
+
+    if (range.range.from != null && range.range.to != null) {
+      console.log('range Ok');
+      window.open(
+        this.reportPath + 'newloandetails.html?data=' + JSON.stringify(range),
+        '_blank'
+      );
+    } else {
+      range.range.from = '2021-01-01';
+      range.range.to = '2035-01-01';
+      window.open(
+        this.reportPath + 'newloandetails.html?data=' + JSON.stringify(range),
+        '_blank'
+      );
+    }
   }
 
   incomeexpenceLoan() {

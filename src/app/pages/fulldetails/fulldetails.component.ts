@@ -61,7 +61,9 @@ export class FulldetailsComponent implements OnInit {
 
   getmoreinfo(id) {
     this.apiCall.get('main/' + id, (result) => {
+      console.log('00000000000');
       console.log(result);
+      console.log('00000000000');
       this.mainData = result;
       this.loannumber = result.oderNumber;
       this.cusname = result.customer.name;

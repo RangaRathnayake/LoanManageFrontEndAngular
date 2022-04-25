@@ -20,6 +20,21 @@
           <p>Total Paid : {{ paid }}</p>
           <p>Current Loan Amount : {{ current }}</p>
           <p>Annual interest rate : {{ anualRate }}</p>
+          <p *ngIf="mainData.loanType == 'P'">
+            Non Refundable Advance : {{ mainData.NonRefundableAdvance }}
+          </p>
+          <p *ngIf="mainData.loanType == 'P'">
+            Discount : {{ mainData.discount }}
+          </p>
+          <p *ngIf="mainData.loanType == 'P'">
+            Down Payment : {{ mainData.downPayment }}
+          </p>
+          <p *ngIf="mainData.loanType == 'P'">
+            Final Advance : {{ mainData.finaladvance }}
+          </p>
+          <p *ngIf="mainData.loanType == 'P'">
+            Selling Price : {{ mainData.sellingPrice }}
+          </p>
         </div>
 
         <button
