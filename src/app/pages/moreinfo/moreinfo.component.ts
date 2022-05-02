@@ -43,6 +43,8 @@ export class MoreinfoComponent implements OnInit {
   capitalPerMonth: number = 0;
   interestPerMonth: number = 0;
   arrears: number = 0;
+  arrearsCapital: number = 0;
+  arrearsInterest: number = 0;
   warrant: number = 0;
   priviarsOver: number = 0;
 
@@ -117,6 +119,10 @@ export class MoreinfoComponent implements OnInit {
     this.apiCall.get('arrears/pending/' + id, (data) => {
       this.arrearsData = data;
 
+      console.log('-----------------------------------');
+      console.log(this.arrearsData);
+      console.log('-----------------------------------');
+
       this.arrearsData.forEach((element) => {
         this.totalCapital += Number(element.capital);
         this.totalInterest += Number(element.interest);
@@ -124,6 +130,8 @@ export class MoreinfoComponent implements OnInit {
         if (element.status == 2) {
           this.arrears +=
             Number(element.capitalArrears) + Number(element.interestArrears);
+          // this.arrearsInterest = Number(element.interestArrears);
+          // this.arrearsCapital = Number(element.capitalArrears);
           this.warrant += Number(element.warrant);
           this.totalHaveToPay +=
             Number(element.capitalArrears) +
@@ -197,6 +205,7 @@ export class MoreinfoComponent implements OnInit {
       if (this.arrearsData[x].warrant > 0) {
         if (Number(this.arrearsData[x].warrant) <= this.over) {
           this.payW += Number(this.arrearsData[x].warrant);
+          console.log('W  =' + this.payW);
           this.over = this.over - Number(this.arrearsData[x].warrant);
           this.arrearsData[x].warrantPaid =
             Number(this.arrearsData[x].warrantPaid) +
@@ -204,6 +213,7 @@ export class MoreinfoComponent implements OnInit {
           this.arrearsData[x].warrant = 0;
         } else {
           this.payW += this.over;
+          console.log('W  =' + this.payW);
           this.arrearsData[x].warrantPaid =
             Number(this.arrearsData[x].warrantPaid) + Number(this.over);
           this.arrearsData[x].warrant =
@@ -214,6 +224,8 @@ export class MoreinfoComponent implements OnInit {
 
       if (Number(this.arrearsData[x].interestArrears) > 0 && this.over > 0) {
         if (Number(this.arrearsData[x].interestArrears) <= this.over) {
+          this.arrearsInterest += Number(this.arrearsData[x].interestArrears);
+          console.log('AIA = ' + this.arrearsInterest);
           this.payA += Number(this.arrearsData[x].interestArrears);
           this.over = this.over - Number(this.arrearsData[x].interestArrears);
           this.arrearsData[x].interestPaid =
@@ -221,6 +233,8 @@ export class MoreinfoComponent implements OnInit {
             Number(this.arrearsData[x].interestArrears);
           this.arrearsData[x].interestArrears = 0;
         } else {
+          this.arrearsInterest += this.over;
+          console.log('AI = ' + this.arrearsInterest);
           this.payA += this.over;
           this.arrearsData[x].interestPaid =
             Number(this.arrearsData[x].interestPaid) + Number(this.over);
@@ -232,6 +246,8 @@ export class MoreinfoComponent implements OnInit {
 
       if (Number(this.arrearsData[x].capitalArrears) > 0 && this.over > 0) {
         if (Number(this.arrearsData[x].capitalArrears) <= this.over) {
+          this.arrearsCapital += Number(this.arrearsData[x].capitalArrears);
+          console.log('ACA = ' + this.arrearsCapital);
           this.payA += Number(this.arrearsData[x].capitalArrears);
           this.over = this.over - Number(this.arrearsData[x].capitalArrears);
           this.arrearsData[x].capitalPaid =
@@ -241,11 +257,16 @@ export class MoreinfoComponent implements OnInit {
           this.arrearsData[x].status = 1;
           this.arrearsData[x].completeDate = this.today;
         } else {
+          this.arrearsCapital += this.over;
+          console.log('AC = ' + this.arrearsCapital);
           this.payA += this.over;
+
           this.arrearsData[x].capitalPaid =
             Number(this.over) + Number(this.arrearsData[x].capitalPaid);
+
           this.arrearsData[x].capitalArrears =
             Number(this.arrearsData[x].capitalArrears) - this.over;
+
           this.over = 0;
         }
       }
@@ -317,6 +338,9 @@ export class MoreinfoComponent implements OnInit {
     this.priviarsOver = 0;
     this.totalInterest = 0;
     this.totalCapital = 0;
+    this.arrearsCapital = 0;
+    this.arrearsInterest = 0;
+    console.log(this.arrearsCapital, this.arrearsInterest);
   }
 
   pay() {
@@ -335,7 +359,8 @@ export class MoreinfoComponent implements OnInit {
           capital: this.payC,
           interest: this.payI,
           warant: this.payW,
-          arrears: this.payA,
+          arrears: this.arrearsCapital,
+          arrearsInterest: this.arrearsInterest,
           dockCharge: 0,
           monthCount: 1,
           nonRefund: 0,
