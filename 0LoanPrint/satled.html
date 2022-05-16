@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>R M C CREDIT & INVESTMENT (PVT) LTD</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      font-size: small;
+    }
+
+    .center {
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .left {
+      text-align: left;
+    }
+
+    .right {
+      text-align: left;
+    }
+
+    .alr {
+      text-align: right;
+    }
+
+    #customers {
+      font-family: Arial, Helvetica, sans-serif;
+      border-collapse: collapse;
+      width: 100%;
+    }
+
+    #customers td,
+    #customers th {
+      border: 1px solid #ddd;
+      padding: 8px;
+    }
+
+    #customers tr:nth-child(even) {
+      background-color: #f2f2f2;
+    }
+
+    #customers tr:hover {
+      background-color: #ddd;
+    }
+
+    #customers th {
+      padding-top: 12px;
+      padding-bottom: 12px;
+      text-align: left;
+      background-color: #04aa6d;
+      color: white;
+    }
+
+    @media print {
+
+      .no-print,
+      .no-print * {
+        display: none !important;
+      }
+    }
+
+    @media print {
+      #printPageButton {
+        display: none;
+      }
+    }
+  </style>
+</head>
+
+<body style="margin: 20px">
+  <h2 style="text-align: center">
+    <u>Settled Loan Report </u>
+  </h2>
+
+  <div>
+    <table style="margin-left: 10px; margin-right: 10px; width: 100%" id="customers"></table>
+  </div>
+
+  <br />
+
+  <hr class="no-print" />
+  <button class="no-print" id="printPageButton" onclick="window.print()">
+    PRINT
+  </button>
+  <br />
+
+  <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+  <script type="text/javascript">
+
+    function checkStatus(arg) {
+      console.log(arg);
+      return arg.main.status == 3;
+    }
+
+    let searchParams = new URLSearchParams(window.location.search);
+    // console.log(searchParams);
+    searchParams.has('data'); // true
+    if (searchParams.has('data')) {
+      let param = JSON.parse(searchParams.get('data'));
+      console.log(param.range.from);
+
+      // let d = new Date(param.day);
+      //
+
+      var table = document.getElementById('myTable');
+
+      var data = [];
+
+      $.ajax({
+        method: 'POST',
+        // url: "http://localhost:3000/transaction/getRange",
+        url: 'https://api.rmcinvesment.com/transaction/getRange',
+        data: param,
+        success: function (da) {
+
+          da.forEach(element => {
+            if (element.main.status == 3) {
+              data.push(element);
+            }
+          });
+
+          // console.log(data);
+          let Capital = 0;
+          let Interest = 0;
+          let warant = 0;
+          let Arrears = 0;
+          let DockCharge = 0;
+          let Nonref = 0;
+          let Advance = 0;
+          let Overpay = 0;
+          let totalFull = 0;
+
+          // <th style="background-color: #aa0404;">T A Capital</th>
+          // <th  style="background-color: #aa0404;">T A Interest</th>
+          // <th  style="background-color: #aa0404;">T A Warrant</th>
+
+          let htmlBody = `<thad>
+                  <th>Loan No.</th>
+                  <th>Date</th>
+                  <th>Capital</th>
+                  <th>Interest</th>
+                  <th>Warant</th>
+                  <th>Dock C.</th>
+                  <th>Non ref:</th>
+                  <th>Advance</th>
+                  <th>Over Pay</th>
+                  <th>Total</th>
+                  <th>Pay Type</th>
+                  <th>I. Rate</th> 
+                  </thad>`;
+
+
+          for (let i = 0; i <= data.length; i++) {
+
+
+            htmlBody += `<tr id="x${i}"></tr>`;
+            if (i < data.length) {
+              Capital = Number(Capital) + Number(data[i].capital) + Number(data[i].arrears);;
+              Interest = Number(Interest) + Number(data[i].interest) + Number(data[i].arrearsInterest);
+              warant = Number(warant) + Number(data[i].warant);
+              DockCharge = Number(DockCharge) + Number(data[i].dockCharge);
+              Nonref = Number(Nonref) + Number(data[i].nonRefund);
+              Advance = Number(Advance) + Number(data[i].advance);
+              Overpay = Number(Overpay) + Number(data[i].over);
+              totalFull = Number(totalFull) + Number(data[i].total);
+
+            }
+
+
+          }
+
+
+
+          $('#customers').html(htmlBody);
+
+          for (let i = 0; i <= data.length; i++) {
+
+
+
+            if (i < data.length) {
+              let d = data[i];
+              let date = new Date(d.day);
+              let month = date.getMonth() + 1;
+              let dd = String(date.getDate()).padStart(2, '0');
+              let year = date.getFullYear();
+              let output = year + '/' + month + '/' + dd;
+
+              $('#x' + i).html(
+                `     <td>${d.main.oderNumber}</td>
+                    <td style="text-align: right;">${output}</td>                   
+                    <td style="text-align: right;">${Number(d.capital) + Number(d.arrears)}</td>
+                    <td style="text-align: right;">${Number(d.interest) + Number(d.arrearsInterest)}</td>
+                    <td style="text-align: right;">${d.warant}</td>
+                    <td style="text-align: right;">${d.dockCharge}</td>
+                    <td style="text-align: right;">${d.nonRefund}</td>
+                    <td style="text-align: right;">${d.advance}</td>
+                    <td style="text-align: right;">${d.over}</td>                   
+                    <td style="text-align: right;">${d.total}</td>                   
+                    <td style="text-align: right;">${d.payType}</td>
+                    <td style="text-align: right;">${d.interestRate}</td>                  
+                    `
+              );
+            }
+
+
+          }
+          $('#x' + data.length).html(
+            `<td style=" font-weight:bold; ">Total</td>
+             <td></td>
+             <td style="text-align: right; font-weight:bold;  ">${Capital.toFixed(2)}</td>
+             <td style="text-align: right; font-weight:bold; ">${Interest.toFixed(2)}</td>
+             <td style="text-align: right; font-weight:bold; ">${warant.toFixed(2)}</td>
+             <td style="text-align: right; font-weight:bold; ">${DockCharge.toFixed(2)}</td>
+             <td style="text-align: right; font-weight:bold; ">${Nonref.toFixed(2)}</td>
+             <td style="text-align: right; font-weight:bold; ">${Advance.toFixed(2)}</td>
+             <td style="text-align: right; font-weight:bold; ">${Overpay.toFixed(2)}</td>
+             <td style="text-align: right; font-weight:bold; ">${totalFull.toFixed(2)}</td>
+             <td></td> <td></td>
+             `
+          );
+
+
+          console.log(Capital);
+          console.log(Interest);
+          console.log(warant);
+          console.log(Arrears);
+          console.log(DockCharge);
+          console.log(Nonref);
+          console.log(Advance);
+          console.log(Overpay);
+        },
+      });
+    }
+  </script>
+
+</body>
+
+</html>

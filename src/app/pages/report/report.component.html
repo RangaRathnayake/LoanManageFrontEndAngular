@@ -9,12 +9,7 @@
         <div class="row">
           <div class="col-md-6">
             <mat-form-field class="example-full-width">
-              <input
-                matInput
-                placeholder="From"
-                type="date"
-                [(ngModel)]="from"
-              />
+              <input matInput placeholder="From" type="date" [(ngModel)]="from" />
             </mat-form-field>
           </div>
 
@@ -25,62 +20,45 @@
           </div>
         </div>
         <div class="row">
+
           <div class="col-4">
-            <button
-              mat-raised-button
-              class="btn btn-success"
-              (click)="alltrans()"
-            >
+            <button mat-raised-button class="btn btn-success" (click)="alltrans()">
               All Income
             </button>
           </div>
 
           <div class="col-4">
-            <button
-              mat-raised-button
-              class="btn btn-success"
-              (click)="expenses()"
-            >
+            <button mat-raised-button class="btn btn-success" (click)="satled()">
+              Settled Loan
+            </button>
+          </div>
+
+          <div class="col-4">
+            <button mat-raised-button class="btn btn-success" (click)="expenses()">
               All expenses
             </button>
           </div>
 
           <div class="col-4">
-            <button
-              mat-raised-button
-              class="btn btn-success"
-              (click)="alltransLoan()"
-            >
+            <button mat-raised-button class="btn btn-success" (click)="alltransLoan()">
               Income Loan
             </button>
           </div>
 
           <div class="col-4">
-            <button
-              mat-raised-button
-              class="btn btn-success"
-              (click)="alltransprop()"
-            >
+            <button mat-raised-button class="btn btn-success" (click)="alltransprop()">
               Income Property
             </button>
           </div>
 
           <div class="col-4">
-            <button
-              mat-raised-button
-              class="btn btn-success"
-              (click)="newloandetails()"
-            >
+            <button mat-raised-button class="btn btn-success" (click)="newloandetails()">
               New Loan Details
             </button>
           </div>
 
           <div class="col-4">
-            <button
-              mat-raised-button
-              class="btn btn-success"
-              (click)="incomeexpenceLoan()"
-            >
+            <button mat-raised-button class="btn btn-success" (click)="incomeexpenceLoan()">
               Income & Expenses Credit
             </button>
           </div>
@@ -89,20 +67,12 @@
         <hr />
         <div class="row">
           <div class="col-4">
-            <button
-              mat-raised-button
-              class="btn btn-warning"
-              (click)="arrearsReport()"
-            >
+            <button mat-raised-button class="btn btn-warning" (click)="arrearsReport()">
               Arrears Report
             </button>
           </div>
           <div class="col-4">
-            <button
-              mat-raised-button
-              class="btn btn-info"
-              (click)="creditMain()"
-            >
+            <button mat-raised-button class="btn btn-info" (click)="creditMain()">
               Credit Main
             </button>
           </div>
