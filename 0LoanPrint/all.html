@@ -116,6 +116,7 @@
           let Nonref = 0;
           let Advance = 0;
           let Overpay = 0;
+          let totalFull = 0;
 
           // <th style="background-color: #aa0404;">T A Capital</th>
           // <th  style="background-color: #aa0404;">T A Interest</th>
@@ -131,6 +132,7 @@
                   <th>Non ref:</th>
                   <th>Advance</th>
                   <th>Over Pay</th>
+                  <th>Total</th>
                   <th>Pay Type</th>
                   <th>I. Rate</th> 
                   </thad>`;
@@ -146,7 +148,7 @@
               Nonref = Number(Nonref) + Number(data[i].nonRefund);
               Advance = Number(Advance) + Number(data[i].advance);
               Overpay = Number(Overpay) + Number(data[i].over);
-
+              totalFull = Number(totalFull) + Number(data[i].total);
 
             }
           }
@@ -174,6 +176,7 @@
                     <td style="text-align: right;">${d.nonRefund}</td>
                     <td style="text-align: right;">${d.advance}</td>
                     <td style="text-align: right;">${d.over}</td>                   
+                    <td style="text-align: right;">${d.total}</td>                   
                     <td style="text-align: right;">${d.payType}</td>
                     <td style="text-align: right;">${d.interestRate}</td>                  
                     `
@@ -191,6 +194,7 @@
              <td style="text-align: right; font-weight:bold; ">${Nonref.toFixed(2)}</td>
              <td style="text-align: right; font-weight:bold; ">${Advance.toFixed(2)}</td>
              <td style="text-align: right; font-weight:bold; ">${Overpay.toFixed(2)}</td>
+             <td style="text-align: right; font-weight:bold; ">${totalFull.toFixed(2)}</td>
              <td></td> <td></td>
              `
           );

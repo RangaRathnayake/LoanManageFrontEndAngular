@@ -1,0 +1,82 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="card">
+            <div class="card-header card-header-success">
+                <h4 class="card-title">Payment Histry</h4>
+                <p class="card-category"></p>
+            </div>
+            <div class="card-body">
+                <div *ngFor="let item of transactionData">
+                    <div style="font-size: 20px ; margin: auto;">
+                        <table style="margin: auto; min-width: 400px;">
+                            <tr *ngIf="item.id>0">
+                                <td>Receipt No </td>
+                                <td style="text-align: right;">
+                                    {{item.id}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td> Date : </td>
+                                <td style="text-align: right;">{{item.day | date :'mediumDate'}}</td>
+                            </tr>
+                            <tr>
+                                <td>&nbsp; </td>
+                                <td>&nbsp; </td>
+                            </tr>
+                            <tr *ngIf="item.warant>0">
+                                <td>Warant</td>
+                                <td style="text-align: right;">{{item.warant| currency:' '}}</td>
+                            </tr>
+                            <tr *ngIf="item.arrears>0">
+                                <td>Arrears Capital </td>
+                                <td style="text-align: right;">{{item.arrears| currency:' '}}</td>
+                            </tr>
+                            <tr *ngIf="item.arrearsInterest>0">
+                                <td>Arrears Interest </td>
+                                <td style="text-align: right;">{{item.arrearsInterest| currency:' '}}</td>
+                            </tr>
+                            <tr *ngIf="item.interest>0">
+                                <td>Interest </td>
+                                <td style="text-align: right;">{{item.interest| currency:' '}}</td>
+                            </tr>
+                            <tr *ngIf="item.capital>0">
+                                <td>Capital </td>
+                                <td style="text-align: right;">{{item.capital| currency:' '}}</td>
+                            </tr>
+                            <tr *ngIf="item.nonRefund>0">
+                                <td>Non Refundable</td>
+                                <td style="text-align: right;">{{item.nonRefund| currency:' '}}</td>
+                            </tr>
+                            <tr *ngIf="item.advance>0">
+                                <td>Advance</td>
+                                <td style="text-align: right;">{{item.advance| currency:' '}}</td>
+                            </tr>
+                            <tr *ngIf="item.dockCharge>0">
+                                <td>Dock. Charge</td>
+                                <td style="text-align: right;">{{item.dockCharge| currency:' '}}</td>
+                            </tr>
+                            <tr *ngIf="item.otherPay>0">
+                                <td>otherPay</td>
+                                <td style="text-align: right;">{{item.otherPay| currency:' '}}</td>
+                            </tr>
+                            <tr *ngIf="item.over>0">
+                                <td>over</td>
+                                <td style="text-align: right;">{{item.over| currency:' '}}</td>
+                            </tr>
+                            <tr *ngIf="item.total>0" style="font-weight: bold;">
+                                <td>TOTAL</td>
+                                <td style="text-align: right;">{{item.total| currency:' '}}</td>
+                            </tr>
+                        </table>
+                        <button mat-button (click)="more(item.id)" class="btn btn-info  pull-right">{{item.id}}</button>
+                        <br>
+                        <hr>
+                        <hr>
+                        <br>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -20,85 +20,63 @@
           <p>Total Paid : {{ paid }}</p>
           <p>Current Loan Amount : {{ current }}</p>
           <p>Annual interest rate : {{ anualRate }}</p>
-          <p *ngIf="mainData.loanType == 'P'">
+          <p *ngIf="mainData && mainData.loanType == 'P'">
             Non Refundable Advance : {{ mainData.NonRefundableAdvance }}
           </p>
-          <p *ngIf="mainData.loanType == 'P'">
+          <p *ngIf="mainData && mainData.loanType == 'P'">
             Discount : {{ mainData.discount }}
           </p>
-          <p *ngIf="mainData.loanType == 'P'">
+          <p *ngIf="mainData && mainData.loanType == 'P'">
             Down Payment : {{ mainData.downPayment }}
           </p>
-          <p *ngIf="mainData.loanType == 'P'">
+          <p *ngIf="mainData && mainData.loanType == 'P'">
             Final Advance : {{ mainData.finaladvance }}
           </p>
-          <p *ngIf="mainData.loanType == 'P'">
+          <p *ngIf="mainData && mainData.loanType == 'P'">
             Selling Price : {{ mainData.sellingPrice }}
           </p>
         </div>
 
-        <button
-          *ngIf="mainData && mainData.status == 1"
-          mat-raised-button
-          class="btn btn-danger pull-right"
-          (click)="settlement()"
-        >
+        <button *ngIf="mainData && mainData.status == 1" mat-raised-button class="btn btn-danger pull-right"
+          (click)="settlement()">
           Settlement
         </button>
 
-        <button
-          mat-raised-button
-          class="btn btn-success pull-right"
-          (click)="Getadvance()"
-          *ngIf="loanType === 'P'"
-        >
+        <button mat-raised-button class="btn btn-success pull-right" (click)="Getadvance()"
+          *ngIf="mainData && loanType === 'P'">
           Advance
         </button>
 
-        <button
-          mat-raised-button
-          class="btn btn-success pull-right"
-          (click)="edit()"
-        >
+        <button mat-raised-button class="btn btn-success pull-right" (click)="edit()">
           Edit
         </button>
 
-        <button
-          mat-raised-button
-          class="btn pull-right"
-          (click)="printOnFile()"
-        >
+        <button mat-raised-button class="btn pull-right" (click)="printOnFile()">
           Print On File
         </button>
 
         <button mat-raised-button class="btn pull-right">Print Cheque</button>
 
-        <button
-          *ngIf="user.utype.id < 3 && !clickOnApprove"
-          mat-raised-button
-          class="btn btn-warning pull-right"
-          (click)="approve()"
-        >
+        <button *ngIf="user.utype.id < 3 && !clickOnApprove" mat-raised-button class="btn btn-warning pull-right"
+          (click)="approve()">
           Approve This Loan
         </button>
 
-        <button
-          *ngIf="mainData && mainData.status == 1"
-          mat-raised-button
-          class="btn btn-success pull-right"
-          (click)="more()"
-        >
+        <button *ngIf="mainData && mainData.status == 1" mat-raised-button class="btn btn-success pull-right"
+          (click)="more()">
           Get Instalment Payment
         </button>
 
-        <button
-          *ngIf="mainData && mainData.status == 1"
-          mat-raised-button
-          class="btn btn-success pull-right"
-          (click)="dockCharge()"
-        >
+        <button *ngIf="mainData && mainData.status == 1" mat-raised-button class="btn btn-success pull-right"
+          (click)="dockCharge()">
           Get Dock Charge
         </button>
+
+        <button *ngIf="mainData && mainData.status == 1" mat-raised-button class="btn btn-info pull-right"
+          (click)="histry()">
+          Pay History
+        </button>
+
       </div>
     </div>
   </div>

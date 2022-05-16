@@ -160,4 +160,8 @@ export class FulldetailsComponent implements OnInit {
   Getadvance() {
     this.router.navigate(['proploan', this.mainId]);
   }
+
+  histry() {
+    this.router.navigate(['histry', this.mainId]);
+  }
 }

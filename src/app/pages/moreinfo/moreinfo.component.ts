@@ -225,6 +225,7 @@ export class MoreinfoComponent implements OnInit {
       if (Number(this.arrearsData[x].interestArrears) > 0 && this.over > 0) {
         if (Number(this.arrearsData[x].interestArrears) <= this.over) {
           this.arrearsInterest += Number(this.arrearsData[x].interestArrears);
+
           console.log('AIA = ' + this.arrearsInterest);
           this.payA += Number(this.arrearsData[x].interestArrears);
           this.over = this.over - Number(this.arrearsData[x].interestArrears);
@@ -234,19 +235,21 @@ export class MoreinfoComponent implements OnInit {
           this.arrearsData[x].interestArrears = 0;
         } else {
           this.arrearsInterest += this.over;
+
           console.log('AI = ' + this.arrearsInterest);
           this.payA += this.over;
           this.arrearsData[x].interestPaid =
             Number(this.arrearsData[x].interestPaid) + Number(this.over);
           this.arrearsData[x].interestArrears =
             Number(this.arrearsData[x].interestArrears) - this.over;
-          this.over += 0;
+          this.over = 0;
         }
       }
 
       if (Number(this.arrearsData[x].capitalArrears) > 0 && this.over > 0) {
         if (Number(this.arrearsData[x].capitalArrears) <= this.over) {
           this.arrearsCapital += Number(this.arrearsData[x].capitalArrears);
+
           console.log('ACA = ' + this.arrearsCapital);
           this.payA += Number(this.arrearsData[x].capitalArrears);
           this.over = this.over - Number(this.arrearsData[x].capitalArrears);
@@ -258,6 +261,7 @@ export class MoreinfoComponent implements OnInit {
           this.arrearsData[x].completeDate = this.today;
         } else {
           this.arrearsCapital += this.over;
+
           console.log('AC = ' + this.arrearsCapital);
           this.payA += this.over;
 

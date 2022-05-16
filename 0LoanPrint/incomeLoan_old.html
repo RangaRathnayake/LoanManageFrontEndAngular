@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>R M C CREDIT & INVESTMENT (PVT) LTD</title>
+    <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <style>
+      table {
+        border-collapse: collapse;
+        border: 1px solid black;
+      }
+
+      th,
+      td {
+        border: 1px solid black;
+      }
+
+      table.c {
+        table-layout: auto;
+        width: 100%;
+        padding-top: 70px;
+      }
+
+      @media print {
+        .no-print,
+        .no-print * {
+          display: none !important;
+        }
+      }
+
+      @media print {
+        #printPageButton {
+          display: none;
+        }
+      }
+
+      .mar {
+        /* font: 14px sans-serif;
+            color: darkslateblue;
+            border: 5px dashed darkslateblue; */
+        margin: 100px;
+        padding: 10px;
+        text-align: center;
+      }
+    </style>
+    <script async src="/cdn-cgi/bm/cv/669835187/api.js"></script>
+  </head>
+
+  <body>
+    <h2 style="text-align: center"><u>All Transaction Report - Loan</u></h2>
+
+    <div class="mar">
+      <table id="myTable" class="c">
+        <tr>
+          <th></th>
+          <th></th>
+        </tr>
+      </table>
+    </div>
+
+    <br />
+
+    <hr class="no-print" />
+    <button class="no-print" id="printPageButton" onclick="window.print()">
+      PRINT
+    </button>
+    <br />
+
+    <script>
+      let searchParams = new URLSearchParams(window.location.search);
+      // console.log(searchParams);
+      searchParams.has('data'); // true
+      if (searchParams.has('data')) {
+        let param = JSON.parse(searchParams.get('data'));
+        console.log(param.range.from);
+
+        // let d = new Date(param.day);
+        //
+
+        var table = document.getElementById('myTable');
+
+        $.ajax({
+          method: 'POST',
+          // url: 'http://localhost:3000/transaction/getIncome',
+          url: 'https://api.rmcinvesment.com/transaction/getIncome',
+          data: param,
+          success: function (data) {
+            let Capital = 0;
+            let Interest = 0;
+            let warant = 0;
+            let Arrears = 0;
+            let DockCharge = 0;
+            let Nonref = 0;
+            let Advance = 0;
+            let Overpay = 0;
+
+            for (let i = 0; i < data.length; i++) {
+              console.log(data[i]);
+
+              var row = table.insertRow(i);
+
+              var cell1 = row.insertCell(0);
+              var cell2 = row.insertCell(1);
+              var cell3 = row.insertCell(2);
+              var cell4 = row.insertCell(3);
+              var cell5 = row.insertCell(4);
+              var cell6 = row.insertCell(5);
+              var cell7 = row.insertCell(6);
+              // var cell8 = row.insertCell(7);
+              // var cell9 = row.insertCell(8);
+              // var cell10 = row.insertCell(9);
+              var cell11 = row.insertCell(7);
+              var cell12 = row.insertCell(8);
+
+              //  var dt = new Date(d.production_date);
+
+              let d = new Date(data[i].day);
+              let month = d.getMonth()+1;
+              let day = String(d.getDate()).padStart(2, '0');
+              let year = d.getFullYear();
+              let output = year + '/' + month + '/' + day;
+
+              cell1.innerHTML = data[i].main.oderNumber;
+              cell2.innerHTML = output;
+              cell3.innerHTML = data[i].capital;
+              cell4.innerHTML = data[i].interest;
+              cell5.innerHTML = data[i].warant;
+              cell6.innerHTML = data[i].arrears;
+              cell7.innerHTML = data[i].dockCharge;
+              // cell8.innerHTML = data[i].nonRefund;
+              // cell9.innerHTML = data[i].advance;
+              // cell10.innerHTML = data[i].over;
+              cell11.innerHTML = data[i].payType;
+              cell12.innerHTML = data[i].main.interestRate;
+
+              cell1.style.textAlign = 'center';
+              cell2.style.textAlign = 'center';
+              cell3.style.textAlign = 'right';
+              cell4.style.textAlign = 'right';
+              cell5.style.textAlign = 'right';
+              cell6.style.textAlign = 'right';
+              cell7.style.textAlign = 'right';
+              // cell8.style.textAlign = 'right';
+              // cell9.style.textAlign = 'right';
+              // cell10.style.textAlign = 'right';
+              cell11.style.textAlign = 'center';
+              cell12.style.textAlign = 'center';
+
+              Capital = Number(Capital) + Number(data[i].capital);
+              Interest = Number(Interest) + Number(data[i].interest);
+              warant = Number(warant) + Number(data[i].warant);
+              Arrears = Number(Arrears) + Number(data[i].arrears);
+              DockCharge = Number(DockCharge) + Number(data[i].dockCharge);
+              Nonref = Number(Nonref) + Number(data[i].nonRefund);
+              Advance = Number(Advance) + Number(data[i].advance);
+              Overpay = Number(Overpay) + Number(data[i].over);
+            }
+
+            var newRow = table.insertRow();
+            var celtot1 = newRow.insertCell(0);
+            var celtot11 = newRow.insertCell(1);
+            var celtot12 = newRow.insertCell(2);
+            var celtot2 = newRow.insertCell(3);
+            var celtot3 = newRow.insertCell(4);
+            var celtot4 = newRow.insertCell(5);
+            var celtot5 = newRow.insertCell(6);
+            // var celtot6 = newRow.insertCell(7);
+            // var celtot7 = newRow.insertCell(8);
+            // var celtot8 = newRow.insertCell(9);
+            // var celtot9 = newRow.insertCell(10);
+            // var celtot10 = newRow.insertCell(11);
+
+            celtot1.innerHTML = 'Total';
+            celtot11.innerHTML = '-';
+            celtot12.innerHTML = Capital.toFixed(2);
+            celtot2.innerHTML = Interest.toFixed(2);
+            celtot3.innerHTML = warant.toFixed(2);
+            celtot4.innerHTML = Arrears.toFixed(2);
+            celtot5.innerHTML = DockCharge.toFixed(2);
+            // celtot6.innerHTML = Nonref.toFixed(2);
+            // celtot7.innerHTML = Advance.toFixed(2);
+            // celtot8.innerHTML = Overpay.toFixed(2);
+            // celtot9.innerHTML = '-';
+            // celtot10.innerHTML = '-';
+
+            celtot12.style.textAlign = 'right';
+            celtot2.style.textAlign = 'right';
+            celtot3.style.textAlign = 'right';
+            celtot4.style.textAlign = 'right';
+            celtot5.style.textAlign = 'right';
+            // celtot6.style.textAlign = 'right';
+            // celtot7.style.textAlign = 'right';
+            // celtot8.style.textAlign = 'right';
+
+            var rows = table.insertRow(0);
+            var cell11 = rows.insertCell(0);
+            var cell21 = rows.insertCell(1);
+            var cell31 = rows.insertCell(2);
+            var cell41 = rows.insertCell(3);
+            var cell51 = rows.insertCell(4);
+            var cell61 = rows.insertCell(5);
+            var cell71 = rows.insertCell(6);
+            // var cell81 = rows.insertCell(7);
+            // var cell91 = rows.insertCell(8);
+            // var cell101 = rows.insertCell(9);
+            var cell111 = rows.insertCell(7);
+            var cell121 = rows.insertCell(8);
+
+            cell11.innerHTML = '<b> Loan num </b>';
+            cell21.innerHTML = ' <b> Date </b>';
+
+            cell31.innerHTML = '<b> Capital </b>';
+            cell41.innerHTML = ' <b> Interest </b>';
+
+            cell51.innerHTML = '<b> warant </b>';
+            cell61.innerHTML = ' <b> Arrears </b>';
+
+            cell71.innerHTML = '<b> DockCharge </b>';
+            // cell81.innerHTML = ' <b>Non ref: </b>';
+
+            // cell91.innerHTML = '<b> Advance </b>';
+            // cell101.innerHTML = ' <b> Over pay </b>';
+
+            cell111.innerHTML = '<b> Pay Type </b>';
+            cell121.innerHTML = ' <b>M. Interest Rate </b>';
+
+            cell11.style.textAlign = 'center';
+            cell21.style.textAlign = 'center';
+
+            cell31.style.textAlign = 'center';
+            cell41.style.textAlign = 'center';
+
+            cell51.style.textAlign = 'center';
+            cell61.style.textAlign = 'center';
+
+            cell71.style.textAlign = 'center';
+            // cell81.style.textAlign = 'center';
+
+            // cell91.style.textAlign = 'center';
+            // cell101.style.textAlign = 'center';
+
+            cell111.style.textAlign = 'center';
+            cell121.style.textAlign = 'center';
+
+            console.log(Capital);
+            console.log(Interest);
+            console.log(warant);
+            console.log(Arrears);
+            console.log(DockCharge);
+            console.log(Nonref);
+            console.log(Advance);
+            console.log(Overpay);
+          },
+        });
+      }
+    </script>
+    <script type="text/javascript">
+      (function () {
+        window['__CF$cv$params'] = {
+          r: '6d84b24dd9304cb0',
+          m: 'LKbOh..LemaxrXxD9scmupIA_hEOBXw1d9vGIq99TR0-1643986070-0-AU1dnzUDmd9NyBMZ+J3CWa+VBS7X0P362AAs/5aPM4SUsEVmn59RDAbAu+EYP2dWK7kkih5l1/G6FDyusCxS74B27y3jClUgyMfKIys8UE9uaMHrwCENTNZ70PhUWJWaL/q4SYwD0kvwQmNPs28s+whE9au7HEvGAqiTOxIskl/5NIKYG/qnKFNgIWudgsWJnw==',
+          s: [0x61f12ecd5d, 0xc7decea728],
+        };
+      })();
+    </script>
+  </body>
+</html>
