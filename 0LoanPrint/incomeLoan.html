@@ -128,6 +128,7 @@
                     // <th  style="background-color: #aa0404;">T A Warrant</th>
 
                     let htmlBody = `<thad>
+                        <th>R. No.</th>
                     <th>Loan No.</th>
                     <th>Date</th>
                     <th>Capital</th>
@@ -172,10 +173,10 @@
                             let output = year + '/' + month + '/' + dd;
 
                             $('#x' + i).html(
-                                `     <td>${d.main.oderNumber}</td>
+                                `  <td>${d.id}</td>   <td>${d.main.oderNumber}</td>
                       <td style="text-align: right;">${output}</td>                   
-                      <td style="text-align: right;">${Number(d.capital) + Number(d.arrears)}</td>
-                      <td style="text-align: right;">${Number(d.interest) + Number(d.arrearsInterest)}</td>
+                      <td style="text-align: right;">${(Number(d.capital) + Number(d.arrears)).toFixed(2)}</td>
+                      <td style="text-align: right;">${(Number(d.interest) + Number(d.arrearsInterest)).toFixed(2)}</td>
                       <td style="text-align: right;">${d.warant}</td>
                       <td style="text-align: right;">${d.dockCharge}</td>
                       <td style="text-align: right;">${d.nonRefund}</td>
@@ -191,7 +192,7 @@
                     }
                     $('#x' + data.length).html(
                         `<td style=" font-weight:bold; ">Total</td>
-               <td></td>
+                        <td></td><td></td>
                <td style="text-align: right; font-weight:bold;  ">${Capital.toFixed(2)}</td>
                <td style="text-align: right; font-weight:bold; ">${Interest.toFixed(2)}</td>
                <td style="text-align: right; font-weight:bold; ">${warant.toFixed(2)}</td>

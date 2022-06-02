@@ -6,77 +6,164 @@
                 <p class="card-category"></p>
             </div>
             <div class="card-body">
-                <div *ngFor="let item of transactionData">
-                    <div style="font-size: 20px ; margin: auto;">
-                        <table style="margin: auto; min-width: 400px;">
-                            <tr *ngIf="item.id>0">
-                                <td>Receipt No </td>
-                                <td style="text-align: right;">
-                                    {{item.id}}
-                                </td>
-                            </tr>
-                            <tr>
-                                <td> Date : </td>
-                                <td style="text-align: right;">{{item.day | date :'mediumDate'}}</td>
-                            </tr>
-                            <tr>
-                                <td>&nbsp; </td>
-                                <td>&nbsp; </td>
-                            </tr>
-                            <tr *ngIf="item.warant>0">
-                                <td>Warant</td>
-                                <td style="text-align: right;">{{item.warant| currency:' '}}</td>
-                            </tr>
-                            <tr *ngIf="item.arrears>0">
-                                <td>Arrears Capital </td>
-                                <td style="text-align: right;">{{item.arrears| currency:' '}}</td>
-                            </tr>
-                            <tr *ngIf="item.arrearsInterest>0">
-                                <td>Arrears Interest </td>
-                                <td style="text-align: right;">{{item.arrearsInterest| currency:' '}}</td>
-                            </tr>
-                            <tr *ngIf="item.interest>0">
-                                <td>Interest </td>
-                                <td style="text-align: right;">{{item.interest| currency:' '}}</td>
-                            </tr>
-                            <tr *ngIf="item.capital>0">
-                                <td>Capital </td>
-                                <td style="text-align: right;">{{item.capital| currency:' '}}</td>
-                            </tr>
-                            <tr *ngIf="item.nonRefund>0">
-                                <td>Non Refundable</td>
-                                <td style="text-align: right;">{{item.nonRefund| currency:' '}}</td>
-                            </tr>
-                            <tr *ngIf="item.advance>0">
-                                <td>Advance</td>
-                                <td style="text-align: right;">{{item.advance| currency:' '}}</td>
-                            </tr>
-                            <tr *ngIf="item.dockCharge>0">
-                                <td>Dock. Charge</td>
-                                <td style="text-align: right;">{{item.dockCharge| currency:' '}}</td>
-                            </tr>
-                            <tr *ngIf="item.otherPay>0">
-                                <td>otherPay</td>
-                                <td style="text-align: right;">{{item.otherPay| currency:' '}}</td>
-                            </tr>
-                            <tr *ngIf="item.over>0">
-                                <td>over</td>
-                                <td style="text-align: right;">{{item.over| currency:' '}}</td>
-                            </tr>
-                            <tr *ngIf="item.total>0" style="font-weight: bold;">
-                                <td>TOTAL</td>
-                                <td style="text-align: right;">{{item.total| currency:' '}}</td>
-                            </tr>
-                        </table>
-                        <button mat-button (click)="more(item.id)" class="btn btn-info  pull-right">{{item.id}}</button>
-                        <br>
-                        <hr>
-                        <hr>
-                        <br>
 
-                    </div>
+
+
+                <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" style="width: 100%;">
+                    <ng-container matColumnDef="id">
+                        <th mat-header-cell *matHeaderCellDef>R. No </th>
+                        <td mat-cell *matCellDef="let element">
+                            {{ element.id }}
+                        </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="day">
+                        <th mat-header-cell *matHeaderCellDef>Date</th>
+                        <td mat-cell *matCellDef="let element">
+                            {{ element.day | date :'mediumDate' }}
+                        </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="warant">
+                        <th mat-header-cell *matHeaderCellDef style="text-align: right;">Warant</th>
+                        <td mat-cell *matCellDef="let element" style="text-align: right;">
+                            {{ element.warant| currency:' ' }}
+                        </td>
+                    </ng-container>
+
+
+
+                    <ng-container matColumnDef="interest">
+                        <th mat-header-cell *matHeaderCellDef style="text-align: right;">Interest</th>
+                        <td mat-cell *matCellDef="let element" style="text-align: right;">
+                            {{callTwo(element.interest, element.arrearsInterest) | currency:' ' }}
+                        </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="capital">
+                        <th mat-header-cell *matHeaderCellDef style="text-align: right;">Capital</th>
+                        <td mat-cell *matCellDef="let element" style="text-align: right;">
+                            {{callTwo(element.capital, element.arrears) | currency:' ' }}
+                        </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="nonRefund">
+                        <th mat-header-cell *matHeaderCellDef style="text-align: right;">Non. Refund</th>
+                        <td mat-cell *matCellDef="let element" style="text-align: right;">
+                            {{ element.nonRefund| currency:' ' }}
+                        </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="advance">
+                        <th mat-header-cell *matHeaderCellDef style="text-align: right;">Advance</th>
+                        <td mat-cell *matCellDef="let element" style="text-align: right;">
+                            {{ element.advance| currency:' ' }}
+                        </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="dockCharge">
+                        <th mat-header-cell *matHeaderCellDef style="text-align: right;">Do. Charge</th>
+                        <td mat-cell *matCellDef="let element" style="text-align: right;">
+                            {{ element.dockCharge| currency:' ' }}
+                        </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="otherPay">
+                        <th mat-header-cell *matHeaderCellDef style="text-align: right;">Other</th>
+                        <td mat-cell *matCellDef="let element" style="text-align: right;">
+                            {{ element.otherPay| currency:' ' }}
+                        </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="over">
+                        <th mat-header-cell *matHeaderCellDef style="text-align: right;">Over</th>
+                        <td mat-cell *matCellDef="let element" style="text-align: right;">
+                            {{ element.over| currency:' ' }}
+                        </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="total">
+                        <th mat-header-cell *matHeaderCellDef style="text-align: right; font-weight: bold;">TOTAL</th>
+                        <td mat-cell *matCellDef="let element" style="text-align: right; font-weight: bold;">
+                            {{ element.total| currency:' ' }}
+                        </td>
+                    </ng-container>
+
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+
+                </table>
+                <br>
+                <div class="col-md-6 offset-md-3">
+                    <table style="width: 100%;">
+                        <thead>
+                            <th>Type</th>
+
+                            <th style="text-align: right;">Total</th>
+                        </thead>
+
+                        <tr>
+                            <td>Warant</td>
+
+                            <td style="text-align: right;">{{warrant | currency: ' '}}</td>
+                        </tr>
+
+                        <tr>
+                            <td>Capital</td>
+
+                            <td style="text-align: right;">{{totCap | currency: ' '}}</td>
+                        </tr>
+
+                        <tr>
+                            <td>Interest</td>
+
+                            <td style="text-align: right;">{{totInterest | currency: ' '}}</td>
+                        </tr>
+
+                        <tr>
+                            <td>Non Refundable</td>
+
+                            <td style="text-align: right;">{{nonRefund | currency: ' '}}</td>
+                        </tr>
+
+                        <tr>
+                            <td>Advance</td>
+
+                            <td style="text-align: right;">{{advance | currency: ' '}}</td>
+                        </tr>
+
+                        <tr>
+                            <td>Document Charge</td>
+
+                            <td style="text-align: right;">{{doc | currency: ' '}}</td>
+                        </tr>
+
+                        <tr>
+                            <td>Other</td>
+
+                            <td style="text-align: right;">{{other | currency: ' '}}</td>
+                        </tr>
+
+                        <tr>
+                            <td>Over</td>
+
+                            <td style="text-align: right;">{{over | currency: ' '}}</td>
+                        </tr>
+
+                        <tr>
+                            <td style="font-weight: bold;">Total Paid</td>
+
+                            <td style="text-align: right; font-weight: bold;">{{total | currency: ' '}}</td>
+                        </tr>
+
+                    </table>
                 </div>
+
+
             </div>
+            <button class="no-print" id="printPageButton" onclick="window.print()">
+                PRINT
+            </button>
         </div>
     </div>
 </div>
