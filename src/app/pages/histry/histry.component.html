@@ -95,6 +95,7 @@
                 </table>
                 <br>
                 <div class="col-md-6 offset-md-3">
+                    <h4>Totally Paid</h4>
                     <table style="width: 100%;">
                         <thead>
                             <th>Type</th>
@@ -156,6 +157,47 @@
                             <td style="text-align: right; font-weight: bold;">{{total | currency: ' '}}</td>
                         </tr>
 
+                    </table>
+                </div>
+
+                <hr>
+
+                <div class="col-md-6 offset-md-3">
+
+                    <h4>Remaining To Pay</h4>
+                    <div>
+                        <p style="text-align: right; color: red; font-size: medium; ">Warrant : {{war | currency : ' '}}
+                        </p>
+                    </div>
+                    <table style="width: 100%; font-size: medium; ">
+                        <thead>
+                            <th>Date</th>
+                            <th style="text-align: right;">Arrears</th>
+                            <th style="text-align: right;">Capital</th>
+                            <th style="text-align: right;">Interest</th>
+                        </thead>
+                        <tbody>
+
+                            <tr style="color: blue;" *ngFor="let item of arrearsData">
+                                <td>{{item.payDate}}</td>
+                                <td style="text-align: right;  color: red;">{{ item.capitalArrears*1 +
+                                    item.interestArrears*1 | currency:' '}}</td>
+                                <td style="text-align: right;">{{item.capital | currency:' '}}</td>
+                                <td style="text-align: right;">{{item.interest | currency:' '}}</td>
+                            </tr>
+                            <br>
+                            <tr>
+                                <td>Total</td>
+                                <td style="text-align: right;">{{arrears | currency:' '}}</td>
+                                <td style="text-align: right;">{{totalCapital | currency:' '}}</td>
+                                <td style="text-align: right;">{{totalInterest | currency:' '}}</td>
+
+                            </tr>
+
+                        </tbody>
+                        <br>
+                        <tfoot style="font-weight: bold;">
+                        </tfoot>
                     </table>
                 </div>
 

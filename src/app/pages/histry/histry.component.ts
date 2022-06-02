@@ -31,6 +31,13 @@ export class HistryComponent implements OnInit {
   over = 0.0;
   total = 0.0;
 
+  arrearsData;
+  arrears = 0.0;
+  war = 0.0;
+  totalCapital = 0.0;
+  totalInterest = 0.0;
+
+  totalHaveToPay;
 
   ELEMENT_DATA: any[] = [];
   inputval;
@@ -54,6 +61,7 @@ export class HistryComponent implements OnInit {
       this.mainId = id;
       if (id) {
         this.getTransactionData(id);
+        this.getArrears(id);
       } else {
       }
     });
@@ -63,7 +71,7 @@ export class HistryComponent implements OnInit {
     this.apiCall.get('transaction/main/' + id, (result) => {
       if (result.length > 0) {
         this.transactionData = result;
-        console.log(this.transactionData);
+
         this.ELEMENT_DATA = this.transactionData;
         this.dataSource = new MatTableDataSource(result);
         this.dataSource.paginator = this.paginator;
@@ -72,6 +80,33 @@ export class HistryComponent implements OnInit {
       } else {
         console.log('empty');
       }
+    });
+  }
+
+  getArrears(id) {
+    console.log(id);
+    this.apiCall.get('arrears/pending/' + id, (data) => {
+      this.arrearsData = data;
+
+      this.arrearsData.forEach((element) => {
+        this.totalCapital += Number(element.capital);
+        this.totalInterest += Number(element.interest);
+
+        console.log("*********** " + this.totalCapital);
+
+        if (element.status == 2) {
+          this.arrears +=
+            Number(element.capitalArrears) + Number(element.interestArrears);
+          this.war += Number(element.warrant);
+          this.totalHaveToPay +=
+            Number(element.capitalArrears) +
+            Number(element.interestArrears) +
+            Number(element.warrant);
+        }
+
+      });
+
+
     });
   }
 

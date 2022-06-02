@@ -9,9 +9,9 @@ export class ReportComponent implements OnInit {
   from;
   to;
   reportPath = environment.reportPath;
-  constructor() {}
+  constructor() { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   alltrans() {
     var range = {
@@ -161,6 +161,30 @@ export class ReportComponent implements OnInit {
     }
   }
 
+  arrearsReportProp() {
+    var range = {
+      range: {
+        from: this.from,
+        to: this.to,
+      },
+    };
+
+    if (range.range.from != null && range.range.to != null) {
+      console.log('range Ok');
+      window.open(
+        this.reportPath + 'arrearsReportProp.html?data=' + JSON.stringify(range),
+        '_blank'
+      );
+    } else {
+      range.range.from = '2021-01-01';
+      range.range.to = '2035-01-01';
+      window.open(
+        this.reportPath + 'arrearsReportProp.html?data=' + JSON.stringify(range),
+        '_blank'
+      );
+    }
+  }
+
   creditMain() {
     var range = {
       range: {
@@ -195,9 +219,42 @@ export class ReportComponent implements OnInit {
     }
   }
 
+  newpropdetails() {
+    var range = {
+      range: {
+        from: this.from,
+        to: this.to,
+      },
+    };
+
+    if (range.range.from != null && range.range.to != null) {
+      console.log('range Ok');
+      window.open(
+        this.reportPath + 'newpropdetails.html?data=' + JSON.stringify(range),
+        '_blank'
+      );
+    } else {
+      range.range.from = '2021-01-01';
+      range.range.to = '2035-01-01';
+      window.open(
+        this.reportPath + 'newpropdetails.html?data=' + JSON.stringify(range),
+        '_blank'
+      );
+    }
+  }
+
   incomeexpenceLoan() {
     console.log('hit');
     var type = { type: 'L' };
+    window.open(
+      this.reportPath + 'incomeexpence.html?data=' + JSON.stringify(type),
+      '_blank'
+    );
+  }
+
+  incomeexpenceProp() {
+    console.log('hit');
+    var type = { type: 'P' };
     window.open(
       this.reportPath + 'incomeexpence.html?data=' + JSON.stringify(type),
       '_blank'

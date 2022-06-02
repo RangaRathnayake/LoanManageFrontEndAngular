@@ -1,7 +1,7 @@
 <div class="main-content">
   <div class="container-fluid">
     <div class="card">
-      <div class="card-header card-header-danger">
+      <div class="card-header card-header-success">
         <h4 class="card-title">Reports</h4>
         <p class="card-category"></p>
       </div>
@@ -21,62 +21,92 @@
         </div>
         <div class="row">
 
+
           <div class="col-4">
-            <button mat-raised-button class="btn btn-success" (click)="alltrans()">
+            <button mat-raised-button class="btn btn-block  btn-success" (click)="alltrans()">
               All Income
             </button>
           </div>
-
           <div class="col-4">
-            <button mat-raised-button class="btn btn-success" (click)="satled()">
-              Settled Loan
+            <button mat-raised-button class="btn btn-block  btn-info" (click)="alltransLoan()">
+              Income Credit
             </button>
           </div>
-
           <div class="col-4">
-            <button mat-raised-button class="btn btn-success" (click)="expenses()">
-              All expenses
-            </button>
-          </div>
-
-          <div class="col-4">
-            <button mat-raised-button class="btn btn-success" (click)="alltransLoan()">
-              Income Loan
-            </button>
-          </div>
-
-          <div class="col-4">
-            <button mat-raised-button class="btn btn-success" (click)="alltransprop()">
+            <button mat-raised-button class="btn btn-block  btn-warning" (click)="alltransprop()">
               Income Property
             </button>
           </div>
 
-          <div class="col-4">
-            <button mat-raised-button class="btn btn-success" (click)="newloandetails()">
-              New Loan Details
-            </button>
-          </div>
+
 
           <div class="col-4">
-            <button mat-raised-button class="btn btn-success" (click)="incomeexpenceLoan()">
+            <button mat-raised-button class="btn btn-block  btn-success" (click)="expenses()">
+              All expenses
+            </button>
+          </div>
+          <div class="col-4">
+            <button mat-raised-button class="btn btn-block  btn-info" (click)="incomeexpenceLoan()">
               Income & Expenses Credit
             </button>
           </div>
-        </div>
-
-        <hr />
-        <div class="row">
           <div class="col-4">
-            <button mat-raised-button class="btn btn-warning" (click)="arrearsReport()">
-              Arrears Report
+            <button mat-raised-button class="btn btn-block  btn-warning" (click)="incomeexpenceProp()">
+              Income & Expenses Property
+            </button>
+          </div>
+
+
+
+          <div class="col-4"></div>
+          <div class="col-4">
+            <button mat-raised-button class="btn btn-block  btn-info" (click)="newloandetails()">
+              New Loan Credit
             </button>
           </div>
           <div class="col-4">
-            <button mat-raised-button class="btn btn-info" (click)="creditMain()">
+            <button mat-raised-button class="btn btn-block  btn-warning" (click)="newpropdetails()">
+              New Loan Property
+            </button>
+          </div>
+
+
+
+          <div class="col-4"></div>
+          <div class="col-4">
+            <button mat-raised-button class="btn btn-block  btn-info" (click)="arrearsReport()">
+              Arrears Report Credit
+            </button>
+          </div>
+          <div class="col-4">
+            <button mat-raised-button class="btn btn-block  btn-warning" (click)="arrearsReportProp()">
+              Arrears Report Property
+            </button>
+          </div>
+
+
+
+          <div class="col-4">
+            <button mat-raised-button class="btn btn-block  btn-success" (click)="satled()">
+              Settled
+            </button>
+          </div>
+          <div class="col-4"></div>
+          <div class="col-4"></div>
+
+
+          <div class="col-4"></div>
+          <div class="col-4">
+            <button mat-raised-button class="btn btn-block btn-info" (click)="creditMain()">
               Credit Main
             </button>
           </div>
+
         </div>
+
+
+
+
       </div>
     </div>
   </div>
