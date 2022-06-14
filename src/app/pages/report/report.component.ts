@@ -264,4 +264,32 @@ export class ReportComponent implements OnInit {
   incomeexpenceProperty() {
     window.open(this.reportPath + 'incomeexpence.html?data=P', '_blank');
   }
+
+  monthlyTransactionReport(type) {
+
+    var range = {
+      range: {
+        from: this.from,
+        to: this.to,
+        type: type
+      },
+    };
+
+    if (range.range.from != null && range.range.to != null) {
+      console.log('range Ok');
+      window.open(
+        this.reportPath + 'monthlyCredit.html?data=' + JSON.stringify(range),
+        '_blank'
+      );
+    } else {
+      range.range.from = '2021-01-01';
+      range.range.to = '2035-01-01';
+      window.open(
+        this.reportPath + 'monthlyCredit.html?data=' + JSON.stringify(range),
+        '_blank'
+      );
+    }
+  }
+
+
 }

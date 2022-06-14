@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>R M C CREDIT & INVESTMENT (PVT) LTD</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            font-size: small;
+        }
+
+        .center {
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .left {
+            text-align: left;
+        }
+
+        .right {
+            text-align: left;
+        }
+
+        .alr {
+            text-align: right;
+        }
+
+        #customers {
+            font-family: Arial, Helvetica, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        #customers td,
+        #customers th {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+
+        #customers tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        #customers tr:hover {
+            background-color: #ddd;
+        }
+
+        #customers th {
+            padding-top: 12px;
+            padding-bottom: 12px;
+            text-align: left;
+            background-color: #04aa6d;
+            color: white;
+        }
+
+        @media print {
+
+            .no-print,
+            .no-print * {
+                display: none !important;
+            }
+        }
+
+        @media print {
+            #printPageButton {
+                display: none;
+            }
+        }
+    </style>
+
+</head>
+
+
+<body style="margin: 20px">
+    <h2 style="text-align: center">
+        <u>Monthly Total Credit Report</u>
+    </h2>
+
+    <div>
+        <table style="margin-left: 10px; margin-right: 10px; width: 100%" id="customers"></table>
+    </div>
+
+    <br />
+
+    <hr class="no-print" />
+    <button class="no-print" id="printPageButton" onclick="window.print()">
+        PRINT
+    </button>
+    <br />
+
+    <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript">
+        let searchParams = new URLSearchParams(window.location.search);
+        // console.log(searchParams);
+        searchParams.has('data'); // true
+        if (searchParams.has('data')) {
+            let param = JSON.parse(searchParams.get('data'));
+            console.log(param.range.from);
+
+            // let d = new Date(param.day);
+            //
+
+            var table = document.getElementById('myTable');
+
+            $.ajax({
+                method: 'POST',
+                // url: "http://localhost:3000/transaction/monthlyTransactionReport",
+                url: 'https://api.rmcinvesment.com/transaction/monthlyTransactionReport',
+                data: param,
+                success: function (data) {
+
+
+
+
+                    let htmlBody = `<thad>
+                    <th>Year</th>
+                    <th>Month</th>
+                    <th>Capital</th>
+                    <th>Interest</th>
+                    <th>Warrant</th>
+                    <th>Dock C.</th>
+                    <th>Total</th>                   
+                    </thad>`;
+
+
+                    for (let i = 0; i <= data.length; i++) {
+                        htmlBody += `<tr id="x${i}"></tr>`;
+                    }
+
+
+
+                    $('#customers').html(htmlBody);
+
+                    for (let i = 0; i <= data.length; i++) {
+                        if (i < data.length) {
+                            let d = data[i];
+
+                            console.log(d);
+
+                            $('#x' + i).html(
+                                `   <td>${d.year}</td>
+                      <td style="text-align: right;">${d.month}</td>                   
+                      <td style="text-align: right;">${d.capital}</td>
+                      <td style="text-align: right;">${d.interest}</td>
+                      <td style="text-align: right;">${d.warant}</td>
+                      <td style="text-align: right;">${d.dockCharge}</td>                               
+                      <td style="text-align: right;">${d.total}</td>                   
+                                  
+                      `
+                            );
+                        }
+
+                    }
+
+
+
+                },
+            });
+        }
+    </script>
+
+</body>
+
+</html>
