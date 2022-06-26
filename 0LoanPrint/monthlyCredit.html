@@ -104,6 +104,13 @@
 
             // let d = new Date(param.day);
             //
+            let totRent = 0;
+            let totCapital = 0;
+            let totInterest = 0;
+            let totWarrant = 0;
+            let totDock = 0;
+            let totTot = 0;
+
 
             var table = document.getElementById('myTable');
 
@@ -120,6 +127,7 @@
                     let htmlBody = `<thad>
                     <th>Year</th>
                     <th>Month</th>
+                    <th>Rental</th>
                     <th>Capital</th>
                     <th>Interest</th>
                     <th>Warrant</th>
@@ -142,9 +150,19 @@
 
                             console.log(d);
 
+                            totRent += Number(d.capital) + Number(d.interest);
+                            totCapital += Number(d.capital);
+                            totInterest += Number(d.interest);
+                            totWarrant += Number(d.warant);
+                            totDock += Number(d.dockCharge);
+                            totTot += Number(d.total);
+
+
+
                             $('#x' + i).html(
                                 `   <td>${d.year}</td>
                       <td style="text-align: right;">${d.month}</td>                   
+                      <td style="text-align: right;">${(Number(d.capital) + Number(d.interest)).toFixed(2)}</td>
                       <td style="text-align: right;">${d.capital}</td>
                       <td style="text-align: right;">${d.interest}</td>
                       <td style="text-align: right;">${d.warant}</td>
@@ -156,6 +174,25 @@
                         }
 
                     }
+
+                    console.log("tot Rent : ", totRent);
+                    console.log("tot cap : ", totCapital);
+                    console.log("tot interest : ", totInterest);
+                    console.log("tot warant : ", totWarrant);
+                    console.log("tot doc : ", totDock);
+                    console.log("tot Tot : ", totTot);
+
+                    $('#x' + data.length).html(
+                        `<td style=" font-weight:bold; ">Total</td>
+                       <td></td>
+               <td style="text-align: right; font-weight:bold;  ">${totRent.toFixed(2)}</td>
+               <td style="text-align: right; font-weight:bold; ">${totCapital.toFixed(2)}</td>
+               <td style="text-align: right; font-weight:bold; ">${totInterest.toFixed(2)}</td>
+               <td style="text-align: right; font-weight:bold; ">${totWarrant.toFixed(2)}</td>
+               <td style="text-align: right; font-weight:bold; ">${totDock.toFixed(2)}</td>
+               <td style="text-align: right; font-weight:bold; ">${totTot.toFixed(2)}</td>
+               `
+                    );
 
 
 
