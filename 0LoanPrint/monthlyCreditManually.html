@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>R M C CREDIT & INVESTMENT (PVT) LTD</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            font-size: small;
+        }
+
+        .center {
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .left {
+            text-align: left;
+        }
+
+        .right {
+            text-align: left;
+        }
+
+        .alr {
+            text-align: right;
+        }
+
+        #customers {
+            font-family: Arial, Helvetica, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        #customers td,
+        #customers th {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+
+        #customers tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        #customers tr:hover {
+            background-color: #ddd;
+        }
+
+        #customers th {
+            padding-top: 12px;
+            padding-bottom: 12px;
+            text-align: left;
+            background-color: #04aa6d;
+            color: white;
+        }
+
+        @media print {
+
+            .no-print,
+            .no-print * {
+                display: none !important;
+            }
+        }
+
+        @media print {
+            #printPageButton {
+                display: none;
+            }
+        }
+    </style>
+
+</head>
+
+
+<body style="margin: 20px">
+    <h2 style="text-align: center">
+        <u>Monthly Total Credit Report</u>
+    </h2>
+
+    <div>
+        <table style="margin-left: 10px; margin-right: 10px; width: 100%" id="customers"></table>
+    </div>
+
+    <br />
+
+    <hr class="no-print" />
+    <button class="no-print" id="printPageButton" onclick="window.print()">
+        PRINT
+    </button>
+    <br />
+
+    <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript">
+        let searchParams = new URLSearchParams(window.location.search);
+        // console.log(searchParams);
+        searchParams.has('data'); // true
+        if (searchParams.has('data')) {
+            let param = JSON.parse(searchParams.get('data'));
+            console.log(param.range.from);
+
+            // let d = new Date(param.day);
+            //
+            let totRent = 0;
+            let totCapital = 0;
+            let totInterest = 0;
+            let totWarrant = 0;
+            let totDock = 0;
+            let totTot = 0;
+            let othes = 0;
+            let expenses = 0;
+            let balance = 0;
+
+
+            var table = document.getElementById('myTable');
+
+            $.ajax({
+                method: 'POST',
+                // url: "http://localhost:3000/report/byType",
+                url: 'https://api.rmcinvesment.com/report/byType',
+                data: param,
+                success: function (data) {
+
+
+
+
+                    let htmlBody = `<thad>
+                    <th>Year</th>
+                    <th>Month</th>
+                    <th>Rental</th>
+                    <th>Capital</th>
+                    <th>Interest</th>
+                    <th>Warrant</th>
+                    <th>Dock C.</th>
+                    <th>Othes</th>
+                    <th>Total</th>                   
+                    <th>Expenses</th>                   
+                    <th>Balance</th>                   
+                    </thad>`;
+
+
+                    for (let i = 0; i <= data.length; i++) {
+                        htmlBody += `<tr id="x${i}"></tr>`;
+                    }
+
+
+
+                    $('#customers').html(htmlBody);
+
+                    for (let i = 0; i <= data.length; i++) {
+                        if (i < data.length) {
+                            let d = data[i];
+
+                            console.log(d);
+
+                            totRent += Number(d.rental);
+                            totCapital += Number(d.capital);
+                            totInterest += Number(d.interest);
+                            totWarrant += Number(d.warrant);
+                            totDock += Number(d.doc);
+                            totTot += Number(d.total);
+                            othes += Number(d.other);
+                            expenses += Number(d.expence);
+                            balance += Number(d.balance);
+
+
+
+                            $('#x' + i).html(
+                                `   <td>${d.year}</td>
+                      <td style="text-align: right;">${d.month}</td>                   
+                      <td style="text-align: right;">${d.rental}</td>
+                      <td style="text-align: right;">${d.capital}</td>
+                      <td style="text-align: right;">${d.interest}</td>
+                      <td style="text-align: right;">${d.warrant}</td>
+                      <td style="text-align: right;">${d.doc}</td>                               
+                      <td style="text-align: right;">${d.other}</td>                               
+                      <td style="text-align: right;">${d.total}</td>                   
+                      <td style="text-align: right;">${d.expence}</td>                   
+                      <td style="text-align: right;">${d.balance}</td>                   
+                                  
+                      `
+                            );
+                        }
+
+                    }
+
+                    console.log("tot Rent : ", totRent);
+                    console.log("tot cap : ", totCapital);
+                    console.log("tot interest : ", totInterest);
+                    console.log("tot warant : ", totWarrant);
+                    console.log("tot doc : ", totDock);
+                    console.log("tot Tot : ", totTot);
+
+                    $('#x' + data.length).html(
+                        `<td style=" font-weight:bold; ">Total</td>
+                       <td></td>
+               <td style="text-align: right; font-weight:bold;  ">${totRent.toFixed(2)}</td>
+               <td style="text-align: right; font-weight:bold; ">${totCapital.toFixed(2)}</td>
+               <td style="text-align: right; font-weight:bold; ">${totInterest.toFixed(2)}</td>
+               <td style="text-align: right; font-weight:bold; ">${totWarrant.toFixed(2)}</td>
+               <td style="text-align: right; font-weight:bold; ">${totDock.toFixed(2)}</td>
+               <td style="text-align: right; font-weight:bold; ">${othes.toFixed(2)}</td>
+               <td style="text-align: right; font-weight:bold; ">${totTot.toFixed(2)}</td>
+               <td style="text-align: right; font-weight:bold; ">${expenses.toFixed(2)}</td>
+               <td style="text-align: right; font-weight:bold; ">${balance.toFixed(2)}</td>
+               `
+                    );
+
+
+
+                },
+            });
+        }
+    </script>
+
+</body>
+
+</html>

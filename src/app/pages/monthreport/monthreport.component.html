@@ -1,0 +1,136 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="card">
+            <div class="card-header card-header-danger">
+                <h4 class="card-title">Monthly Report Manually</h4>
+                <p class="card-category"></p>
+            </div>
+            <div class="card-body">
+                <br>
+                <div class="row">
+                    <div class="col-md-3">
+                        <mat-radio-group aria-label="Select an option" [(ngModel)]="type"
+                            (ngModelChange)="selectType(type)" style="padding-top: 10px">
+                            <mat-radio-button value="L">
+                                Credit&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            </mat-radio-button>
+                            <mat-radio-button value="P">Property&nbsp;&nbsp;&nbsp;</mat-radio-button>
+                        </mat-radio-group>
+                    </div>
+
+                    <div class="col-md-3">
+                        <mat-form-field class="">
+                            <input matInput type="number" placeholder="Year" [(ngModel)]="year" />
+                        </mat-form-field>
+                    </div>
+
+
+                    <div class="col-md-3">
+                        <mat-form-field class="">
+                            <input matInput type="number" placeholder="Month" [(ngModel)]="month" />
+                        </mat-form-field>
+                    </div>
+
+                    <div class="col-md-3">
+                        <button mat-raised-button class="btn btn-success btn-block" (click)="find()">
+                            Find
+                        </button>
+                    </div>
+
+
+                </div>
+                <br><br>
+                <div *ngIf="isFind">
+
+                    <div class="col-md-2">
+                        <mat-form-field class="" style="text-align: right;">
+                            <input matInput type="number" placeholder="interest" [(ngModel)]="interest"
+                                (keyup)="calculate()" />
+                        </mat-form-field>
+                    </div>
+
+
+                    <div class="col-md-2">
+                        <mat-form-field class="" style="text-align: right;">
+                            <input matInput type="number" placeholder="Capital" [(ngModel)]="capital"
+                                (keyup)="calculate()" />
+                        </mat-form-field>
+                    </div>
+
+
+                    <div class="col-md-2">
+                        <mat-form-field class="" style="text-align: right;">
+                            <input matInput disabled type="number" placeholder="Rental" [(ngModel)]="rental" />
+                        </mat-form-field>
+                    </div>
+
+                    <div class="col-md-2">
+                        <mat-form-field class="" style="text-align: right;">
+                            <input matInput type="number" placeholder="Warrant" [(ngModel)]="warrant"
+                                (keyup)="calculate()" />
+                        </mat-form-field>
+                    </div>
+
+                    <div class="col-md-2">
+                        <mat-form-field class="" style="text-align: right;">
+                            <input matInput type="number" placeholder="Doc. Charge" [(ngModel)]="doc"
+                                (keyup)="calculate()" />
+                        </mat-form-field>
+                    </div>
+
+                    <div class="col-md-2" *ngIf="type=='P'" style="text-align: right;">
+                        <mat-form-field class="" style="text-align: right;">
+                            <input matInput type="number" placeholder="Non Refundable" [(ngModel)]="nonref"
+                                (keyup)="calculate()" />
+                        </mat-form-field>
+                    </div>
+
+
+                    <div class="col-md-2" *ngIf="type=='P'" style="text-align: right;">
+                        <mat-form-field class="" style="text-align: right;">
+                            <input matInput type="number" placeholder="Advance" [(ngModel)]="advance"
+                                (keyup)="calculate()" />
+                        </mat-form-field>
+                    </div>
+
+                    <div class="col-md-2">
+                        <mat-form-field class="" style="text-align: right;">
+                            <input matInput type="number" placeholder="Other" [(ngModel)]="other"
+                                (keyup)="calculate()" />
+                        </mat-form-field>
+                    </div>
+
+                    <div class="col-md-2">
+                        <mat-form-field class="" style="text-align: right;">
+                            <input matInput disabled type="number" placeholder="Total" [(ngModel)]="total" />
+                        </mat-form-field>
+                    </div>
+
+                    <div class="col-md-2">
+                        <mat-form-field class="" style="text-align: right;">
+                            <input matInput type="number" placeholder="Expence" [(ngModel)]="expence"
+                                (keyup)="calculate()" />
+                        </mat-form-field>
+                    </div>
+
+                    <div class="col-md-2">
+                        <mat-form-field class="" style="text-align: right;">
+                            <input matInput disabled type="number" placeholder="Balance" [(ngModel)]="balance" />
+                        </mat-form-field>
+                    </div>
+
+
+
+                    <div class="col-md-2">
+                        <button mat-raised-button class="btn btn-success btn-block" (click)="save()">
+                            Save
+                        </button>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>
