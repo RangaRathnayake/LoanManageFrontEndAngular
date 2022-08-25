@@ -130,7 +130,7 @@ export class ProploanComponent implements OnInit {
     this.arout.params.subscribe((params) => {
       const id = params["id"];
       if (id) {
-        console.log("test one");
+        console.log("test one  = " + id);
         this.Isone = false;
         this.Istwo = true;
         this.Isthree = false;
@@ -255,7 +255,7 @@ export class ProploanComponent implements OnInit {
     });
   }
 
-  onChange() {}
+  onChange() { }
 
   getloanref() {
     this.apiCall.get("main/max/L", (result) => {
@@ -441,8 +441,10 @@ export class ProploanComponent implements OnInit {
 
           if (this.paytype.id == "1") {
             nonradvance = this.advancepay;
+            downpay = 0;
           } else {
             downpay = this.advancepay;
+            nonradvance = 0;
           }
 
           this.apiCall.get("main/max/P", (result) => {
@@ -501,6 +503,7 @@ export class ProploanComponent implements OnInit {
                     user: this.getuser.id,
                   },
                 };
+
                 this.apiCall.post("main/saveTransaction", obj, (data) => {
                   console.log("xxxxxx");
                   console.log(data);
@@ -516,7 +519,7 @@ export class ProploanComponent implements OnInit {
 
                   window.open(
                     "https://rmcinvesment.com/0LoanPrint/prop.html?data=" +
-                      JSON.stringify(this.data),
+                    JSON.stringify(this.data),
                     "_blank"
                   );
                 });
@@ -581,6 +584,15 @@ export class ProploanComponent implements OnInit {
                 },
               },
               (data) => {
+
+                if (this.paytype.id == 1) {
+                  this.nonref = this.advancepay;
+                  this.downpay = 0;
+                } else {
+                  this.downpay = this.advancepay;
+                  this.nonref = 0;
+                }
+
                 let obj = {
                   transaction: {
                     day: new Date(),
@@ -619,7 +631,7 @@ export class ProploanComponent implements OnInit {
 
                   window.open(
                     "https://rmcinvesment.com/0LoanPrint/prop.html?data=" +
-                      JSON.stringify(this.data),
+                    JSON.stringify(this.data),
                     "_blank"
                   );
                   // window.open("https://rmcinvesment.com/0LoanPrint/index.html?data=" + JSON.stringify(datas), '_blank');
