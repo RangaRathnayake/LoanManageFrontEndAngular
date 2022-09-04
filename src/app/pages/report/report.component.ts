@@ -63,6 +63,35 @@ export class ReportComponent implements OnInit {
     }
   }
 
+
+  satledProperty() {
+    var range = {
+      range: {
+        from: this.from,
+        to: this.to,
+        type: 'P',
+      },
+    };
+
+    if (range.range.from != null && range.range.to != null) {
+      console.log('range Ok');
+      window.open(
+        this.reportPath + 'satledProperty.html?data=' + JSON.stringify(range),
+        '_blank'
+      );
+    } else {
+      range.range.from = '2021-01-01';
+      range.range.to = '2035-01-01';
+      window.open(
+        this.reportPath + 'satledProperty.html?data=' + JSON.stringify(range),
+        '_blank'
+      );
+    }
+  }
+
+
+
+
   alltransLoan() {
     var range = {
       range: {
