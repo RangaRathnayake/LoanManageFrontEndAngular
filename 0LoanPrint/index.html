@@ -258,7 +258,7 @@
       $("#id").html(padLeadingZeros(param.transaction.id, 4));
       $("#amount").html(param.transaction.total);
       $("#warrant").html(param.transaction.warant);
-      $("#arrears").html(Number(param.transaction.arrears) + Number(param.transaction.arrearsInterest));
+      $("#arrears").html((Number(param.transaction.arrears) + Number(param.transaction.arrearsInterest)).toFixed(2));
       $("#capital").html(
         (
           Number(param.transaction.capital) +
