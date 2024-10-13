@@ -40,6 +40,7 @@ import { ReceiptComponent } from '../../pages/receipt/receipt.component';
 import { DockchargeComponent } from '../../pages/dockcharge/dockcharge.component';
 import { HistryComponent } from '../../pages/histry/histry.component';
 import { MonthreportComponent } from 'app/pages/monthreport/monthreport.component';
+import { PaycapitalComponent } from 'app/pages/paycapital/paycapital.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -84,7 +85,8 @@ import { MonthreportComponent } from 'app/pages/monthreport/monthreport.componen
     ReceiptComponent,
     DockchargeComponent,
     HistryComponent,
-    MonthreportComponent
+    MonthreportComponent,
+    PaycapitalComponent
   ],
 })
 export class AdminLayoutModule { }

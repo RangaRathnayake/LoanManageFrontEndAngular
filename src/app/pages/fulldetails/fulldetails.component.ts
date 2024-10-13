@@ -122,6 +122,11 @@ export class FulldetailsComponent implements OnInit {
     this.router.navigate(['settlement', this.mainId]);
   }
 
+
+  payCapital() {
+    this.router.navigate(['paycapital', this.mainId]);
+  }
+
   approve() {
     this.clickOnApprove = true;
     this.mainData.status = 1;

@@ -1,0 +1,116 @@
+<div class="main-content">
+    <div class="container-fluid">
+
+        <div class="card">
+            <div class="card-header card-header-success">
+                <h4 class="card-title">Pay Capital : {{loannumber}}</h4>
+                <p class="card-category"></p>
+            </div>
+            <div class="card-body">
+
+                <div class="col-md-8" style="float: none; margin: 0 auto;">
+                    <h3>Number : {{loannumber}} <br> Name : {{cusname}}</h3>
+                    <h4>Total Loan Amount : {{totalLoanAmount | currency:' '}}<br>
+                        Annual interest rate : {{anualRate | currency:' '}}%<br>
+                        <strong>Complete for this month : {{totalHaveToPay | currency:' '}}</strong><br>
+                        Have to pay for finish all : {{finishAmount | currency:' '}}
+                    </h4>
+
+                    <!-- <mat-radio-group aria-label="Select an option" [(ngModel)]="reduceType">
+                        <mat-radio-button value="Amount">Reduce Installment Amount</mat-radio-button> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <mat-radio-button value="Count">Reduce Installment Count</mat-radio-button>
+                       
+                    </mat-radio-group> -->
+
+
+
+                </div>
+
+                <div class="col-md-8" style="float: none; margin: 0 auto;">
+                    <mat-form-field appearance="standard" style="text-align: right;">
+                        <mat-label>Pay Amount Rs. </mat-label>
+                        <input type="number" matInput (keyup.enter)="calByArray($event.target.value)"
+                            placeholder="Amount" #input>
+                    </mat-form-field>
+                    <h4 *ngIf="arrearsData && arrearsData[0].warrant>0" style="text-align: right; color: red;"> Day
+                        Day count :
+                        {{dayCount}} x per day : {{arrearsData[0].warrant/dayCount | currency:' '}} = Fined :
+                        {{arrearsData[0].warrant | currency:'
+                        '}}
+                    </h4>
+                    <mat-spinner *ngIf="!arrearsData"></mat-spinner>
+                </div>
+
+
+                <div *ngIf="!hasArrears" class="row">
+                    <div class="col-md-8" style="float: none; margin: 0 auto;">
+                        <table style="width: 100%; font-size: medium; ">
+                            <thead>
+                                <th>Date</th>
+                                <!-- <th style="text-align: right;">Arrears</th> -->
+
+                                <th *ngIf="!newData" style="text-align: right;">Capital</th>
+                                <th *ngIf="!newData" style="text-align: right;">Interest</th>
+
+                                <th *ngIf="newData" style="text-align: right;">New Capital</th>
+                                <th *ngIf="newData" style="text-align: right;">New Interest</th>
+                            </thead>
+                            <tbody>
+
+                                <tr style="color: blue;" *ngFor="let item of arrearsData">
+                                    <td>{{item.payDate}}</td>
+                                    <!-- <td style="text-align: right;  color: red;">{{ item.capitalArrears*1 +
+                                        item.interestArrears*1 | currency:' '}}</td> -->
+                                    <td style="text-align: right;">{{item.capital | currency:' '}}</td>
+                                    <td style="text-align: right;">{{item.interest | currency:' '}}</td>
+                                </tr>
+                                <br>
+                                <tr>
+                                    <td>Total</td>
+                                    <!-- <td style="text-align: right;">{{arrears | currency:' '}}</td> -->
+                                    <td style="text-align: right;">{{totalCapital | currency:' '}}</td>
+                                    <td style="text-align: right;">{{totalInterest | currency:' '}}</td>
+                                </tr>
+
+                            </tbody>
+                            <br>
+                            <tfoot style="font-weight: bold;">
+                                <td>Total Payment</td>
+                                <!-- <td style="text-align: right;"></td> -->
+                                <td style="text-align: right;"></td>
+                                <td style="text-align: right;">{{payT | currency:' '}}</td>
+                            </tfoot>
+                        </table>
+
+                        <br>
+                        <div>
+                            <mat-radio-group aria-label="Select an option" [(ngModel)]="payType">
+                                <mat-radio-button value="Cash">Cash</mat-radio-button> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <mat-radio-button value="Cheque">Cheque</mat-radio-button>
+                            </mat-radio-group>
+
+                            <mat-form-field *ngIf="payType=='Cheque'" appearance="standard">
+                                <input type="text" matInput placeholder="Cheque Number" [(ngModel)]="cheaueNumber">
+                            </mat-form-field>
+
+                            <button *ngIf="!clickOnPay && enter && !hasArrears" mat-raised-button
+                                class="btn btn-success pull-right" (click)="pay()">Get Payment</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div *ngIf="hasArrears" class="row">
+
+                    <h3>Please complete the arrears payment before reducing the capital.</h3>
+
+                </div>
+
+
+
+
+            </div>
+        </div>
+
+
+    </div>
+</div>

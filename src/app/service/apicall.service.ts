@@ -9,7 +9,7 @@ export class ApicallService {
 
   TOKEN_KEY = environment.TOKEN_KEY;
 
-  apiurl = environment.apiUrl;
+  apiurl =  environment.apiUrl;
 
   constructor(private http: HttpClient) { }
 

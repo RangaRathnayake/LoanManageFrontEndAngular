@@ -42,6 +42,12 @@
           Settlement
         </button>
 
+        <button *ngIf="mainData && mainData.status == 1" mat-raised-button class="btn btn-warning pull-right"
+          (click)="payCapital()">
+          Reduce Capital
+        </button>
+
+
         <button mat-raised-button class="btn btn-success pull-right" (click)="Getadvance()"
           *ngIf="mainData && loanType === 'P'">
           Advance

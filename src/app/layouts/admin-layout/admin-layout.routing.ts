@@ -26,6 +26,7 @@ import { ReceiptComponent } from '../../pages/receipt/receipt.component';
 import { DockchargeComponent } from 'app/pages/dockcharge/dockcharge.component';
 import { HistryComponent } from '../../pages/histry/histry.component';
 import { MonthreportComponent } from 'app/pages/monthreport/monthreport.component';
+import { PaycapitalComponent } from 'app/pages/paycapital/paycapital.component';
 export const AdminLayoutRoutes: Routes = [
   { path: 'dashboard', component: DashboardComponent },
   { path: 'user-profile', component: UserProfileComponent },
@@ -54,5 +55,6 @@ export const AdminLayoutRoutes: Routes = [
   { path: 'dockCharge/:id', component: DockchargeComponent },
   { path: 'histry/:id', component: HistryComponent },
   { path: 'month', component: MonthreportComponent },
+  { path: 'paycapital/:id', component: PaycapitalComponent },
 
 ];
